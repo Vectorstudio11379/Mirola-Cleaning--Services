@@ -1,0 +1,867 @@
+/* ==========================================================================
+   MIROLA CLEANING SERVICES - PURE BLACK MINIMALIST HERO
+   Ultra-refined, minimalist layout with reduced text boldness & pure black canvas
+   ========================================================================== */
+
+/* Hero Scroll Area (400vh scroll-driven canvas track) */
+.hero-scroll-area {
+  position: relative;
+  width: 100%;
+  height: 400vh;
+  background-color: #000000;
+}
+
+/* Sticky Full-Screen Stage */
+.hero-sticky-stage {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #000000;
+  overflow: hidden;
+  padding-top: 100px;
+}
+
+/* Canvas Background & Cinematic Dark Luxury Blend */
+.scroll-canvas-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: #000000;
+}
+
+.scroll-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0.8;
+}
+
+.canvas-cinematic-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.62) 75%, #000000 100%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.12) 25%, rgba(0, 0, 0, 0.22) 70%, rgba(0, 0, 0, 0.82) 90%, #000000 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   NAVBAR (MINIMALIST FLOATING PILL)
+   ========================================================================== */
+.navbar-container {
+  position: fixed;
+  top: 28px;
+  left: 0;
+  width: 100%;
+  padding: 0 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  pointer-events: none;
+}
+
+/* Top-Left Floating Pill Badge */
+.nav-pill-badge {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(14, 14, 14, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 7px 18px;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.nav-pill-badge:hover {
+  background: rgba(22, 22, 22, 0.95);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.brand-logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-logo-icon.large {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.navbar-brand-logo-img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  border-radius: 50%;
+  display: block;
+}
+
+.drawer-brand-logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  border-radius: 6px;
+  display: block;
+}
+
+.brand-pill-title {
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #f4f4f5;
+  letter-spacing: -0.01em;
+}
+
+.nav-hamburger-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.65);
+  margin-left: 2px;
+  transition: color 0.2s ease;
+}
+
+.nav-pill-badge:hover .nav-hamburger-icon {
+  color: #ffffff;
+}
+
+/* Quick Service Status indicator on the Right */
+.nav-quick-contact {
+  pointer-events: auto;
+}
+
+.nav-quote-btn {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  font-weight: 400;
+  padding: 7px 16px;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.nav-quote-btn .highlight {
+  color: #f4f4f5;
+  font-weight: 500;
+}
+
+.nav-quote-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   MINIMALIST HERO CONTAINER (2-COLUMN EDITORIAL SPREAD)
+   ========================================================================== */
+.hero-container {
+  position: relative;
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 10px 48px 15px;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 60px;
+  z-index: 10;
+}
+
+/* LEFT COLUMN: AVAILABILITY BADGE & LIGHTER HEADLINE */
+.hero-left-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 580px;
+  z-index: 20;
+}
+
+/* Availability Pill Badge */
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  margin-bottom: 28px;
+  transition: border-color 0.2s ease;
+}
+
+.availability-badge:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.pulsing-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #ff334b;
+  box-shadow: 0 0 8px rgba(255, 51, 75, 0.8);
+  display: inline-block;
+  animation: pulse-dot 2.2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 51, 75, 0.6);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 6px rgba(255, 51, 75, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 51, 75, 0);
+  }
+}
+
+.badge-text {
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 400;
+  color: #e4e4e7;
+  letter-spacing: -0.01em;
+}
+
+/* Reduced Boldness Minimalist Editorial Headline */
+.hero-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 4.4vw, 4rem);
+  font-weight: 300; /* Reduced from 700 bold to clean light weight */
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: CONCISE DESCRIPTION & RED CTA BUTTON
+   ========================================================================== */
+.hero-right-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 420px;
+  margin-left: auto;
+  z-index: 20;
+}
+
+.hero-description {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.7;
+  color: #a1a1aa;
+  font-weight: 300; /* Reduced boldness for clean minimalist readability */
+  margin-bottom: 32px;
+}
+
+/* RED CTA BUTTON MATCHING REFERENCE GEOMETRY */
+.red-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: #e62e40;
+  padding: 5px 24px 5px 5px;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(230, 46, 64, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.red-cta-button:hover {
+  background: #ff2d44;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(230, 46, 64, 0.45);
+}
+
+.red-cta-button:active {
+  transform: translateY(0);
+}
+
+.cta-arrow-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #e62e40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+
+.red-cta-button:hover .cta-arrow-circle {
+  transform: translateX(2px);
+}
+
+.cta-text {
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 500; /* Clean medium weight instead of heavy bold */
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   OVERSIZED BRAND TEXT ("MIROLA CLEANING SERVICES") - BIGGER & SAFE BOTTOM
+   ========================================================================== */
+.oversized-brand-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 10;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-bottom: clamp(8px, 1.8vh, 22px);
+  padding-inline: 16px;
+  line-height: 1;
+  overflow: visible;
+}
+
+.oversized-brand-text {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7.2vw, 8.5rem);
+  font-weight: 300; /* Clean light architectural weight */
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-align: center;
+  user-select: none;
+  display: block;
+  white-space: nowrap;
+  line-height: 0.95;
+  padding-bottom: 4px;
+}
+
+/* ==========================================================================
+   SLIDE-OUT NAVIGATION DRAWER (MINIMALIST PURE BLACK)
+   ========================================================================== */
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  z-index: 150;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.nav-menu-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 360px;
+  max-width: 85vw;
+  height: 100vh;
+  background: #080808;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 20px 0 60px rgba(0, 0, 0, 0.9);
+  z-index: 160;
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-menu-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.drawer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.drawer-title {
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.drawer-subtitle {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.drawer-close-btn {
+  color: var(--text-secondary);
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.drawer-close-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.drawer-section-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 28px 0 12px;
+}
+
+.drawer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.drawer-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.drawer-nav-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(3px);
+}
+
+.item-title {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: #f4f4f5;
+}
+
+.item-desc {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.drawer-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.drawer-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.drawer-cta-btn {
+  width: 100%;
+  padding: 12px;
+  background: #e62e40;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s;
+}
+
+.drawer-cta-btn:hover {
+  opacity: 0.92;
+}
+
+/* ==========================================================================
+   CONSULTATION BOOKING MODAL (MINIMALIST PURE BLACK)
+   ========================================================================= */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  background: #080808;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95);
+  border-radius: 16px;
+  padding: 34px 30px;
+  overflow: hidden;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: var(--text-secondary);
+  padding: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.2s;
+}
+
+.modal-close-icon:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.modal-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #a1a1aa;
+  margin-bottom: 8px;
+}
+
+.modal-header h2 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.modal-header p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 22px;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group.full-width {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-size: 11.5px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #ffffff;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+.form-group select option {
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+.modal-trust-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+.modal-submit-btn {
+  width: 100%;
+  padding: 13px;
+  background: #e62e40;
+  color: #ffffff;
+  border-radius: 10px;
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  box-shadow: 0 6px 20px rgba(230, 46, 64, 0.3);
+  transition: all 0.2s ease;
+}
+
+.modal-submit-btn:hover {
+  background: #ff2d44;
+  transform: translateY(-1px);
+}
+
+.modal-success-state {
+  text-align: center;
+  padding: 24px 8px;
+}
+
+.success-icon-badge {
+  display: inline-flex;
+  padding: 12px;
+  background: rgba(74, 222, 128, 0.08);
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.modal-success-state h3 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.modal-success-state p {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 22px;
+  font-weight: 300;
+}
+
+.modal-perks {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.perk-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #e4e4e7;
+  font-weight: 300;
+}
+
+.modal-done-btn {
+  padding: 10px 28px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.modal-done-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN & MOBILE STACKING
+   ========================================================================== */
+
+/* Laptop / Medium Desktops */
+@media (max-width: 1200px) {
+  .hero-container {
+    padding: 20px 40px 30px;
+    gap: 40px;
+  }
+  
+  .hero-headline {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+  }
+  
+  .hero-right-column {
+    max-width: 380px;
+  }
+}
+
+/* Tablets (1024px down to 860px) */
+@media (max-width: 1024px) {
+  .navbar-container {
+    padding: 0 32px;
+  }
+
+  .hero-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 36px;
+    padding: 20px 32px 30px;
+  }
+
+  .hero-right-column {
+    margin-left: 0;
+    max-width: 480px;
+  }
+}
+
+/* Mobile Devices (Under 860px) */
+@media (max-width: 860px) {
+  .navbar-container {
+    top: 18px;
+    padding: 0 20px;
+  }
+
+  .nav-quick-contact {
+    display: none;
+  }
+
+  .hero-sticky-stage {
+    padding-top: 95px;
+  }
+
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 10px 20px 20px;
+    gap: 28px;
+  }
+
+  .hero-left-column {
+    align-items: flex-start;
+    max-width: 100%;
+  }
+
+  .hero-headline {
+    font-size: clamp(2.1rem, 8.5vw, 2.8rem);
+    line-height: 1.16;
+  }
+
+  .hero-right-column {
+    align-items: flex-start;
+    text-align: left;
+    max-width: 100%;
+  }
+
+  .hero-description {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+
+  .red-cta-button {
+    padding: 4px 20px 4px 4px;
+  }
+
+  .cta-arrow-circle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .cta-text {
+    font-size: 11.5px;
+  }
+
+  .oversized-brand-container {
+    margin-top: auto;
+    margin-bottom: 0;
+    padding-bottom: 14px;
+  }
+
+  .oversized-brand-text {
+    font-size: clamp(1.8rem, 7.5vw, 3.2rem);
+    letter-spacing: -0.02em;
+    white-space: normal;
+    text-wrap: balance;
+    line-height: 1.08;
+    padding-bottom: 2px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
