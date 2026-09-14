@@ -76,7 +76,7 @@ export const ContactSection: React.FC = () => {
             {isSubmitted ? (
               <div className="contact-success-state">
                 <div className="success-icon-badge">
-                  <CheckCircle2 size={48} color="#34d399" />
+                  <CheckCircle2 size={48} color="#c90000" />
                 </div>
                 <h3>Proposal Request Received!</h3>
                 <p>

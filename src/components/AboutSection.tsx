@@ -141,7 +141,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation }
             
             {/* Centered Circular White Play Button */}
             <div className="media-play-button" aria-hidden="true">
-              <Play size={22} fill="#06322b" color="#06322b" className="play-icon-offset" />
+              <Play size={22} fill="#d81e35" color="#d81e35" className="play-icon-offset" />
             </div>
           </div>
 
@@ -188,7 +188,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation }
 
             <div className="video-modal-header">
               <div className="modal-badge-row">
-                <Sparkles size={16} color="#10b981" />
+                <Sparkles size={16} color="#c90000" />
                 <span>Commercial Excellence in Motion</span>
               </div>
               <h3>Hospital-Grade Janitorial & Sanitization Standards</h3>
@@ -203,7 +203,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation }
               />
               <div className="video-simulated-controls">
                 <div className="simulated-pill">
-                  <ShieldCheck size={16} color="#10b981" />
+                  <ShieldCheck size={16} color="#c90000" />
                   <span>ISO 9001 Compliant Operations • 100% Bonded & Insured</span>
                 </div>
               </div>

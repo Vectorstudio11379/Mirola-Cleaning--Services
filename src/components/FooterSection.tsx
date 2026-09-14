@@ -38,7 +38,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ onOpenConsultation
 
             {subscribed ? (
               <div className="cta-success-msg">
-                <CheckCircle2 size={20} color="#34d399" />
+                <CheckCircle2 size={20} color="#c90000" />
                 <span>Thank you! Our facility director will contact you promptly.</span>
               </div>
             ) : (

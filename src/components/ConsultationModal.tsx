@@ -45,7 +45,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
         {isSubmitted ? (
           <div className="modal-success-state">
             <div className="success-icon-badge">
-              <CheckCircle2 size={46} color="#4ade80" />
+              <CheckCircle2 size={46} color="#c90000" />
             </div>
             <h3>Consultation Request Received!</h3>
             <p>
@@ -53,11 +53,11 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
             </p>
             <div className="modal-perks">
               <div className="perk-item">
-                <ShieldCheck size={16} color="#c084fc" />
+                <ShieldCheck size={16} color="#c90000" />
                 <span>Custom Site Inspection Included</span>
               </div>
               <div className="perk-item">
-                <Clock size={16} color="#c084fc" />
+                <Clock size={16} color="#c90000" />
                 <span>Zero Commitment Estimate</span>
               </div>
             </div>

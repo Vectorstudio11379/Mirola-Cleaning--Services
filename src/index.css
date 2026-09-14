@@ -5,9 +5,18 @@
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-subtle-hover: rgba(255, 255, 255, 0.16);
 
-  --red-cta: #e62e40;
-  --red-cta-hover: #ff2d44;
-  --red-glow: rgba(230, 46, 64, 0.25);
+  /* Official Mirola Logo Red Palette */
+  --brand-red: #c90000;
+  --brand-red-deep: #ba0100;
+  --brand-red-hover: #ef233c;
+  --brand-red-active: #a30000;
+  --brand-red-glow: 0 0 14px rgba(201, 0, 0, 0.6);
+  --brand-red-tint: rgba(201, 0, 0, 0.08);
+  --brand-red-border: rgba(201, 0, 0, 0.25);
+
+  --red-cta: #c90000;
+  --red-cta-hover: #ef233c;
+  --red-glow: rgba(201, 0, 0, 0.3);
 
   --text-primary: #ffffff;
   --text-secondary: #a1a1aa;
