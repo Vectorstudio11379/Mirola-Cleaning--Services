@@ -115,7 +115,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
               <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/floor-care')}>Floor Care & Strip/Wax</button></li>
               <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/sanitation')}>Sanitation Services</button></li>
               <li><a href="#about" onClick={(e) => { e.preventDefault(); handleLink('/'); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>About Us</a></li>
-              <li><a href="#testimonials" onClick={(e) => { e.preventDefault(); handleLink('/'); setTimeout(() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>Client Reviews</a></li>
+              <li><a href="#testimonials" onClick={(e) => { e.preventDefault(); handleLink('/'); setTimeout(() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>Testimonials</a></li>
             </ul>
           </div>
 

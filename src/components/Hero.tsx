@@ -23,7 +23,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
             {/* Availability-style pill badge with delicate indicator */}
             <div className="availability-badge">
               <span className="pulsing-indicator" />
-              <span className="badge-text">Best Janitorial service in USA</span>
+              <span className="badge-text">Serving All 50 States</span>
             </div>
 
             {/* Minimalist, Clean Editorial Headline with Reduced Boldness */}

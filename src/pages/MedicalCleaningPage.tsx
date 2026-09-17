@@ -34,8 +34,8 @@ export const MedicalCleaningPage: React.FC<MedicalCleaningPageProps> = ({
       title="Medical & Clinical Facility"
       titleHighlight="Cleaning Services"
       subtitle="Hospital-grade terminal disinfection, bio-burden mitigation, and sterile touchpoint barriers for outpatient clinics, surgical suites, dental offices, and diagnostic laboratories."
-      heroImage="/images/drive_folder_2/DSC00249.jpg"
-      heroImageCaption="Hospital-Grade Laboratory & Clinical Exam Room Sterilization"
+      heroImage="/images/medical_cleaning_hero.png"
+      heroImageCaption="Uniformed Mirola Healthcare Specialist Executing Clinical Corridor & Terminal Disinfection"
       stats={[
         { value: 'EPA List N', label: 'Registered Hospital Disinfectants' },
         { value: '100%', label: 'Color-Coded Microfiber Protocol' },
@@ -93,10 +93,10 @@ export const MedicalCleaningPage: React.FC<MedicalCleaningPageProps> = ({
           tag: 'Clinical Exam Suites'
         },
         {
-          src: '/images/drive_folder_2/DSC00249.jpg',
-          alt: 'Medical sink and scrub station sanitization',
-          caption: 'Sterilizing clinical wash sinks, sensor faucets, and vanity counters.',
-          tag: 'Scrub Stations'
+          src: '/images/medical_cleaning_hero.png',
+          alt: 'Mirola healthcare cleaning specialist sanitizing clinical facility corridor',
+          caption: 'Uniformed healthcare specialist mopping and disinfecting clinic corridor with hospital supply cart.',
+          tag: 'Clinical Corridors'
         },
         {
           src: '/images/drive_folder_2/DSC00402.jpg',

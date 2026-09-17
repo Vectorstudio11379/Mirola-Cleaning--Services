@@ -91,10 +91,10 @@ export const SanitationPage: React.FC<SanitationPageProps> = ({
           tag: 'Antimicrobial Misting'
         },
         {
-          src: '/images/drive_folder_2/DSC00249.jpg',
-          alt: 'Restroom vanity counter sanitization',
-          caption: 'Deep sanitization of commercial vanity sinks, faucets, and soap dispensers.',
-          tag: 'Restroom Disinfection'
+          src: '/images/medical_cleaning_hero.png',
+          alt: 'Healthcare terminal corridor sanitation and infection control',
+          caption: 'Hospital-grade sanitization and terminal disinfection in healthcare corridor.',
+          tag: 'Healthcare Sanitation'
         },
         {
           src: '/images/drive_folder_2/DSC00256.jpg',

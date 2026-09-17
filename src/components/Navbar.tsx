@@ -324,7 +324,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="pill-nav-btn"
               onClick={() => handleSectionScroll('testimonials')}
             >
-              Reviews
+              Testimonials
             </button>
 
             <button 
@@ -524,7 +524,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             Why Choose Us
           </button>
           <button type="button" className="drawer-nav-item-simple" onClick={() => handleSectionScroll('testimonials')}>
-            Client Reviews
+            Testimonials
           </button>
           <button type="button" className="drawer-nav-item-simple" onClick={() => handleSectionScroll('faq')}>
             FAQ

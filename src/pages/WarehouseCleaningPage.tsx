@@ -33,8 +33,8 @@ export const WarehouseCleaningPage: React.FC<WarehouseCleaningPageProps> = ({
       title="Warehouse & Distribution"
       titleHighlight="Cleaning Services"
       subtitle="Heavy-duty concrete floor scrubbing, high-bay structural dusting, packing debris management, and loading dock sanitation engineered for USA logistics hubs."
-      heroImage="/images/drive_folder_2/DSC00280.jpg"
-      heroImageCaption="High-Capacity Industrial Waste Handling & Continuous Facility Maintenance"
+      heroImage="/images/warehouse_cleaning_hero.jpg"
+      heroImageCaption="Uniformed Mirola Crew Executing Warehouse Floor Sweeping & Logistics Facility Care"
       stats={[
         { value: '500k+', label: 'Sq. Ft. Capacities Handled' },
         { value: 'OSHA', label: 'Safety & Slip-Resistance Compliant' },
@@ -86,10 +86,10 @@ export const WarehouseCleaningPage: React.FC<WarehouseCleaningPageProps> = ({
       ]}
       gallery={[
         {
-          src: '/images/drive_folder_2/DSC00280.jpg',
-          alt: 'High capacity waste dolly in facility corridor',
-          caption: 'High-capacity industrial waste dolly and corridor maintenance.',
-          tag: 'Waste Management'
+          src: '/images/warehouse_cleaning_hero.jpg',
+          alt: 'Mirola specialist maintaining warehouse distribution floor',
+          caption: 'Specialized warehouse sweeping, ride-on scrubbing, and logistics aisle floor care.',
+          tag: 'Warehouse Logistics'
         },
         {
           src: '/images/drive_folder_2/DSC00445.jpg',

@@ -45,7 +45,7 @@ const buildingTypes = [
     path: '/services/janitorial/warehouse' as AppRoute,
     icon: <Boxes size={28} />,
     tag: 'Industrial Strength',
-    image: '/images/drive_folder_2/DSC00280.jpg',
+    image: '/images/warehouse_cleaning_hero.jpg',
     description: 'Heavy-duty concrete sweeping, high-bay overhead dusting, loading dock hygiene, and high-capacity industrial waste management.',
     features: ['Ride-on auto-scrubber concrete care', 'High-reach racking & beam dusting', 'OSHA compliant slip-hazard mitigation']
   },
@@ -65,7 +65,7 @@ const buildingTypes = [
     path: '/services/janitorial/medical' as AppRoute,
     icon: <ShieldCheck size={28} />,
     tag: 'Hospital-Grade Terminal',
-    image: '/images/drive_folder_2/DSC00249.jpg',
+    image: '/images/medical_cleaning_hero.png',
     description: 'CDC, OSHA, and HIPAA-compliant healthcare sanitation engineered for surgical suites, medical labs, and patient exam rooms.',
     features: ['Color-coded microfiber cross-contamination defense', 'Terminal cleaning & bio-burden elimination', 'Bloodborne pathogen certified staff']
   }

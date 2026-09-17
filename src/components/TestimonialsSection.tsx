@@ -61,7 +61,7 @@ export const TestimonialsSection: React.FC = () => {
             </div>
             <span className="rating-score">4.9 / 5</span>
             <span className="rating-dot">•</span>
-            <span className="rating-count">500+ Verified Facility Reviews</span>
+            <span className="rating-count">500+ Verified Facility Testimonials</span>
           </div>
         </div>
 
