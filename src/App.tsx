@@ -10,10 +10,12 @@ import { FaqSection } from './components/FaqSection';
 import { BlogSection } from './components/BlogSection';
 import { FooterSection } from './components/FooterSection';
 import { ConsultationModal } from './components/ConsultationModal';
+import { useScrollReveal } from './hooks/useScrollReveal';
 import './App.css';
 
 function App() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
+  useScrollReveal();
 
   return (
     <div className="app-main-layout">

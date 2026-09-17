@@ -88,7 +88,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
       <div className="services-container">
         
         {/* Section Header */}
-        <div className="services-header-row">
+        <div className="services-header-row scroll-reveal">
           <div className="services-header-left">
             <div className="services-pill-badge">
               <span className="services-dot" />
@@ -113,7 +113,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         </div>
 
         {/* Interactive Accordion / Expandable Cards */}
-        <div className="services-accordion-list">
+        <div className="services-accordion-list scroll-reveal-stagger">
           {servicesData.map((service) => {
             const isActive = activeServiceId === service.id;
 

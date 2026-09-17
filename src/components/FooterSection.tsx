@@ -33,7 +33,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
       <div className="footer-container">
         
         {/* Large Floating CTA Banner */}
-        <div className="footer-cta-banner">
+        <div className="footer-cta-banner scroll-reveal-scale">
           <div className="cta-banner-content">
             <div className="cta-badge">
               <ShieldCheck size={16} />
@@ -73,7 +73,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
         </div>
 
         {/* Footer Navigation Columns */}
-        <div className="footer-columns-grid">
+        <div className="footer-columns-grid scroll-reveal-stagger">
           
           {/* Brand Info */}
           <div className="footer-col brand-col">

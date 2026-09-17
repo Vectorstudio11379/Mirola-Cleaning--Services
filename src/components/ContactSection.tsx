@@ -92,7 +92,7 @@ ${formData.company ? `${formData.company}\n` : ''}${formData.phone}`;
       <div className="contact-container">
         
         {/* Left Column: Contact Copy & Trust Badges */}
-        <div className="contact-info-column">
+        <div className="contact-info-column scroll-reveal-left">
           <div className="contact-pill-badge">
             <span className="contact-dot" />
             <span className="contact-badge-text">GET IN TOUCH</span>
@@ -141,7 +141,7 @@ ${formData.company ? `${formData.company}\n` : ''}${formData.phone}`;
         </div>
 
         {/* Right Column: Luxury Obsidian Form Box */}
-        <div className="contact-form-column">
+        <div className="contact-form-column scroll-reveal-right">
           <div className="contact-form-card">
             {isSubmitted ? (
               <div className="contact-success-state">

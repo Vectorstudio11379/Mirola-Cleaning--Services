@@ -250,7 +250,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation }
         </div>
 
         {/* 3. BOTTOM 3-CARD ROW (MEDIA + STATS) */}
-        <div className="about-cards-grid">
+        <div className="about-cards-grid scroll-reveal-stagger">
           
           {/* Left Card: Video / Media Preview Card */}
           <div 

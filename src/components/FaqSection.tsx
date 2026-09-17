@@ -42,7 +42,7 @@ export const FaqSection: React.FC = () => {
       <div className="faq-container">
         
         {/* Header */}
-        <div className="faq-header">
+        <div className="faq-header scroll-reveal">
           <div className="faq-pill-badge">
             <HelpCircle size={14} />
             <span>FREQUENTLY ASKED QUESTIONS</span>
@@ -57,7 +57,7 @@ export const FaqSection: React.FC = () => {
         </div>
 
         {/* Accordion List */}
-        <div className="faq-accordion-list">
+        <div className="faq-accordion-list scroll-reveal-stagger">
           {faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
 

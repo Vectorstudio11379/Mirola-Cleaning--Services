@@ -42,7 +42,7 @@ export const TestimonialsSection: React.FC = () => {
       <div className="testimonials-container">
         
         {/* Header */}
-        <div className="testimonials-header">
+        <div className="testimonials-header scroll-reveal">
           <div className="testimonials-pill-badge">
             <span className="testimonials-dot" />
             <span className="testimonials-badge-text">TESTIMONIALS</span>
@@ -66,7 +66,7 @@ export const TestimonialsSection: React.FC = () => {
         </div>
 
         {/* Testimonials Cards Grid */}
-        <div className="testimonials-cards-grid">
+        <div className="testimonials-cards-grid scroll-reveal-stagger">
           {reviews.map((rev, index) => (
             <div key={index} className="testimonial-card">
               <div className="card-quote-icon">

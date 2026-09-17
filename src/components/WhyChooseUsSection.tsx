@@ -32,7 +32,7 @@ export const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ onOpenCo
       <div className="why-choose-container">
         
         {/* Header */}
-        <div className="why-choose-header">
+        <div className="why-choose-header scroll-reveal">
           <div className="why-pill-badge">
             <span className="why-dot" />
             <span className="why-badge-text">WHY CHOOSE US</span>
@@ -55,7 +55,7 @@ export const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ onOpenCo
         </div>
 
         {/* 3 Large Numbered Feature Cards */}
-        <div className="why-cards-grid">
+        <div className="why-cards-grid scroll-reveal-stagger">
           {features.map((feat) => (
             <div key={feat.number} className="why-feature-card">
               <div className="why-card-top">

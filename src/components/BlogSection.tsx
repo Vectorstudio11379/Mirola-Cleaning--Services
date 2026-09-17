@@ -41,7 +41,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ onOpenConsultation }) 
       <div className="blog-container">
         
         {/* Header */}
-        <div className="blog-header-row">
+        <div className="blog-header-row scroll-reveal">
           <div className="blog-header-left">
             <div className="blog-pill-badge">
               <span className="blog-dot" />
@@ -65,7 +65,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ onOpenConsultation }) 
         </div>
 
         {/* Blog Cards Grid */}
-        <div className="blog-cards-grid">
+        <div className="blog-cards-grid scroll-reveal-stagger">
           {posts.map((post) => (
             <article key={post.id} className="blog-card">
               <div className="blog-img-box">
