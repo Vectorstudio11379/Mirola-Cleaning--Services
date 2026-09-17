@@ -3531,8 +3531,8 @@
 /* Footer Columns */
 .footer-columns-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1.2fr 1fr;
-  gap: 50px;
+  grid-template-columns: 1.6fr 1fr 1.2fr;
+  gap: 60px;
   margin-bottom: 60px;
 }
 

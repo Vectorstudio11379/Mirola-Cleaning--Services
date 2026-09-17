@@ -131,18 +131,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
             </ul>
           </div>
 
-          {/* Service Areas */}
-          <div className="footer-col">
-            <h4 className="footer-col-title">USA Service Hubs</h4>
-            <ul className="footer-links-list">
-              <li><span>Bergen County</span></li>
-              <li><span>Hudson County</span></li>
-              <li><span>Essex County</span></li>
-              <li><span>Morris County</span></li>
-              <li><span>Union County</span></li>
-              <li><span>Passaic & Middlesex</span></li>
-            </ul>
-          </div>
+
 
         </div>
 
