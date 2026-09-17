@@ -6,15 +6,15 @@ export const TestimonialsSection: React.FC = () => {
     {
       name: 'Carlos Martinez',
       role: 'Founder & CEO, Uptown Corporate Center',
-      location: 'Jersey City, NJ',
-      text: 'I’ve managed corporate properties across North Jersey for over twelve years, and none compare to Mirola Cleaning Services. From our initial consultation, their operations were seamless. Our polished marble lobbies and 4 floors of executive suites have never looked crisper.',
+      location: 'Jersey City, USA',
+      text: 'I’ve managed corporate properties across the USA for over twelve years, and none compare to Mirola Cleaning Services. From our initial consultation, their operations were seamless. Our polished marble lobbies and 4 floors of executive suites have never looked crisper.',
       rating: 5,
       avatar: 'CM'
     },
     {
       name: 'David Thompson',
       role: 'Director of Facility Operations, Apex Healthcare',
-      location: 'Newark, NJ',
+      location: 'Newark, USA',
       text: 'In an outpatient medical center, hospital-grade disinfection is non-negotiable. Mirola’s healthcare cleaning team executes terminal disinfection to the highest CDC standard. Their digital checklist audits give our compliance board complete confidence.',
       rating: 5,
       avatar: 'DT'
@@ -22,15 +22,15 @@ export const TestimonialsSection: React.FC = () => {
     {
       name: 'James Walker',
       role: 'Senior Property Manager, Metro Tech Tower',
-      location: 'Hoboken, NJ',
-      text: 'Transitioning our 120,000 sq ft commercial facility to Mirola was effortless. Their day porter staff is proactive, impeccably uniformed, and tenant satisfaction scores jumped immediately. They truly set the benchmark for commercial janitorial in New Jersey.',
+      location: 'Hoboken, USA',
+      text: 'Transitioning our 120,000 sq ft commercial facility to Mirola was effortless. Their day porter staff is proactive, impeccably uniformed, and tenant satisfaction scores jumped immediately. They truly set the benchmark for commercial janitorial in the USA.',
       rating: 5,
       avatar: 'JW'
     },
     {
       name: 'Elena Rostova',
       role: 'Managing Partner, Vantage Legal Group',
-      location: 'Paramus, NJ',
+      location: 'Paramus, USA',
       text: 'Our law firm hosts high-profile clients every day. Mirola ensures our conference rooms, glass partitions, and hardwood floors are pristine every morning before our doors open. Their consistency is unmatched.',
       rating: 5,
       avatar: 'ER'
@@ -49,7 +49,7 @@ export const TestimonialsSection: React.FC = () => {
           </div>
 
           <h2 className="testimonials-headline">
-            Trusted by New Jersey’s Leading Commercial Properties
+            Trusted by USA’s Leading Commercial Properties
           </h2>
 
           {/* Social Proof Rating Capsule */}

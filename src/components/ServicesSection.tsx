@@ -1,8 +1,22 @@
 import React, { useState } from 'react';
-import { ArrowRight, Plus, Building2, Shield, Sparkles, Layers } from 'lucide-react';
+import { 
+  ArrowRight, 
+  Plus, 
+  Building2, 
+  Shield, 
+  Sparkles, 
+  Layers, 
+  Baby, 
+  Dumbbell, 
+  Boxes, 
+  ShieldCheck, 
+  CheckCircle2 
+} from 'lucide-react';
+import type { AppRoute } from '../types/navigation';
 
 interface ServicesSectionProps {
   onOpenConsultation: () => void;
+  onNavigate: (path: AppRoute) => void;
 }
 
 interface ServiceItem {
@@ -14,53 +28,62 @@ interface ServiceItem {
   tags: string[];
   image: string;
   icon: React.ReactNode;
+  pagePath: AppRoute;
+  subBuildings?: {
+    name: string;
+    path: AppRoute;
+    icon: React.ReactNode;
+  }[];
 }
 
 const servicesData: ServiceItem[] = [
   {
-    id: 'office',
+    id: 'janitorial',
     number: '01',
-    title: 'Corporate & Commercial Office Cleaning',
-    shortDesc: 'Nightly janitorial, day porter solutions & comprehensive workstation hygiene.',
-    fullDesc: 'Enjoy a consistently fresh, sanitized, and welcoming workplace with routine or deep recurring commercial cleaning solutions engineered for New Jersey enterprises.',
-    tags: ['Reliable', 'Spotless', 'Personalized'],
-    image: '/images/service-office.jpg',
-    icon: <Building2 size={20} />
+    title: 'Janitorial Services',
+    shortDesc: 'Tailored recurring commercial facility care customized by specific building occupancy.',
+    fullDesc: 'Ensure a pristine, hygienic, and compliant workplace tailored to your exact facility type. Click any building specialty below to explore dedicated scopes of work, trained crews, and inspection protocols.',
+    tags: ['Daily & Nightly', '5 Building Types', 'Dedicated Porters'],
+    image: '/images/drive_folder_2/DSC00550.jpg',
+    icon: <Sparkles size={20} />,
+    pagePath: '/services/janitorial',
+    subBuildings: [
+      { name: 'Daycare Cleaning', path: '/services/janitorial/daycare', icon: <Baby size={14} /> },
+      { name: 'Gym Cleaning', path: '/services/janitorial/gym', icon: <Dumbbell size={14} /> },
+      { name: 'Warehouse Cleaning', path: '/services/janitorial/warehouse', icon: <Boxes size={14} /> },
+      { name: 'Office Cleaning', path: '/services/janitorial/office', icon: <Building2 size={14} /> },
+      { name: 'Medical Cleaning', path: '/services/janitorial/medical', icon: <ShieldCheck size={14} /> },
+    ]
   },
   {
-    id: 'medical',
+    id: 'floor-care',
     number: '02',
-    title: 'Medical & Healthcare Facility Sanitation',
-    shortDesc: 'Hospital-grade terminal disinfection, bio-burden mitigation & compliance.',
-    fullDesc: 'Keep your clinical environment 100% compliant and sterile with EPA-registered hospital-grade disinfectants, color-coded microfiber systems, and CDC protocol execution.',
-    tags: ['Hospital-Grade', 'Terminal Clean', 'CDC Compliant'],
-    image: '/images/service-medical.jpg',
-    icon: <Shield size={20} />
+    title: 'Floor Care and Strip & Wax Services',
+    shortDesc: 'Rotary stripping, high-gloss VCT waxing, high-speed burnishing & terrazzo restoration.',
+    fullDesc: 'Restore dull, scuffed, and high-traffic commercial corridors to brilliant, mirror-like clarity. Our rotary stripping units remove yellowed wax down to the bare tile, applying 5 coats of 25%+ high-solid polymer finish for extraordinary reflection and ASTM slip-resistant safety.',
+    tags: ['High-Gloss VCT', 'Diamond Polish', 'Slip-Resistant'],
+    image: '/images/drive_folder_2/DSC03844.jpg',
+    icon: <Layers size={20} />,
+    pagePath: '/services/floor-care'
   },
   {
-    id: 'floors',
+    id: 'sanitation',
     number: '03',
-    title: 'Industrial Floor Stripping, Waxing & Buffing',
-    shortDesc: 'Diamond polishing, terrazzo restoration, high-gloss VCT wax & concrete sealing.',
-    fullDesc: 'Perfect for high-traffic corridors and corporate lobbies. Our specialized multi-speed rotary machinery strips worn finishes and seals floors with mirror-finish polymer coats.',
-    tags: ['High-Gloss', 'Diamond Polish', 'Slip-Resistant'],
-    image: '/images/service-floors.jpg',
-    icon: <Sparkles size={20} />
-  },
-  {
-    id: 'custom',
-    number: '04',
-    title: 'Custom Janitorial Packages & Day Porters',
-    shortDesc: 'Tailored multi-facility management, event support & flexible schedules.',
-    fullDesc: 'Need something unique? Choose the frequencies, specialized zones, and continuous day porter presence that matter most, and we will build a turnkey operational schedule.',
-    tags: ['Flexible', 'Tailored', 'Convenient'],
-    image: '/images/cleaner-video-thumb.jpg',
-    icon: <Layers size={20} />
+    title: 'Sanitation Services',
+    shortDesc: 'Hospital-grade terminal disinfection, touchpoint bio-barriers & electrostatic misting.',
+    fullDesc: 'Keep your facility safe from viral outbreaks and pathogens with EPA List N hospital germicides, 360-degree electrostatic antimicrobial misting, and ATP bioluminescence verification that neutralizes 99.99% of bacteria and viruses on contact.',
+    tags: ['EPA List N', 'Electrostatic Mist', '99.99% Kill'],
+    image: '/images/drive_folder_2/DSC00402.jpg',
+    icon: <Shield size={20} />,
+    pagePath: '/services/sanitation'
   }
 ];
 
-export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenConsultation }) => {
-  const [activeServiceId, setActiveServiceId] = useState<string>('office');
+export const ServicesSection: React.FC<ServicesSectionProps> = ({ 
+  onOpenConsultation, 
+  onNavigate 
+}) => {
+  const [activeServiceId, setActiveServiceId] = useState<string>('janitorial');
 
   return (
     <section className="services-section" id="services">
@@ -71,10 +94,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenConsulta
           <div className="services-header-left">
             <div className="services-pill-badge">
               <span className="services-dot" />
-              <span className="services-badge-text">OUR EXPERT SERVICES</span>
+              <span className="services-badge-text">OUR EXPERT COMMERCIAL SERVICES</span>
             </div>
             <h2 className="services-headline">
-              From corporate headquarters to specialized medical suites, we deliver <span className="accent-lime">tailored solutions</span> that shine.
+              Specialized commercial cleaning engineered for <span className="accent-lime">USA enterprises</span>.
             </h2>
           </div>
 
@@ -82,8 +105,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenConsulta
             <button 
               type="button" 
               className="services-view-all-btn"
-              onClick={onOpenConsultation}
-              aria-label="Request custom service proposal"
+              onClick={() => onNavigate('/services/janitorial')}
+              aria-label="Explore all commercial solutions"
             >
               <span>Explore All Solutions</span>
               <ArrowRight size={16} />
@@ -113,6 +136,30 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenConsulta
                       <h3 className="expanded-service-title">{service.title}</h3>
                       <p className="expanded-service-desc">{service.fullDesc}</p>
 
+                      {/* Sub-buildings pills if Janitorial */}
+                      {service.subBuildings && (
+                        <div className="janitorial-sub-buildings-box">
+                          <div className="sub-buildings-label">
+                            <span>SELECT BUILDING TYPE FOR DEDICATED SCOPE:</span>
+                          </div>
+                          <div className="sub-buildings-pills-row">
+                            {service.subBuildings.map((b, idx) => (
+                              <button
+                                key={idx}
+                                type="button"
+                                className="sub-building-nav-pill"
+                                onClick={() => onNavigate(b.path)}
+                                title={`View dedicated ${b.name} page`}
+                              >
+                                {b.icon}
+                                <span>{b.name}</span>
+                                <ArrowRight size={12} className="pill-arrow" />
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       {/* Tag Pills */}
                       <div className="service-tags-row">
                         {service.tags.map((tag, idx) => (
@@ -126,12 +173,20 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenConsulta
                         <button 
                           type="button" 
                           className="service-book-btn"
-                          onClick={onOpenConsultation}
+                          onClick={() => onNavigate(service.pagePath)}
                         >
-                          <span>Schedule Free Inspection</span>
+                          <span>View Full {service.title} Page</span>
                           <span className="btn-arrow-circle">
                             <ArrowRight size={14} />
                           </span>
+                        </button>
+                        <button 
+                          type="button" 
+                          className="service-inspection-secondary-btn"
+                          onClick={onOpenConsultation}
+                        >
+                          <Sparkles size={14} className="btn-sparkle-icon" />
+                          <span>Get Free Estimate</span>
                         </button>
                       </div>
                     </div>
@@ -143,7 +198,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenConsulta
                         className="service-feature-img"
                       />
                       <div className="expanded-img-badge">
-                        <span>Certified NJ Specialists</span>
+                        <CheckCircle2 size={14} color="#c90000" />
+                        <span>Certified USA Specialists</span>
                       </div>
                     </div>
                   </div>

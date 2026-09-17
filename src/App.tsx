@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutSection } from './components/AboutSection';
 import { ServicesSection } from './components/ServicesSection';
-import { PricingSection } from './components/PricingSection';
 import { WhyChooseUsSection } from './components/WhyChooseUsSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { ContactSection } from './components/ContactSection';
@@ -11,48 +10,179 @@ import { FaqSection } from './components/FaqSection';
 import { BlogSection } from './components/BlogSection';
 import { FooterSection } from './components/FooterSection';
 import { ConsultationModal } from './components/ConsultationModal';
+
+// Dedicated Service & Building Pages
+import { JanitorialPage } from './pages/JanitorialPage';
+import { FloorCarePage } from './pages/FloorCarePage';
+import { SanitationPage } from './pages/SanitationPage';
+import { DaycareCleaningPage } from './pages/DaycareCleaningPage';
+import { GymCleaningPage } from './pages/GymCleaningPage';
+import { WarehouseCleaningPage } from './pages/WarehouseCleaningPage';
+import { OfficeCleaningPage } from './pages/OfficeCleaningPage';
+import { MedicalCleaningPage } from './pages/MedicalCleaningPage';
+
+import type { AppRoute } from './types/navigation';
 import './App.css';
 
 function App() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
+  const [currentPath, setCurrentPath] = useState<AppRoute>(() => {
+    const path = window.location.pathname;
+    const validRoutes: AppRoute[] = [
+      '/',
+      '/services/janitorial',
+      '/services/floor-care',
+      '/services/sanitation',
+      '/services/janitorial/daycare',
+      '/services/janitorial/gym',
+      '/services/janitorial/warehouse',
+      '/services/janitorial/office',
+      '/services/janitorial/medical'
+    ];
+    return validRoutes.includes(path as AppRoute) ? (path as AppRoute) : '/';
+  });
+
+  // Listen to browser Back/Forward navigation
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      const validRoutes: AppRoute[] = [
+        '/',
+        '/services/janitorial',
+        '/services/floor-care',
+        '/services/sanitation',
+        '/services/janitorial/daycare',
+        '/services/janitorial/gym',
+        '/services/janitorial/warehouse',
+        '/services/janitorial/office',
+        '/services/janitorial/medical'
+      ];
+      setCurrentPath(validRoutes.includes(path as AppRoute) ? (path as AppRoute) : '/');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigate = (path: AppRoute) => {
+    if (path !== currentPath) {
+      window.history.pushState({}, '', path);
+      setCurrentPath(path);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const renderCurrentPage = () => {
+    switch (currentPath) {
+      case '/services/janitorial':
+        return (
+          <JanitorialPage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
+      case '/services/floor-care':
+        return (
+          <FloorCarePage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
+      case '/services/sanitation':
+        return (
+          <SanitationPage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
+      case '/services/janitorial/daycare':
+        return (
+          <DaycareCleaningPage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
+      case '/services/janitorial/gym':
+        return (
+          <GymCleaningPage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
+      case '/services/janitorial/warehouse':
+        return (
+          <WarehouseCleaningPage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
+      case '/services/janitorial/office':
+        return (
+          <OfficeCleaningPage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
+      case '/services/janitorial/medical':
+        return (
+          <MedicalCleaningPage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
+      case '/':
+      default:
+        return (
+          <main>
+            {/* 1. Main Hero Section (Retained 400vh Canvas Video Sequence) */}
+            <Hero onOpenConsultation={() => setIsConsultationOpen(true)} />
+
+            {/* 2. About Us Section */}
+            <AboutSection onOpenConsultation={() => setIsConsultationOpen(true)} />
+
+            {/* 3. Services Section with 3 Core Services & Janitorial Building Selector */}
+            <ServicesSection 
+              onOpenConsultation={() => setIsConsultationOpen(true)} 
+              onNavigate={navigate}
+            />
+
+            {/* 4. Why Choose Us Section */}
+            <WhyChooseUsSection onOpenConsultation={() => setIsConsultationOpen(true)} />
+
+            {/* 5. Testimonials Section */}
+            <TestimonialsSection />
+
+            {/* 6. Contact Section */}
+            <ContactSection />
+
+            {/* 7. FAQ Section */}
+            <FaqSection />
+
+            {/* 8. Blog Section */}
+            <BlogSection onOpenConsultation={() => setIsConsultationOpen(true)} />
+          </main>
+        );
+    }
+  };
 
   return (
     <div className="app-main-layout">
-      {/* Floating Pill Navigation Capsule */}
-      <Navbar onOpenConsultation={() => setIsConsultationOpen(true)} />
+      {/* Floating Pill Navigation Capsule with Services & Janitorial dropdown */}
+      <Navbar 
+        currentPath={currentPath}
+        onNavigate={navigate}
+        onOpenConsultation={() => setIsConsultationOpen(true)} 
+      />
 
-      {/* Main Page Content Flow */}
-      <main>
-        {/* 1. Main Hero Section (Retained 400vh Canvas Video Sequence) */}
-        <Hero onOpenConsultation={() => setIsConsultationOpen(true)} />
+      {/* Dynamic Multi-Page Router Content */}
+      {renderCurrentPage()}
 
-        {/* 2. About Us Section (Logo Ticker, High-Impact Editorial, Media Play Card & Stat Cards) */}
-        <AboutSection onOpenConsultation={() => setIsConsultationOpen(true)} />
-
-        {/* 3. Services Section (Dark Forest Green Accordion Showcase) */}
-        <ServicesSection onOpenConsultation={() => setIsConsultationOpen(true)} />
-
-        {/* 4. Pricing Plans Section (Mint Background with Monthly/Annual Toggle) */}
-        <PricingSection onOpenConsultation={() => setIsConsultationOpen(true)} />
-
-        {/* 5. Why Choose Us Section (3 Large Numbered Feature Cards) */}
-        <WhyChooseUsSection onOpenConsultation={() => setIsConsultationOpen(true)} />
-
-        {/* 6. Testimonials Section (Mint Background with 500+ Reviews & Customer Cards) */}
-        <TestimonialsSection />
-
-        {/* 7. Contact / Quick Walkthrough Booking Section */}
-        <ContactSection />
-
-        {/* 8. Frequently Asked Questions Section */}
-        <FaqSection />
-
-        {/* 9. Cleaning Tips & Expert Insights Blog Section */}
-        <BlogSection onOpenConsultation={() => setIsConsultationOpen(true)} />
-      </main>
-
-      {/* 10. CTA Banner & Footer Section with Watermark */}
-      <FooterSection onOpenConsultation={() => setIsConsultationOpen(true)} />
+      {/* CTA Banner & Footer Section with Watermark */}
+      <FooterSection 
+        onNavigate={navigate}
+        onOpenConsultation={() => setIsConsultationOpen(true)} 
+      />
 
       {/* Free Consultation Booking Modal */}
       <ConsultationModal 
@@ -64,4 +194,3 @@ function App() {
 }
 
 export default App;
-

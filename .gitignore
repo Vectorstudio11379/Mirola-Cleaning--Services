@@ -27,3 +27,11 @@ dist-ssr
 *.zip
 *.tar.gz
 *.rar
+
+# Frame backups & scratch
+public/frames_backup/
+*.ps1
+*.py
+public/images/drive_folder_1/
+public/images/thumb_*.jpg
+public/images/thumbs_f2/

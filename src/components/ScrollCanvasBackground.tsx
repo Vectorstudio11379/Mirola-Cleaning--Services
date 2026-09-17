@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 
-const TOTAL_FRAMES = 150;
+const TOTAL_FRAMES = 50;
 
-// Helper to format frame filename: ezgif-frame-001.png -> ezgif-frame-150.png
+// Helper to format frame filename: ezgif-frame-001.png -> ezgif-frame-050.png
 const getFrameUrl = (frameIndex: number): string => {
   const padded = String(frameIndex).padStart(3, '0');
   return `/frames/ezgif-frame-${padded}.png`;
@@ -125,14 +125,14 @@ export const ScrollCanvasBackground: React.FC<ScrollCanvasBackgroundProps> = ({ 
     // Preload Frame 1 immediately
     preloadFrame(1);
 
-    // Wave 1: Immediate chunk (Frames 2-30)
-    for (let i = 2; i <= 30; i++) {
+    // Wave 1: Immediate chunk (Frames 2-15)
+    for (let i = 2; i <= 15; i++) {
       preloadFrame(i);
     }
 
-    // Wave 2: Keyframes across the sequence (every 4th frame)
+    // Wave 2: Keyframes across the sequence (every 2nd frame)
     const keyframesTimer = setTimeout(() => {
-      for (let i = 32; i <= TOTAL_FRAMES; i += 4) {
+      for (let i = 16; i <= TOTAL_FRAMES; i += 2) {
         preloadFrame(i);
       }
     }, 50);
@@ -146,8 +146,8 @@ export const ScrollCanvasBackground: React.FC<ScrollCanvasBackgroundProps> = ({ 
 
     // Preload window around active scroll target dynamically
     const preloadSurroundingFrames = (centerIndex: number) => {
-      const start = Math.max(1, centerIndex - 5);
-      const end = Math.min(TOTAL_FRAMES, centerIndex + 20);
+      const start = Math.max(1, centerIndex - 3);
+      const end = Math.min(TOTAL_FRAMES, centerIndex + 10);
       for (let i = start; i <= end; i++) {
         preloadFrame(i);
       }
@@ -167,8 +167,8 @@ export const ScrollCanvasBackground: React.FC<ScrollCanvasBackgroundProps> = ({ 
 
       const scrolled = -rect.top;
       
-      // CRITICAL: Complete the 150 frames at 78% of the scroll track.
-      // This guarantees the animation reaches Frame 150 and holds it for the remaining 22%
+      // CRITICAL: Complete the 50 frames at 78% of the scroll track.
+      // This guarantees the animation reaches Frame 50 and holds it for the remaining 22%
       // before the sticky container reaches its end or goes down!
       const ANIMATION_END_PERCENT = 0.78;
       const rawProgress = scrolled / (scrollableDist * ANIMATION_END_PERCENT);

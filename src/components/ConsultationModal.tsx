@@ -1,32 +1,113 @@
 import React, { useState } from 'react';
-import { X, CheckCircle2, ShieldCheck, Clock, MapPin } from 'lucide-react';
+import { X, CheckCircle2, MapPin, Check, ExternalLink, Mail, AlertCircle } from 'lucide-react';
 
 interface ConsultationModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+export const FACILITY_OPTIONS = [
+  'Office / Corporate Building',
+  'Medical / Healthcare Center',
+  'Industrial / Warehouse Facility',
+  'Educational / Campus Property',
+  'Retail / Commercial Showroom',
+  'Fitness Center / Gym',
+];
+
+const TARGET_EMAIL = 'inquiries@mirolacleaning.com';
+
 export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, onClose }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [gmailLink, setGmailLink] = useState('');
+  const [mailtoLink, setMailtoLink] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     company: '',
     email: '',
     phone: '',
-    facilityType: 'Office / Corporate Building',
+    facilityTypes: ['Office / Corporate Building'] as string[],
     squareFootage: '5,000 - 15,000 sq ft',
     notes: '',
   });
 
   if (!isOpen) return null;
 
+  const toggleFacilityType = (type: string) => {
+    setFormData(prev => {
+      const exists = prev.facilityTypes.includes(type);
+      const next = exists 
+        ? prev.facilityTypes.filter(t => t !== type)
+        : [...prev.facilityTypes, type];
+      if (next.length > 0) setErrorMsg('');
+      return { ...prev, facilityTypes: next };
+    });
+  };
+
+  const generateEmailData = () => {
+    const subject = `Facility Consultation Request - ${formData.company || formData.fullName || 'Commercial Client'}`;
+    const facilityList = formData.facilityTypes.length > 0
+      ? formData.facilityTypes.map(f => `  • ${f}`).join('\n')
+      : '  • Commercial Facility (Standard)';
+
+    const body = 
+`Hello Mirola Commercial Cleaning Team,
+
+I would like to request an on-site commercial facility consultation and estimate. Here are our facility specifications:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FACILITY CONSULTATION DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Full Name: ${formData.fullName}
+• Company / Facility Name: ${formData.company}
+• Corporate Email: ${formData.email}
+• Direct Phone: ${formData.phone}
+• Approximate Area: ${formData.squareFootage}
+
+FACILITY CLASSIFICATION(S):
+${facilityList}
+
+SPECIFIC CLEANING PRIORITIES / NOTES:
+${formData.notes.trim() ? formData.notes.trim() : 'Standard commercial janitorial walkthrough requested.'}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Please contact me to arrange an on-site walkthrough.
+
+Thank you,
+${formData.fullName}
+${formData.company ? `${formData.company}\n` : ''}${formData.phone}`;
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(TARGET_EMAIL)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoUrl = `mailto:${encodeURIComponent(TARGET_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    return { gmailUrl, mailtoUrl };
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.facilityTypes.length === 0) {
+      setErrorMsg('Please select at least one facility classification.');
+      return;
+    }
+
+    const { gmailUrl, mailtoUrl } = generateEmailData();
+    setGmailLink(gmailUrl);
+    setMailtoLink(mailtoUrl);
+
+    // Automatically open Gmail compose in a new tab
+    try {
+      window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+    } catch {
+      // Browser popup fallback handled by confirmation UI
+    }
+
     setIsSubmitted(true);
   };
 
   const handleReset = () => {
     setIsSubmitted(false);
+    setErrorMsg('');
     onClose();
   };
 
@@ -47,23 +128,60 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
             <div className="success-icon-badge">
               <CheckCircle2 size={46} color="#c90000" />
             </div>
-            <h3>Consultation Request Received!</h3>
+            <h3>Consultation Draft Opened in Gmail!</h3>
             <p>
-              Thank you, <strong>{formData.fullName || 'there'}</strong>. Our New Jersey commercial cleaning director will review your facility details for <strong>{formData.company || 'your business'}</strong> and contact you within 2 hours.
+              Thank you, <strong>{formData.fullName || 'there'}</strong>. We have opened a new tab with your prefilled facility details in <strong>Gmail</strong> addressed to <strong>{TARGET_EMAIL}</strong>.
             </p>
-            <div className="modal-perks">
-              <div className="perk-item">
-                <ShieldCheck size={16} color="#c90000" />
-                <span>Custom Site Inspection Included</span>
+
+            <div className="gmail-summary-box">
+              <div className="gmail-summary-header">Consultation Summary</div>
+              <div className="gmail-summary-row">
+                <span className="summary-label">Company / Facility:</span>
+                <span className="summary-val">{formData.company || 'Not specified'}</span>
               </div>
-              <div className="perk-item">
-                <Clock size={16} color="#c90000" />
-                <span>Zero Commitment Estimate</span>
+              <div className="gmail-summary-row">
+                <span className="summary-label">Estimated Area:</span>
+                <span className="summary-val">{formData.squareFootage}</span>
+              </div>
+              <div className="gmail-summary-header" style={{ marginTop: '10px' }}>Facility Classifications:</div>
+              <div className="gmail-summary-chips">
+                {formData.facilityTypes.map((type) => (
+                  <span key={type} className="gmail-chip">
+                    <Check size={11} strokeWidth={3} />
+                    {type}
+                  </span>
+                ))}
               </div>
             </div>
-            <button type="button" className="modal-done-btn" onClick={handleReset}>
-              Close Window
-            </button>
+
+            <p className="gmail-instruction-note">
+              Please switch to your Gmail tab and click <strong>Send</strong> to dispatch your walkthrough request directly to our commercial operations team.
+            </p>
+
+            <div className="modal-actions-group">
+              {gmailLink && (
+                <a 
+                  href={gmailLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="modal-gmail-btn"
+                >
+                  <ExternalLink size={16} />
+                  <span>Re-open in Gmail</span>
+                </a>
+              )}
+              <div className="modal-secondary-actions">
+                {mailtoLink && (
+                  <a href={mailtoLink} className="modal-secondary-btn">
+                    <Mail size={14} />
+                    <span>Open in Default Mail</span>
+                  </a>
+                )}
+                <button type="button" className="modal-secondary-btn" onClick={handleReset}>
+                  Done / Close
+                </button>
+              </div>
+            </div>
           </div>
         ) : (
           <form className="modal-form" onSubmit={handleSubmit}>
@@ -73,7 +191,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
                 <span>MIROLA COMMERCIAL SERVICES</span>
               </div>
               <h2>Book Your Free Consultation</h2>
-              <p>Specialized commercial janitorial & sanitation analysis for New Jersey businesses.</p>
+              <p>Specialized commercial janitorial & sanitation analysis for USA businesses.</p>
             </div>
 
             <div className="form-grid">
@@ -95,7 +213,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
                   id="company"
                   type="text" 
                   required 
-                  placeholder="e.g. Apex Financial NJ"
+                  placeholder="e.g. Apex Financial USA"
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                 />
@@ -124,35 +242,56 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 />
               </div>
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="facilityType">Facility Classification</label>
-                <select 
-                  id="facilityType"
-                  value={formData.facilityType}
-                  onChange={(e) => setFormData({ ...formData, facilityType: e.target.value })}
-                >
-                  <option value="Office / Corporate Building">Office / Corporate Building</option>
-                  <option value="Medical / Healthcare Center">Medical / Healthcare Center</option>
-                  <option value="Industrial / Warehouse Facility">Industrial / Warehouse Facility</option>
-                  <option value="Educational / Campus Property">Educational / Campus Property</option>
-                  <option value="Retail / Showroom Space">Retail / Showroom Space</option>
-                </select>
-              </div>
+            <div className="form-group full-width" style={{ marginBottom: '14px' }}>
+              <label htmlFor="squareFootage">Approximate Area</label>
+              <select 
+                id="squareFootage"
+                value={formData.squareFootage}
+                onChange={(e) => setFormData({ ...formData, squareFootage: e.target.value })}
+              >
+                <option value="Under 5,000 sq ft">Under 5,000 sq ft</option>
+                <option value="5,000 - 15,000 sq ft">5,000 - 15,000 sq ft</option>
+                <option value="15,000 - 50,000 sq ft">15,000 - 50,000 sq ft</option>
+                <option value="50,000+ sq ft">50,000+ sq ft</option>
+              </select>
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="squareFootage">Approximate Area</label>
-                <select 
-                  id="squareFootage"
-                  value={formData.squareFootage}
-                  onChange={(e) => setFormData({ ...formData, squareFootage: e.target.value })}
-                >
-                  <option value="Under 5,000 sq ft">Under 5,000 sq ft</option>
-                  <option value="5,000 - 15,000 sq ft">5,000 - 15,000 sq ft</option>
-                  <option value="15,000 - 50,000 sq ft">15,000 - 50,000 sq ft</option>
-                  <option value="50,000+ sq ft">50,000+ sq ft</option>
-                </select>
+            {/* Facility Classification Multi-Select Checklist */}
+            <div className="facility-checklist-container">
+              <div className="facility-checklist-header">
+                <label>Facility Classification</label>
+                <span className="facility-checklist-hint">(Select all that apply)</span>
               </div>
+              <div className="facility-checklist-grid">
+                {FACILITY_OPTIONS.map((option) => {
+                  const isChecked = formData.facilityTypes.includes(option);
+                  return (
+                    <label 
+                      key={option} 
+                      className={`facility-checkbox-card ${isChecked ? 'is-checked' : ''}`}
+                    >
+                      <input 
+                        type="checkbox"
+                        className="facility-checkbox-input"
+                        checked={isChecked}
+                        onChange={() => toggleFacilityType(option)}
+                      />
+                      <span className="facility-checkbox-custom">
+                        <Check size={12} strokeWidth={3} />
+                      </span>
+                      <span className="facility-checkbox-label">{option}</span>
+                    </label>
+                  );
+                })}
+              </div>
+              {errorMsg && (
+                <div className="facility-checklist-error">
+                  <AlertCircle size={14} />
+                  <span>{errorMsg}</span>
+                </div>
+              )}
             </div>
 
             <div className="form-group full-width">
@@ -168,15 +307,20 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
 
             <div className="modal-trust-bar">
               <MapPin size={14} color="#94a3b8" />
-              <span>Serving all New Jersey counties • Fully Bonded & Insured</span>
+              <span>Serving commercial facilities across the USA • Fully Bonded & Insured</span>
             </div>
 
             <button type="submit" className="modal-submit-btn">
-              SUBMIT CONSULTATION REQUEST
+              <span>SUBMIT & OPEN IN GMAIL</span>
+              <ExternalLink size={15} />
             </button>
+            <div className="dispatch-hint-note">
+              ✓ Prepares your consultation draft in Gmail with prefilled specifications
+            </div>
           </form>
         )}
       </div>
     </div>
   );
 };
+

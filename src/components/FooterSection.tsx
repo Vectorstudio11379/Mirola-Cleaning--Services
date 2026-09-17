@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import type { AppRoute } from '../types/navigation';
 
 interface FooterSectionProps {
   onOpenConsultation: () => void;
+  onNavigate: (path: AppRoute) => void;
 }
 
-export const FooterSection: React.FC<FooterSectionProps> = ({ onOpenConsultation }) => {
+export const FooterSection: React.FC<FooterSectionProps> = ({ 
+  onOpenConsultation, 
+  onNavigate 
+}) => {
   const [emailInput, setEmailInput] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -14,6 +19,10 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ onOpenConsultation
     if (emailInput.trim()) {
       setSubscribed(true);
     }
+  };
+
+  const handleLink = (path: AppRoute) => {
+    onNavigate(path);
   };
 
   return (
@@ -25,7 +34,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ onOpenConsultation
           <div className="cta-banner-content">
             <div className="cta-badge">
               <ShieldCheck size={16} />
-              <span>NEW JERSEY'S COMMERCIAL SPECIALISTS</span>
+              <span>USA'S COMMERCIAL SPECIALISTS</span>
             </div>
 
             <h2 className="cta-title">
@@ -33,7 +42,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ onOpenConsultation
             </h2>
 
             <p className="cta-subtitle">
-              Join over 500+ satisfied corporate facilities across New Jersey. Schedule your complimentary site audit today.
+              Join over 500+ satisfied corporate facilities across the USA. Schedule your complimentary site audit today.
             </p>
 
             {subscribed ? (
@@ -65,7 +74,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ onOpenConsultation
           
           {/* Brand Info */}
           <div className="footer-col brand-col">
-            <div className="footer-brand-header">
+            <div className="footer-brand-header" onClick={() => handleLink('/')} style={{ cursor: 'pointer' }}>
               <img 
                 src="/images/logo.jpg" 
                 alt="Mirola Cleaning Services Logo" 
@@ -75,13 +84,13 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ onOpenConsultation
             </div>
 
             <p className="footer-brand-desc">
-              Mirola Cleaning Services delivers hospital-grade sanitization, automated floor care, and precision janitorial facility management across New Jersey.
+              Mirola Cleaning Services delivers hospital-grade sanitization, automated floor care, and precision janitorial facility management across the USA.
             </p>
 
             <div className="footer-contact-items">
               <div className="footer-contact-row">
                 <Phone size={15} />
-                <span>(201) 555-MIROLA / New Jersey</span>
+                <span>(201) 555-MIROLA / USA</span>
               </div>
               <div className="footer-contact-row">
                 <Mail size={15} />
@@ -89,7 +98,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ onOpenConsultation
               </div>
               <div className="footer-contact-row">
                 <MapPin size={15} />
-                <span>Serving All 21 New Jersey Counties</span>
+                <span>Serving Commercial Hubs Nationwide in the USA</span>
               </div>
             </div>
           </div>
@@ -98,32 +107,30 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ onOpenConsultation
           <div className="footer-col">
             <h4 className="footer-col-title">Navigation</h4>
             <ul className="footer-links-list">
-              <li><a href="#hero">Home</a></li>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#services">Our Services</a></li>
-              <li><a href="#pricing">Pricing Plans</a></li>
-              <li><a href="#why-choose">Why Choose Us</a></li>
-              <li><a href="#testimonials">Client Reviews</a></li>
-              <li><a href="#faq">FAQ</a></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/')}>Home</button></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/janitorial')}>Janitorial Services</button></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/floor-care')}>Floor Care & Strip/Wax</button></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/sanitation')}>Sanitation Services</button></li>
+              <li><a href="#about" onClick={(e) => { e.preventDefault(); handleLink('/'); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>About Us</a></li>
+              <li><a href="#testimonials" onClick={(e) => { e.preventDefault(); handleLink('/'); setTimeout(() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>Client Reviews</a></li>
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Janitorial Building Types */}
           <div className="footer-col">
-            <h4 className="footer-col-title">Expert Services</h4>
+            <h4 className="footer-col-title">Building Types</h4>
             <ul className="footer-links-list">
-              <li><a href="#services">Corporate Office Cleaning</a></li>
-              <li><a href="#services">Medical Facility Sanitation</a></li>
-              <li><a href="#services">Floor Stripping & Waxing</a></li>
-              <li><a href="#services">Day Porter Services</a></li>
-              <li><a href="#services">Post-Construction Cleanup</a></li>
-              <li><a href="#services">Carpet Steam Extraction</a></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/janitorial/daycare')}>Daycare Cleaning</button></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/janitorial/gym')}>Gym Cleaning</button></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/janitorial/warehouse')}>Warehouse Cleaning</button></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/janitorial/office')}>Office Cleaning</button></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/janitorial/medical')}>Medical Cleaning</button></li>
             </ul>
           </div>
 
           {/* Service Areas */}
           <div className="footer-col">
-            <h4 className="footer-col-title">NJ Service Hubs</h4>
+            <h4 className="footer-col-title">USA Service Hubs</h4>
             <ul className="footer-links-list">
               <li><span>Bergen County</span></li>
               <li><span>Hudson County</span></li>

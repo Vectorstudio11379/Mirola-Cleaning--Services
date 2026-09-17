@@ -9,16 +9,16 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ onOpenConsultation }) 
   const posts = [
     {
       id: 1,
-      image: '/images/service-office.jpg',
+      image: '/images/drive_folder_2/DSC00189.jpg',
       tag: 'FACILITY HYGIENE',
       date: 'Sept 10, 2026',
       readTime: '4 min read',
       title: '10 Expert-Approved Sanitization Protocols That Actually Keep Offices Healthy',
-      excerpt: 'Learn how top New Jersey enterprises mitigate airborne pathogens and seasonal absenteeism through zoned hygiene execution.'
+      excerpt: 'Learn how top USA enterprises mitigate airborne pathogens and seasonal absenteeism through zoned hygiene execution.'
     },
     {
       id: 2,
-      image: '/images/cleaner-video-thumb.jpg',
+      image: '/images/drive_folder_2/DSC00168.jpg',
       tag: 'ECO CHEMISTRY',
       date: 'Aug 28, 2026',
       readTime: '5 min read',
@@ -27,12 +27,12 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ onOpenConsultation }) 
     },
     {
       id: 3,
-      image: '/images/service-floors.jpg',
-      tag: 'FLOOR RESTORATION',
+      image: '/images/drive_folder_2/DSC00443.jpg',
+      tag: 'FACILITY CARE',
       date: 'Aug 15, 2026',
       readTime: '6 min read',
-      title: 'Commercial Floor Care: Stripping vs. Burnishing for Long-Term Durability',
-      excerpt: 'Preserve high-traffic marble, terrazzo, and VCT finishes with multi-stage rotary maintenance schedules that impress clients.'
+      title: 'Precision Commercial Sanitation: How Consistent Standards Protect Long-Term Assets',
+      excerpt: 'Preserve high-traffic facilities and commercial equipment with multi-stage maintenance schedules that impress clients and occupants.'
     }
   ];
 

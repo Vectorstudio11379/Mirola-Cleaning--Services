@@ -23,21 +23,21 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
             {/* Availability-style pill badge with delicate indicator */}
             <div className="availability-badge">
               <span className="pulsing-indicator" />
-              <span className="badge-text">Best Janitorial service in NJ</span>
+              <span className="badge-text">Best Janitorial service in USA</span>
             </div>
 
             {/* Minimalist, Clean Editorial Headline with Reduced Boldness */}
             <h1 className="hero-headline">
               Best Janitorial<br />
               Services In<br />
-              New Jersey
+              USA
             </h1>
           </div>
 
           {/* RIGHT COLUMN: Concise Description & Red CTA Button */}
           <div className="hero-right-column">
             <p className="hero-description">
-              Mirola Cleaning Services delivers hospital-grade sanitization, precision floor care, and comprehensive commercial facility management across New Jersey that convert first impressions into lasting trust.
+              Mirola Cleaning Services delivers hospital-grade sanitization, precision floor care, and comprehensive commercial facility management across the USA that convert first impressions into lasting trust.
             </p>
 
             {/* Red CTA button with circular arrow icon */}
@@ -58,7 +58,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
 
         {/* OVERSIZED BRAND TEXT: "MIROLA CLEANING SERVICES" spanning across the bottom */}
         <div className="oversized-brand-container" aria-hidden="true">
-          <span className="oversized-brand-text">MIROLA CLEANING SERVICES</span>
+          <div className="oversized-brand-text">
+            <span className="brand-word">MIROLA</span>
+            <span className="brand-word">CLEANING</span>
+            <span className="brand-word">SERVICES</span>
+          </div>
         </div>
 
       </div>

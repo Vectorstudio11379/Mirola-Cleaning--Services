@@ -22,7 +22,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenConsultati
         'Hospital-grade restroom sanitization & restocking',
         'Breakroom sink & surface disinfection',
         'Hard floor sweeping & damp microfiber mopping',
-        'Dedicated NJ facility coordinator'
+        'Dedicated USA facility coordinator'
       ],
       ctaText: 'Select Essential'
     },
@@ -76,7 +76,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenConsultati
             Simple, transparent pricing tailored to your facility's exact scale.
           </h2>
           <p className="pricing-subheadline">
-            Zero hidden fees. Month-to-month contracts with 100% satisfaction guarantee across New Jersey.
+            Zero hidden fees. Month-to-month contracts with 100% satisfaction guarantee across the USA.
           </p>
 
           {/* Billing Toggle */}

@@ -40,7 +40,7 @@ export const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ onOpenCo
 
           <div className="why-heading-row">
             <h2 className="why-headline">
-              Why New Jersey Leaders Rely on <span className="text-highlight-dark">Mirola Cleaning</span>
+              Why USA Leaders Rely on <span className="text-highlight-dark">Mirola Cleaning</span>
             </h2>
 
             <button 
