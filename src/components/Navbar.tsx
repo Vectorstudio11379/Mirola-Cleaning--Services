@@ -16,16 +16,14 @@ import {
   Layers,
   Home
 } from 'lucide-react';
-import type { AppRoute } from '../types/navigation';
-
 interface NavbarProps {
-  currentPath: AppRoute;
-  onNavigate: (path: AppRoute) => void;
+  currentPath?: string;
+  onNavigate?: (path: string) => void;
   onOpenConsultation: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ 
-  currentPath, 
+  currentPath = '/', 
   onNavigate, 
   onOpenConsultation 
 }) => {
@@ -90,13 +88,20 @@ export const Navbar: React.FC<NavbarProps> = ({
     };
   }, []);
 
-  const handleLinkClick = (path: AppRoute) => {
+  const handleLinkClick = (path: string) => {
     clearCloseTimeout();
     setDrawerOpen(false);
     setServicesMenuOpen(false);
     setIsServicesPinned(false);
     setJanitorialHovered(false);
-    onNavigate(path);
+    if (path === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (onNavigate) {
+      onNavigate(path);
+    } else {
+      const el = document.getElementById('services');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const handleSectionScroll = (sectionId: string) => {
@@ -105,16 +110,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     setServicesMenuOpen(false);
     setIsServicesPinned(false);
     setJanitorialHovered(false);
-    if (currentPath !== '/') {
-      onNavigate('/');
-      setTimeout(() => {
-        const el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 150);
-    } else {
-      const el = document.getElementById(sectionId);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
+    const el = document.getElementById(sectionId);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

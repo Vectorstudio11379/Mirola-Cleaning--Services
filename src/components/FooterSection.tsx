@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
-import type { AppRoute } from '../types/navigation';
-
 interface FooterSectionProps {
   onOpenConsultation: () => void;
-  onNavigate: (path: AppRoute) => void;
+  onNavigate?: (path: string) => void;
 }
 
 export const FooterSection: React.FC<FooterSectionProps> = ({ 
@@ -21,8 +19,13 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
     }
   };
 
-  const handleLink = (path: AppRoute) => {
-    onNavigate(path);
+  const handleLink = (path: string) => {
+    if (onNavigate) {
+      onNavigate(path);
+    } else {
+      const el = document.getElementById('services');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (

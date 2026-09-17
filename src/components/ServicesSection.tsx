@@ -12,11 +12,9 @@ import {
   ShieldCheck, 
   CheckCircle2 
 } from 'lucide-react';
-import type { AppRoute } from '../types/navigation';
-
 interface ServicesSectionProps {
   onOpenConsultation: () => void;
-  onNavigate: (path: AppRoute) => void;
+  onNavigate?: (path: string) => void;
 }
 
 interface ServiceItem {
@@ -28,10 +26,10 @@ interface ServiceItem {
   tags: string[];
   image: string;
   icon: React.ReactNode;
-  pagePath: AppRoute;
+  pagePath: string;
   subBuildings?: {
     name: string;
-    path: AppRoute;
+    path: string;
     icon: React.ReactNode;
   }[];
 }
@@ -105,7 +103,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
             <button 
               type="button" 
               className="services-view-all-btn"
-              onClick={() => onNavigate('/services/janitorial')}
+              onClick={() => onNavigate ? onNavigate('/services/janitorial') : onOpenConsultation()}
               aria-label="Explore all commercial solutions"
             >
               <span>Explore All Solutions</span>
@@ -148,8 +146,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                                 key={idx}
                                 type="button"
                                 className="sub-building-nav-pill"
-                                onClick={() => onNavigate(b.path)}
-                                title={`View dedicated ${b.name} page`}
+                                onClick={() => onNavigate ? onNavigate(b.path) : onOpenConsultation()}
+                                title={`Book consultation for ${b.name}`}
                               >
                                 {b.icon}
                                 <span>{b.name}</span>
@@ -173,9 +171,9 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                         <button 
                           type="button" 
                           className="service-book-btn"
-                          onClick={() => onNavigate(service.pagePath)}
+                          onClick={() => onNavigate ? onNavigate(service.pagePath) : onOpenConsultation()}
                         >
-                          <span>View Full {service.title} Page</span>
+                          <span>{onNavigate ? `View Full ${service.title} Page` : `Schedule ${service.title} Consultation`}</span>
                           <span className="btn-arrow-circle">
                             <ArrowRight size={14} />
                           </span>
