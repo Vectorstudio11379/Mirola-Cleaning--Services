@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, ShieldCheck, CheckCircle2, Check, ExternalLink, AlertCircle } from 'lucide-react';
 import { FACILITY_OPTIONS } from './ConsultationModal';
+import { CONTACT_INFO } from '../constants/contactInfo';
 
-const TARGET_EMAIL = 'inquiries@mirolacleaning.com';
+const TARGET_EMAIL = CONTACT_INFO.email;
 
 export const ContactSection: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -129,9 +130,9 @@ ${formData.company ? `${formData.company}\n` : ''}${formData.phone}`;
           </div>
 
           <div className="direct-contact-capsule">
-            <a href="tel:2015556476" className="direct-contact-row">
+            <a href={`tel:${CONTACT_INFO.phoneTel}`} className="direct-contact-row">
               <Phone size={16} />
-              <span>Direct Dispatch: <strong>(201) 555-MIROLA</strong></span>
+              <span>Direct Dispatch: <strong>{CONTACT_INFO.phoneDisplay}</strong></span>
             </a>
             <a href={`mailto:${TARGET_EMAIL}`} className="direct-contact-row">
               <Mail size={16} />

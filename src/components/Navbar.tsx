@@ -16,6 +16,7 @@ import {
   Layers,
   Home
 } from 'lucide-react';
+import { CONTACT_INFO } from '../constants/contactInfo';
 interface NavbarProps {
   currentPath?: string;
   onNavigate?: (path: string) => void;
@@ -110,8 +111,17 @@ export const Navbar: React.FC<NavbarProps> = ({
     setServicesMenuOpen(false);
     setIsServicesPinned(false);
     setJanitorialHovered(false);
-    const el = document.getElementById(sectionId);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+
+    if (currentPath !== '/' && onNavigate) {
+      onNavigate('/');
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -536,14 +546,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         <div className="drawer-footer">
           <div className="drawer-contact-info">
-            <div className="contact-row">
+            <a href={`tel:${CONTACT_INFO.phoneTel}`} className="contact-row" style={{ textDecoration: 'none', color: 'inherit' }}>
               <Phone size={15} />
-              <span>(201) 555-MIROLA / USA</span>
-            </div>
-            <div className="contact-row">
+              <span>{CONTACT_INFO.phoneDisplay}</span>
+            </a>
+            <a href={`mailto:${CONTACT_INFO.email}`} className="contact-row" style={{ textDecoration: 'none', color: 'inherit' }}>
               <Mail size={15} />
-              <span>inquiries@mirolacleaning.com</span>
-            </div>
+              <span>{CONTACT_INFO.email}</span>
+            </a>
           </div>
 
           <button 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, CheckCircle2, MapPin, Check, ExternalLink, Mail, AlertCircle } from 'lucide-react';
+import { CONTACT_INFO } from '../constants/contactInfo';
 
 interface ConsultationModalProps {
   isOpen: boolean;
@@ -15,7 +16,7 @@ export const FACILITY_OPTIONS = [
   'Fitness Center / Gym',
 ];
 
-const TARGET_EMAIL = 'inquiries@mirolacleaning.com';
+const TARGET_EMAIL = CONTACT_INFO.email;
 
 export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, onClose }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);

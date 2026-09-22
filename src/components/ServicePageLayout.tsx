@@ -11,6 +11,7 @@ import {
   ArrowLeft
 } from 'lucide-react';
 import type { AppRoute } from '../types/navigation';
+import { CONTACT_INFO } from '../constants/contactInfo';
 
 export interface GalleryPhoto {
   src: string;
@@ -133,13 +134,13 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({
                   <ArrowRight size={16} />
                 </button>
 
-                <a href="tel:2015556476" className="service-phone-link">
+                <a href={`tel:${CONTACT_INFO.phoneTel}`} className="service-phone-link">
                   <div className="phone-icon-pill">
                     <Phone size={16} />
                   </div>
                   <div className="phone-text-group">
                     <span className="phone-label">Direct Facility Line</span>
-                    <span className="phone-number">(201) 555-MIROLA</span>
+                    <span className="phone-number">{CONTACT_INFO.phoneDisplay}</span>
                   </div>
                 </a>
               </div>

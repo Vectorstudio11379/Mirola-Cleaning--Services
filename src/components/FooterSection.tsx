@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { CONTACT_INFO } from '../constants/contactInfo';
 interface FooterSectionProps {
   onOpenConsultation: () => void;
   onNavigate?: (path: string) => void;
@@ -91,17 +92,17 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
             </p>
 
             <div className="footer-contact-items">
-              <div className="footer-contact-row">
+              <a href={`tel:${CONTACT_INFO.phoneTel}`} className="footer-contact-row" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <Phone size={15} />
-                <span>(201) 555-MIROLA / USA</span>
-              </div>
-              <div className="footer-contact-row">
+                <span>{CONTACT_INFO.phoneDisplay}</span>
+              </a>
+              <a href={`mailto:${CONTACT_INFO.email}`} className="footer-contact-row" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <Mail size={15} />
-                <span>inquiries@mirolacleaning.com</span>
-              </div>
+                <span>{CONTACT_INFO.email}</span>
+              </a>
               <div className="footer-contact-row">
                 <MapPin size={15} />
-                <span>Serving Commercial Hubs Nationwide in the USA</span>
+                <span>{CONTACT_INFO.address}</span>
               </div>
             </div>
           </div>
