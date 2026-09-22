@@ -23,6 +23,7 @@ import { MedicalCleaningPage } from './pages/MedicalCleaningPage';
 import { AboutPage } from './pages/AboutPage';
 import { TestimonialsPage } from './pages/TestimonialsPage';
 import { ContactPage } from './pages/ContactPage';
+import { LegalModal, type LegalModalType } from './components/LegalModal';
 
 import type { AppRoute } from './types/navigation';
 import { useScrollReveal } from './hooks/useScrollReveal';
@@ -45,6 +46,7 @@ const VALID_ROUTES: AppRoute[] = [
 
 function App() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
+  const [legalModalType, setLegalModalType] = useState<LegalModalType>(null);
   const [currentPath, setCurrentPath] = useState<AppRoute>(() => {
     const path = window.location.pathname;
     return VALID_ROUTES.includes(path as AppRoute) ? (path as AppRoute) : '/';
@@ -207,12 +209,23 @@ function App() {
       <FooterSection 
         onNavigate={navigate}
         onOpenConsultation={() => setIsConsultationOpen(true)} 
+        onOpenLegal={(type) => setLegalModalType(type)}
       />
 
-      {/* Free Consultation Booking Modal with Multi-Select Facility Checklist & Gmail Compose */}
+      {/* Free Consultation Booking Modal with Multi-Select Facility Checklist & Direct Delivery */}
       <ConsultationModal 
         isOpen={isConsultationOpen} 
         onClose={() => setIsConsultationOpen(false)} 
+      />
+
+      {/* Legal & Compliance Modals (Terms, Privacy, Safety Standards) */}
+      <LegalModal 
+        type={legalModalType}
+        onClose={() => setLegalModalType(null)}
+        onOpenConsultation={() => {
+          setLegalModalType(null);
+          setIsConsultationOpen(true);
+        }}
       />
     </div>
   );

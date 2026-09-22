@@ -6,11 +6,13 @@ import { submitLeadDirect } from '../services/formSubmission';
 interface FooterSectionProps {
   onOpenConsultation: () => void;
   onNavigate?: (path: string) => void;
+  onOpenLegal?: (type: 'terms' | 'privacy' | 'compliance') => void;
 }
 
 export const FooterSection: React.FC<FooterSectionProps> = ({ 
   onOpenConsultation, 
-  onNavigate 
+  onNavigate,
+  onOpenLegal
 }) => {
   const [emailInput, setEmailInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -166,11 +168,11 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
             © {new Date().getFullYear()} Mirola Cleaning Services LLC. All Rights Reserved. Fully Bonded & Insured.
           </div>
           <div className="footer-legal-links">
-            <a href="#terms" onClick={(e) => { e.preventDefault(); onOpenConsultation(); }}>Terms of Service</a>
+            <a href="#terms" onClick={(e) => { e.preventDefault(); onOpenLegal ? onOpenLegal('terms') : onOpenConsultation(); }}>Terms of Service</a>
             <span className="legal-separator">•</span>
-            <a href="#privacy" onClick={(e) => { e.preventDefault(); onOpenConsultation(); }}>Privacy Policy</a>
+            <a href="#privacy" onClick={(e) => { e.preventDefault(); onOpenLegal ? onOpenLegal('privacy') : onOpenConsultation(); }}>Privacy Policy</a>
             <span className="legal-separator">•</span>
-            <a href="#security" onClick={(e) => { e.preventDefault(); onOpenConsultation(); }}>Safety Compliance</a>
+            <a href="#compliance" onClick={(e) => { e.preventDefault(); onOpenLegal ? onOpenLegal('compliance') : onOpenConsultation(); }}>Safety Compliance</a>
           </div>
         </div>
 
