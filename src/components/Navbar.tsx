@@ -95,10 +95,10 @@ export const Navbar: React.FC<NavbarProps> = ({
     setServicesMenuOpen(false);
     setIsServicesPinned(false);
     setJanitorialHovered(false);
-    if (path === '/') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (onNavigate) {
+    if (onNavigate) {
       onNavigate(path);
+    } else if (path === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       const el = document.getElementById('services');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
