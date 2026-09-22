@@ -3,11 +3,11 @@
    Ultra-refined, minimalist layout with reduced text boldness & pure black canvas
    ========================================================================== */
 
-/* Hero Scroll Area (400vh scroll-driven canvas track) */
+/* Hero Scroll Area (Interactive Scroll-Linked Canvas Track - No Dead Space) */
 .hero-scroll-area {
   position: relative;
   width: 100%;
-  height: 400vh;
+  height: 220vh;
   background-color: #000000;
 }
 
@@ -3996,6 +3996,10 @@
   }
 
   /* 1. Hero Mobile Stacking & Touch Layout */
+  .hero-scroll-area {
+    height: 180vh;
+  }
+
   .hero-sticky-stage {
     padding-top: 80px;
     padding-bottom: 8px;
