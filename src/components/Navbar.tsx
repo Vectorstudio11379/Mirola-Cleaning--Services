@@ -14,7 +14,11 @@ import {
   Boxes, 
   ShieldCheck, 
   Layers,
-  Home
+  Home,
+  Users,
+  Star,
+  Calendar,
+  HelpCircle
 } from 'lucide-react';
 import { CONTACT_INFO } from '../constants/contactInfo';
 interface NavbarProps {
@@ -88,6 +92,18 @@ export const Navbar: React.FC<NavbarProps> = ({
       clearCloseTimeout();
     };
   }, []);
+
+  // Lock background body scroll when drawer is open so drawer scrolls cleanly
+  useEffect(() => {
+    if (drawerOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [drawerOpen]);
 
   const handleLinkClick = (path: string) => {
     clearCloseTimeout();
@@ -529,27 +545,50 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="drawer-section-label">PAGES & COMPANY</div>
           <button 
             type="button" 
-            className={`drawer-nav-item-simple ${currentPath === '/about' ? 'active' : ''}`} 
+            className={`drawer-nav-item ${currentPath === '/about' ? 'active' : ''}`} 
             onClick={() => handleLinkClick('/about')}
           >
-            About Mirola
+            <Users size={18} />
+            <div>
+              <div className="item-title">About Mirola</div>
+              <div className="item-desc">Our ethos, certified crew & standards</div>
+            </div>
           </button>
+
           <button 
             type="button" 
-            className={`drawer-nav-item-simple ${currentPath === '/testimonials' ? 'active' : ''}`} 
+            className={`drawer-nav-item ${currentPath === '/testimonials' ? 'active' : ''}`} 
             onClick={() => handleLinkClick('/testimonials')}
           >
-            Client Testimonials
+            <Star size={18} />
+            <div>
+              <div className="item-title">Client Testimonials</div>
+              <div className="item-desc">Verified commercial & facility reviews</div>
+            </div>
           </button>
+
           <button 
             type="button" 
-            className={`drawer-nav-item-simple ${currentPath === '/contact' ? 'active' : ''}`} 
+            className={`drawer-nav-item ${currentPath === '/contact' ? 'active' : ''}`} 
             onClick={() => handleLinkClick('/contact')}
           >
-            Contact & Walkthrough
+            <Calendar size={18} />
+            <div>
+              <div className="item-title">Contact & Walkthrough</div>
+              <div className="item-desc">Schedule 24h on-site facility survey</div>
+            </div>
           </button>
-          <button type="button" className="drawer-nav-item-simple" onClick={() => handleSectionScroll('faq')}>
-            Frequently Asked Questions
+
+          <button 
+            type="button" 
+            className="drawer-nav-item" 
+            onClick={() => handleSectionScroll('faq')}
+          >
+            <HelpCircle size={18} />
+            <div>
+              <div className="item-title">Frequently Asked Questions</div>
+              <div className="item-desc">Common questions, SLA & insurance</div>
+            </div>
           </button>
         </nav>
 

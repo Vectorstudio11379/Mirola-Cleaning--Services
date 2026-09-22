@@ -168,60 +168,79 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
             <span className="subpage-breadcrumb-current">Testimonials</span>
           </nav>
 
-          <div style={{ maxWidth: '820px' }}>
-            <div className="subpage-badge">
-              <span className="subpage-pulse-dot" />
-              <span>VERIFIED ENTERPRISE REVIEWS</span>
-            </div>
+          <div className="subpage-hero-grid">
+            <div className="subpage-hero-copy">
+              <div className="subpage-badge">
+                <span className="subpage-pulse-dot" />
+                <span>VERIFIED ENTERPRISE REVIEWS</span>
+              </div>
 
-            <h1 className="subpage-hero-title">
-              Trusted by USA’s{' '}
-              <span className="subpage-highlight-red">Leading Commercial</span>{' '}
-              Properties
-            </h1>
+              <h1 className="subpage-hero-title">
+                Trusted by USA’s{' '}
+                <span className="subpage-highlight-red">Leading Commercial</span>{' '}
+                Properties
+              </h1>
 
-            <p className="subpage-hero-subtitle">
-              Read verified feedback from facility directors, property managers, and healthcare administrators who trust Mirola Cleaning Services to safeguard their commercial properties every single night.
-            </p>
+              <p className="subpage-hero-subtitle">
+                Read verified feedback from facility directors, property managers, and healthcare administrators who trust Mirola Cleaning Services to safeguard their commercial properties every single night.
+              </p>
 
-            <div className="subpage-hero-actions">
-              <button 
-                type="button" 
-                className="subpage-btn-primary"
-                onClick={onOpenConsultation}
-              >
-                <span>Book Free USA Facility Walkthrough</span>
-                <ArrowRight size={16} />
-              </button>
+              <div className="subpage-hero-actions">
+                <button 
+                  type="button" 
+                  className="subpage-btn-primary"
+                  onClick={onOpenConsultation}
+                >
+                  <span>Book Free USA Facility Walkthrough</span>
+                  <ArrowRight size={16} />
+                </button>
 
-              <a href={`tel:${CONTACT_INFO.phoneTel}`} className="subpage-phone-badge">
-                <div className="subpage-phone-icon-circle">
-                  <Phone size={15} />
+                <a href={`tel:${CONTACT_INFO.phoneTel}`} className="subpage-phone-badge">
+                  <div className="subpage-phone-icon-circle">
+                    <Phone size={15} />
+                  </div>
+                  <span>{CONTACT_INFO.phoneDisplay}</span>
+                </a>
+              </div>
+
+              {/* Trust Metrics Chips */}
+              <div className="subpage-hero-stats-row">
+                <div className="subpage-stat-card">
+                  <div className="subpage-stat-num">4.9<span>/5</span></div>
+                  <div className="subpage-stat-label">500+ Audited Scores</div>
                 </div>
-                <span>{CONTACT_INFO.phoneDisplay}</span>
-              </a>
-            </div>
-
-            {/* Trust Metrics Chips */}
-            <div className="subpage-hero-stats-row">
-              <div className="subpage-stat-card">
-                <div className="subpage-stat-num">4.9<span>/5</span></div>
-                <div className="subpage-stat-label">500+ Audited Scores</div>
-              </div>
-              <div className="subpage-stat-card">
-                <div className="subpage-stat-num">99.4<span>%</span></div>
-                <div className="subpage-stat-label">Client Retention</div>
-              </div>
-              <div className="subpage-stat-card">
-                <div className="subpage-stat-num">15M<span>+</span></div>
-                <div className="subpage-stat-label">Sq. Ft. Maintained</div>
-              </div>
-              <div className="subpage-stat-card">
-                <div className="subpage-stat-num">100<span>%</span></div>
-                <div className="subpage-stat-label">Verified Operators</div>
+                <div className="subpage-stat-card">
+                  <div className="subpage-stat-num">99.4<span>%</span></div>
+                  <div className="subpage-stat-label">Client Retention</div>
+                </div>
+                <div className="subpage-stat-card">
+                  <div className="subpage-stat-num">15M<span>+</span></div>
+                  <div className="subpage-stat-label">Sq. Ft. Maintained</div>
+                </div>
+                <div className="subpage-stat-card">
+                  <div className="subpage-stat-num">100<span>%</span></div>
+                  <div className="subpage-stat-label">Verified Operators</div>
+                </div>
               </div>
             </div>
 
+            {/* Hero Right Column: Authentic Commercial Floor Care Photo Showcase */}
+            <div className="subpage-hero-media">
+              <div className="subpage-hero-image-card">
+                <img 
+                  src="/images/drive_folder_2/DSC00402.jpg" 
+                  alt="High-gloss commercial facility floor care executed by Mirola Cleaning Services" 
+                  className="subpage-hero-img"
+                />
+                <div className="subpage-hero-img-badge">
+                  <div className="badge-pulse-indicator" />
+                  <div>
+                    <div className="img-badge-title">500+ Commercial Facilities Safeguarded</div>
+                    <div className="img-badge-subtitle">4.9 / 5.0 Star Verified Client Satisfaction Across USA</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>

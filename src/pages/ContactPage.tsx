@@ -88,53 +88,72 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             <span className="subpage-breadcrumb-current">Contact & Dispatch</span>
           </nav>
 
-          <div style={{ maxWidth: '820px' }}>
-            <div className="subpage-badge">
-              <span className="subpage-pulse-dot" />
-              <span>DIRECT FACILITY DISPATCH & INQUIRIES</span>
+          <div className="subpage-hero-grid">
+            <div className="subpage-hero-copy">
+              <div className="subpage-badge">
+                <span className="subpage-pulse-dot" />
+                <span>DIRECT FACILITY DISPATCH & INQUIRIES</span>
+              </div>
+
+              <h1 className="subpage-hero-title">
+                Connect Directly with{' '}
+                <span className="subpage-highlight-red">Mirola Facility Operations</span>
+              </h1>
+
+              <p className="subpage-hero-subtitle">
+                Have an immediate facility spill or want to book an on-site walkthrough? Reach our regional operations team directly. We provide tailored, fixed-rate scopes of work within 24 hours.
+              </p>
+
+              <div className="subpage-hero-actions">
+                <a href={`tel:${CONTACT_INFO.phoneTel}`} className="subpage-btn-primary" style={{ textDecoration: 'none' }}>
+                  <Phone size={16} />
+                  <span>Call Dispatch: {CONTACT_INFO.phoneDisplay}</span>
+                </a>
+
+                <a href={`mailto:${CONTACT_INFO.email}`} className="subpage-phone-badge">
+                  <Mail size={15} color="#c90000" />
+                  <span>{CONTACT_INFO.email}</span>
+                </a>
+              </div>
+
+              {/* Quick SLA Chips */}
+              <div className="subpage-hero-stats-row">
+                <div className="subpage-stat-card">
+                  <div className="subpage-stat-num">&lt; 60<span>m</span></div>
+                  <div className="subpage-stat-label">Emergency SLA</div>
+                </div>
+                <div className="subpage-stat-card">
+                  <div className="subpage-stat-num">24/7</div>
+                  <div className="subpage-stat-label">Live Dispatch</div>
+                </div>
+                <div className="subpage-stat-card">
+                  <div className="subpage-stat-num">0<span>$</span></div>
+                  <div className="subpage-stat-label">Free On-Site Survey</div>
+                </div>
+                <div className="subpage-stat-card">
+                  <div className="subpage-stat-num">24<span>h</span></div>
+                  <div className="subpage-stat-label">Proposal Delivery</div>
+                </div>
+              </div>
             </div>
 
-            <h1 className="subpage-hero-title">
-              Connect Directly with{' '}
-              <span className="subpage-highlight-red">Mirola Facility Operations</span>
-            </h1>
-
-            <p className="subpage-hero-subtitle">
-              Have an immediate facility spill or want to book an on-site walkthrough? Reach our regional operations team directly. We provide tailored, fixed-rate scopes of work within 24 hours.
-            </p>
-
-            <div className="subpage-hero-actions">
-              <a href={`tel:${CONTACT_INFO.phoneTel}`} className="subpage-btn-primary" style={{ textDecoration: 'none' }}>
-                <Phone size={16} />
-                <span>Call Dispatch: {CONTACT_INFO.phoneDisplay}</span>
-              </a>
-
-              <a href={`mailto:${CONTACT_INFO.email}`} className="subpage-phone-badge">
-                <Mail size={15} color="#c90000" />
-                <span>{CONTACT_INFO.email}</span>
-              </a>
-            </div>
-
-            {/* Quick SLA Chips */}
-            <div className="subpage-hero-stats-row">
-              <div className="subpage-stat-card">
-                <div className="subpage-stat-num">&lt; 60<span>m</span></div>
-                <div className="subpage-stat-label">Emergency SLA</div>
-              </div>
-              <div className="subpage-stat-card">
-                <div className="subpage-stat-num">24/7</div>
-                <div className="subpage-stat-label">Live Dispatch</div>
-              </div>
-              <div className="subpage-stat-card">
-                <div className="subpage-stat-num">0<span>$</span></div>
-                <div className="subpage-stat-label">Free On-Site Survey</div>
-              </div>
-              <div className="subpage-stat-card">
-                <div className="subpage-stat-num">24<span>h</span></div>
-                <div className="subpage-stat-label">Proposal Delivery</div>
+            {/* Hero Right Column: Authentic Commercial Photo Showcase */}
+            <div className="subpage-hero-media">
+              <div className="subpage-hero-image-card">
+                <img 
+                  src="/images/drive_folder_2/DSC00501.jpg" 
+                  alt="Mirola commercial cleaning specialists on site in uniform" 
+                  className="subpage-hero-img"
+                />
+                <div className="subpage-hero-img-badge">
+                  <div className="badge-pulse-indicator" />
+                  <div>
+                    <div className="img-badge-title">Direct USA Facility Operations</div>
+                    <div className="img-badge-subtitle">100% Bonded, Insured & Background-Vetted Crews</div>
+                  </div>
+                </div>
               </div>
             </div>
-
           </div>
 
         </div>

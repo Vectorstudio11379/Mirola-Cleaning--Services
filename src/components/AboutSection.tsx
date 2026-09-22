@@ -202,10 +202,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation, 
               }
             }}
           >
-            <img 
-              src="/images/drive_folder_2/DSC00216.jpg" 
-              alt="Professional Mirola specialists sanitizing commercial facility" 
+            <video 
+              src="/Seamless_continuous_cinematic.mp4" 
+              poster="/images/drive_folder_2/DSC00216.jpg" 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
               className="about-media-img"
+              style={{ objectFit: 'cover' }}
             />
             <div className="media-overlay-gradient" />
             
@@ -265,13 +270,16 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation, 
               <p>See how Mirola Cleaning Services transforms corporate facilities across the USA with precision, eco-conscious chemistry, and meticulous detail.</p>
             </div>
 
-            <div className="video-player-frame">
-              <img 
-                src="/images/drive_folder_2/DSC00216.jpg" 
-                alt="Mirola commercial cleaning in progress" 
-                className="video-player-placeholder"
+            <div className="video-player-frame" style={{ background: '#000000', borderRadius: '12px', overflow: 'hidden' }}>
+              <video 
+                src="/Seamless_continuous_cinematic.mp4" 
+                poster="/images/drive_folder_2/DSC00216.jpg" 
+                controls 
+                autoPlay 
+                playsInline 
+                style={{ width: '100%', maxHeight: '480px', objectFit: 'contain', display: 'block' }}
               />
-              <div className="video-simulated-controls">
+              <div className="video-simulated-controls" style={{ padding: '12px' }}>
                 <div className="simulated-pill">
                   <ShieldCheck size={16} color="#c90000" />
                   <span>ISO 9001 Compliant Operations • 100% Bonded & Insured</span>

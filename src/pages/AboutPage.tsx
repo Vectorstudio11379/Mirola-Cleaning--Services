@@ -310,52 +310,47 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
           <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '32px', alignItems: 'center' }}>
             
-            {/* Video Thumbnail Box */}
+            {/* Embedded Cinematic Video Showcase */}
             <div 
               style={{ 
                 position: 'relative', 
                 borderRadius: '18px', 
                 overflow: 'hidden', 
-                cursor: 'pointer',
-                boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-                border: '1px solid rgba(255,255,255,0.1)'
+                boxShadow: '0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(201, 0, 0, 0.2)',
+                border: '1px solid rgba(201, 0, 0, 0.3)',
+                background: '#000000',
+                aspectRatio: '16 / 9'
               }}
-              onClick={() => setVideoModalOpen(true)}
             >
-              <img 
-                src="/images/cleaner-video-thumb.jpg" 
-                alt="Facility walkthrough demonstration video preview" 
-                style={{ width: '100%', height: '340px', objectFit: 'cover', display: 'block' }}
+              <video 
+                src="/Seamless_continuous_cinematic.mp4" 
+                poster="/images/drive_folder_2/DSC00216.jpg" 
+                autoPlay 
+                loop 
+                muted 
+                playsInline 
+                controls
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               />
               <div 
                 style={{ 
                   position: 'absolute', 
-                  inset: 0, 
-                  background: 'rgba(8, 11, 19, 0.45)', 
-                  display: 'flex', 
-                  flexDirection: 'column',
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  gap: '12px'
+                  bottom: '14px', 
+                  left: '14px', 
+                  background: 'rgba(8, 11, 19, 0.88)', 
+                  backdropFilter: 'blur(8px)',
+                  padding: '6px 14px',
+                  borderRadius: '20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  pointerEvents: 'none',
+                  border: '1px solid rgba(255, 255, 255, 0.15)'
                 }}
               >
-                <div 
-                  style={{ 
-                    width: '64px', 
-                    height: '64px', 
-                    borderRadius: '50%', 
-                    background: '#c90000', 
-                    color: '#ffffff',
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'center',
-                    boxShadow: '0 0 30px rgba(201, 0, 0, 0.7)'
-                  }}
-                >
-                  <Play size={24} fill="#ffffff" style={{ marginLeft: '3px' }} />
-                </div>
-                <span style={{ color: '#ffffff', fontWeight: 600, fontSize: '14px', letterSpacing: '0.04em' }}>
-                  Click to Watch Facility Procedures (1:45)
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#c90000', boxShadow: '0 0 8px #c90000' }} />
+                <span style={{ color: '#ffffff', fontSize: '11.5px', fontWeight: 600, letterSpacing: '0.04em' }}>
+                  CONTINUOUS CINEMATIC FACILITY WALKTHROUGH
                 </span>
               </div>
             </div>
@@ -491,13 +486,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             </div>
 
             <div style={{ padding: '24px' }}>
-              <img 
-                src="/images/cleaner-video-thumb.jpg" 
-                alt="Facility walkthrough preview" 
-                style={{ width: '100%', height: '420px', objectFit: 'cover', borderRadius: '12px' }}
+              <video 
+                src="/Seamless_continuous_cinematic.mp4" 
+                poster="/images/drive_folder_2/DSC00216.jpg" 
+                controls 
+                autoPlay 
+                playsInline 
+                style={{ width: '100%', maxHeight: '480px', objectFit: 'contain', borderRadius: '12px', background: '#000000', display: 'block' }}
               />
-              <p style={{ color: '#94a3b8', fontSize: '13.5px', marginTop: '16px', lineHeight: 1.6 }}>
-                Mirola’s uniformed janitorial specialists utilize state-of-the-art HEPA filtration, zero-cross-contamination microfiber systems, and CDC-approved sanitizers for complete commercial property compliance.
+              <p style={{ color: '#cbd5e1', fontSize: '13.5px', marginTop: '16px', lineHeight: 1.6 }}>
+                Mirola’s uniformed janitorial specialists execute continuous high-efficiency facility sanitization, precision automated floor scrubbing, and certified pathogen barrier protocols across USA corporate, medical, and industrial environments.
               </p>
             </div>
           </div>
