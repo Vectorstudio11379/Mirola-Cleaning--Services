@@ -2146,7 +2146,10 @@
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(201, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.25);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.35;
+  box-sizing: border-box;
 }
 
 .service-book-btn:hover {
@@ -4081,25 +4084,96 @@
 
   .service-expanded-card {
     grid-template-columns: 1fr;
-    padding: 20px 16px;
+    padding: 22px 16px;
     gap: 20px;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .expanded-content-col {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .expanded-service-title {
+    font-size: clamp(1.4rem, 5.5vw, 1.75rem);
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+
+  .expanded-service-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #475569;
+    word-break: normal;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+    max-width: 100%;
+    margin-bottom: 18px;
+  }
+
+  .service-tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+
+  .service-tag-pill {
+    white-space: nowrap;
+    font-size: 11.5px;
+    padding: 5px 12px;
+  }
+
+  .janitorial-sub-buildings-box {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+
+  .sub-buildings-pills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .sub-building-nav-pill {
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: 12px;
+    padding: 7px 12px;
   }
 
   .expanded-image-col {
     height: 220px;
     border-radius: 12px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .expanded-cta-row {
     flex-direction: column;
     width: 100%;
     gap: 12px;
+    box-sizing: border-box;
   }
 
   .service-book-btn,
   .service-inspection-secondary-btn {
     width: 100%;
     justify-content: center;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+    padding: 12px 18px;
+    box-sizing: border-box;
+    font-size: clamp(12.5px, 3.2vw, 13.5px);
   }
 
   /* 3. Why Choose Us Mobile */
@@ -6962,6 +7036,133 @@
   flex-shrink: 0;
 }
 
+/* About Page: Video & Stats Showcase Grid */
+.about-video-stats-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 32px;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.about-video-showcase-box {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(201, 0, 0, 0.2);
+  border: 1px solid rgba(201, 0, 0, 0.3);
+  background: #000000;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.about-cinematic-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-cinematic-pill-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  max-width: calc(100% - 28px);
+  background: rgba(8, 11, 19, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-sizing: border-box;
+}
+
+.pulse-red-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c90000;
+  box-shadow: 0 0 8px #c90000;
+  flex-shrink: 0;
+}
+
+.cinematic-pill-text {
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.about-performance-stats-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.about-performance-stat-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: 28px;
+  backdrop-filter: blur(12px);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.about-performance-stat-card.featured-glow {
+  background: linear-gradient(135deg, rgba(201, 0, 0, 0.2) 0%, rgba(201, 0, 0, 0.05) 100%);
+  border: 1px solid rgba(201, 0, 0, 0.35);
+}
+
+.perf-stat-num {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+.perf-stat-num .accent-red {
+  color: #c90000;
+}
+
+.about-performance-stat-card.featured-glow .perf-stat-num .accent-red {
+  color: #ff4d61;
+}
+
+.perf-stat-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 4px;
+}
+
+.about-performance-stat-card.featured-glow .perf-stat-title {
+  color: #ffffff;
+}
+
+.perf-stat-desc {
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.about-performance-stat-card.featured-glow .perf-stat-desc {
+  color: #cbd5e1;
+}
+
 /* Testimonial Filter Bar & Cards */
 .subpage-filter-bar {
   display: flex;
@@ -7367,17 +7568,422 @@
 }
 
 @media (max-width: 768px) {
+  /* Subpage Containers & Spacing */
+  .subpage-container,
+  .service-page-container {
+    padding: 0 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .subpage-hero-dark,
+  .service-hero-section {
+    padding: 100px 0 45px;
+  }
+
+  .subpage-hero-grid,
+  .subpage-hero-split-grid,
+  .service-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    width: 100%;
+  }
+
+  .subpage-hero-title,
+  .service-hero-title {
+    font-size: clamp(1.8rem, 6.5vw, 2.3rem);
+    line-height: 1.18;
+    margin-bottom: 12px;
+  }
+
+  .subpage-hero-subtitle,
+  .service-hero-subtitle {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+
+  .subpage-hero-actions,
+  .service-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 12px;
+    margin-bottom: 26px;
+  }
+
+  .subpage-btn-primary,
+  .service-primary-cta {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 13px 20px;
+    font-size: 14px;
+  }
+
+  .subpage-phone-badge,
+  .service-phone-link {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 10px 16px;
+  }
+
   .subpage-hero-stats-row {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
   }
+
+  .subpage-stat-card {
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .subpage-stat-num {
+    font-size: 1.45rem;
+  }
+
+  .subpage-stat-label {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .service-hero-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-top: 18px;
+  }
+
+  .subpage-hero-img-wrap,
+  .subpage-hero-image-card {
+    max-height: 280px;
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  .subpage-hero-img {
+    height: 250px;
+  }
+
+  .subpage-hero-img-badge {
+    position: static;
+    margin-top: 10px;
+    border-radius: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 14px;
+  }
+
+  .hero-image-frame {
+    max-height: 280px;
+    border-radius: 16px;
+    width: 100%;
+  }
+
+  .service-hero-main-img {
+    height: 250px;
+  }
+
+  .hero-image-glass-card {
+    position: static;
+    margin-top: 10px;
+    border-radius: 12px;
+    padding: 10px 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 1. About Page Mobile Optimizations */
+  .about-story-split-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .about-story-headline {
+    font-size: 1.35rem;
+    line-height: 1.35;
+    margin-bottom: 16px;
+  }
+
+  .about-story-paragraphs {
+    font-size: 14.5px;
+    line-height: 1.65;
+    gap: 14px;
+  }
+
+  .subpage-pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .subpage-pillar-card {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  /* About Video & Performance Stats Stack (Fixes Screenshot 1) */
+  .about-video-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .about-video-showcase-box {
+    border-radius: 16px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .about-cinematic-pill-badge {
+    bottom: 10px;
+    left: 10px;
+    padding: 5px 10px;
+    max-width: calc(100% - 20px);
+  }
+
+  .cinematic-pill-text {
+    font-size: 10px;
+  }
+
+  .about-performance-stats-col {
+    gap: 14px;
+    width: 100%;
+  }
+
+  .about-performance-stat-card {
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+
+  .perf-stat-num {
+    font-size: 2.1rem;
+    margin-bottom: 4px;
+  }
+
+  .perf-stat-title {
+    font-size: 14px;
+  }
+
+  .perf-stat-desc {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  /* 2. Testimonials Page Mobile Optimizations */
+  .subpage-filter-bar {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 4px 16px 14px;
+    margin: 0 -16px 24px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .subpage-filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .subpage-filter-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+
   .subpage-reviews-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
   }
+
+  .subpage-review-card {
+    padding: 20px 16px;
+    border-radius: 16px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .review-quote {
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  .review-card-footer {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* 3. Contact Page Mobile Optimizations */
+  .subpage-contact-split {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    width: 100%;
+  }
+
+  .contact-channel-box {
+    padding: 16px 18px;
+    border-radius: 14px;
+    gap: 14px;
+  }
+
+  .channel-box-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .channel-box-value {
+    font-size: 15px;
+    word-break: break-all;
+  }
+
+  .contact-form-card {
+    padding: 22px 16px;
+    border-radius: 18px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .form-card-heading {
+    font-size: 1.4rem;
+  }
+
   .contact-form-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
-  .contact-form-card {
-    padding: 24px;
+
+  .contact-form-input,
+  .contact-form-select,
+  .contact-form-textarea {
+    font-size: 16px; /* prevent iOS auto-zoom */
+    padding: 11px 14px;
+    box-sizing: border-box;
+  }
+
+  .facility-checklist-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .facility-checkbox-card {
+    padding: 10px 12px;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .contact-submit-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    justify-content: center;
+  }
+
+  /* 4. Service Subpages Mobile Optimizations */
+  .overview-card-wrapper,
+  .checklist-container-box {
+    padding: 22px 16px;
+    border-radius: 18px;
+  }
+
+  .overview-headline,
+  .checklist-title,
+  .features-section-title,
+  .gallery-section-title,
+  .related-title,
+  .service-faq-title {
+    font-size: clamp(1.4rem, 5.5vw, 1.8rem);
+  }
+
+  .overview-body-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .overview-highlights-box {
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+
+  .service-features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .feature-item-card {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .gallery-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .gallery-masonry-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .gallery-img-container {
+    height: 220px;
+  }
+
+  .checklist-categories-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .checklist-category-card {
+    padding: 18px 16px;
+  }
+
+  .service-faq-section,
+  .related-services-section,
+  .janitorial-buildings-section,
+  .subpage-white-section,
+  .subpage-light-section,
+  .subpage-dark-section {
+    padding: 48px 0;
+  }
+
+  .service-faq-card {
+    padding: 18px 16px;
+  }
+
+  .related-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .building-cards-large-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  /* Red CTA Banners */
+  .subpage-cta-banner-red {
+    padding: 44px 0;
+  }
+
+  .subpage-cta-banner-red .subpage-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 18px;
+  }
+
+  .cta-banner-btn-white {
+    width: 100%;
+    justify-content: center;
   }
 }
 

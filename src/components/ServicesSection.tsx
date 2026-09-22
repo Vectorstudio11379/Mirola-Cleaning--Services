@@ -173,7 +173,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                           className="service-book-btn"
                           onClick={() => onNavigate ? onNavigate(service.pagePath) : onOpenConsultation()}
                         >
-                          <span>{onNavigate ? `View Full ${service.title} Page` : `Schedule ${service.title} Consultation`}</span>
+                          <span>{onNavigate ? `Explore ${service.title}` : `Schedule ${service.title} Consultation`}</span>
                           <span className="btn-arrow-circle">
                             <ArrowRight size={14} />
                           </span>

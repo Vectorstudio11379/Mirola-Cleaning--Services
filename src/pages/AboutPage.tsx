@@ -308,20 +308,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '32px', alignItems: 'center' }}>
+          <div className="about-video-stats-grid">
             
             {/* Embedded Cinematic Video Showcase */}
-            <div 
-              style={{ 
-                position: 'relative', 
-                borderRadius: '18px', 
-                overflow: 'hidden', 
-                boxShadow: '0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(201, 0, 0, 0.2)',
-                border: '1px solid rgba(201, 0, 0, 0.3)',
-                background: '#000000',
-                aspectRatio: '16 / 9'
-              }}
-            >
+            <div className="about-video-showcase-box">
               <video 
                 src="/Seamless_continuous_cinematic.mp4" 
                 poster="/images/drive_folder_2/DSC00216.jpg" 
@@ -330,69 +320,38 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 muted 
                 playsInline 
                 controls
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                className="about-cinematic-video"
               />
-              <div 
-                style={{ 
-                  position: 'absolute', 
-                  bottom: '14px', 
-                  left: '14px', 
-                  background: 'rgba(8, 11, 19, 0.88)', 
-                  backdropFilter: 'blur(8px)',
-                  padding: '6px 14px',
-                  borderRadius: '20px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  pointerEvents: 'none',
-                  border: '1px solid rgba(255, 255, 255, 0.15)'
-                }}
-              >
-                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#c90000', boxShadow: '0 0 8px #c90000' }} />
-                <span style={{ color: '#ffffff', fontSize: '11.5px', fontWeight: 600, letterSpacing: '0.04em' }}>
+              <div className="about-cinematic-pill-badge">
+                <div className="pulse-red-dot" />
+                <span className="cinematic-pill-text">
                   CONTINUOUS CINEMATIC FACILITY WALKTHROUGH
                 </span>
               </div>
             </div>
 
             {/* Performance Stat Callout Cards */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div 
-                style={{ 
-                  background: 'rgba(255,255,255,0.04)', 
-                  border: '1px solid rgba(255,255,255,0.09)', 
-                  borderRadius: '16px', 
-                  padding: '28px',
-                  backdropFilter: 'blur(12px)'
-                }}
-              >
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', fontWeight: 700, color: '#ffffff', marginBottom: '6px' }}>
-                  $5M<span style={{ color: '#c90000' }}>+</span>
+            <div className="about-performance-stats-col">
+              <div className="about-performance-stat-card">
+                <div className="perf-stat-num">
+                  $5M<span className="accent-red">+</span>
                 </div>
-                <div style={{ fontSize: '15px', fontWeight: 600, color: '#f1f5f9', marginBottom: '4px' }}>
+                <div className="perf-stat-title">
                   Commercial Property Under Active Care
                 </div>
-                <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5 }}>
+                <div className="perf-stat-desc">
                   Consistently delivering spotless turnaround for corporate office towers, fulfillment centers, and medical suites.
                 </div>
               </div>
 
-              <div 
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(201,0,0,0.2) 0%, rgba(201,0,0,0.05) 100%)', 
-                  border: '1px solid rgba(201,0,0,0.35)', 
-                  borderRadius: '16px', 
-                  padding: '28px',
-                  backdropFilter: 'blur(12px)'
-                }}
-              >
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', fontWeight: 700, color: '#ffffff', marginBottom: '6px' }}>
-                  98<span style={{ color: '#ff4d61' }}>%</span>
+              <div className="about-performance-stat-card featured-glow">
+                <div className="perf-stat-num">
+                  98<span className="accent-red">%</span>
                 </div>
-                <div style={{ fontSize: '15px', fontWeight: 600, color: '#ffffff', marginBottom: '4px' }}>
+                <div className="perf-stat-title">
                   Turnaround Quality Score
                 </div>
-                <div style={{ fontSize: '13px', color: '#cbd5e1', lineHeight: 1.5 }}>
+                <div className="perf-stat-desc">
                   Verified by independent supervisor audit scores across scheduled night-shift janitorial routes.
                 </div>
               </div>
