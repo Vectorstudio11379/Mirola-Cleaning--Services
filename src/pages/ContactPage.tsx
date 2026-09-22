@@ -218,12 +218,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   <MapPin size={22} />
                 </div>
                 <div>
-                  <div className="channel-box-title">Service Coverage</div>
+                  <div className="channel-box-title">Physical Headquarters</div>
                   <div className="channel-box-value">
                     {CONTACT_INFO.address}
                   </div>
                   <div className="channel-box-sub">
-                    Regional hubs across New Jersey, New York, Pennsylvania & Nationwide accounts
+                    Operational facility hub serving New Jersey, New York, Pennsylvania & Nationwide accounts
                   </div>
                 </div>
               </div>

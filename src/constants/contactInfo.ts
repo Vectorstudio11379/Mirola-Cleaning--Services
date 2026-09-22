@@ -11,8 +11,13 @@ export const CONTACT_INFO = {
   email: 'mirolacleaning@mirolaenterprises.com',
 
   // Corporate Office / Service Location
-  address: 'Serving Commercial Hubs Nationwide in the USA',
-  cityStateZip: 'United States',
+  streetAddress: '800 Hamilton Street',
+  city: 'Somerset',
+  state: 'NJ',
+  zipCode: '08873',
+  country: 'USA',
+  address: '800 Hamilton Street, Somerset, NJ 08873, USA',
+  cityStateZip: 'Somerset, NJ 08873',
 
   // Service Hours
   operatingHours: '24/7 Rapid Response & Nightly Janitorial Dispatch',
