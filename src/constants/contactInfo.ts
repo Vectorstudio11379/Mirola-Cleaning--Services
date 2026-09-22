@@ -20,6 +20,6 @@ export const CONTACT_INFO = {
   // Background Form Submission Endpoints
   // Automatically uses built-in PHP mailer on Hostinger/Apache/Nginx hosting
   formEndpoint: '/api/contact.php',
-  // Optional: Paste a free Web3Forms Access Key here if deploying to purely static Jamstack hosts (e.g. Netlify/Vercel)
-  web3FormsAccessKey: '',
+  // Active Web3Forms Access Key for direct Google Workspace delivery
+  web3FormsAccessKey: 'cc2f8058-465f-4061-a923-d29ff928cff9',
 } as const;
