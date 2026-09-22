@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Play, X, ShieldCheck, Sparkles } from 'lucide-react';
+import { ClientLogoTicker } from './ClientLogoTicker';
 
 interface AboutSectionProps {
   onOpenConsultation: () => void;
@@ -128,76 +129,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation, 
     <section className="about-section" id="about">
       <div className="about-container">
         
-        {/* 1. TOP LOGO TICKER / CLIENT TRUST BAR */}
-        <div className="logo-ticker-wrapper">
-          <div className="logo-ticker-track">
-            {/* Logo Item 1 */}
-            <div className="ticker-logo-item">
-              <svg width="130" height="34" viewBox="0 0 130 34" fill="currentColor">
-                <circle cx="16" cy="17" r="10" stroke="currentColor" strokeWidth="2.5" fill="none" />
-                <path d="M16 7V27M6 17H26" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                <text x="36" y="22" fontFamily="Plus Jakarta Sans, sans-serif" fontSize="16" fontWeight="700" letterSpacing="-0.02em">Logoipsum</text>
-              </svg>
-            </div>
-
-            {/* Logo Item 2 */}
-            <div className="ticker-logo-item">
-              <svg width="130" height="34" viewBox="0 0 130 34" fill="currentColor">
-                <path d="M16 6L25 11V18C25 23.5 21.2 28.5 16 30C10.8 28.5 7 23.5 7 18V11L16 6Z" stroke="currentColor" strokeWidth="2.2" fill="none" />
-                <path d="M12 17L15 20L20 14" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                <text x="36" y="22" fontFamily="Plus Jakarta Sans, sans-serif" fontSize="16" fontWeight="700" letterSpacing="-0.02em">Logoipsum</text>
-              </svg>
-            </div>
-
-            {/* Logo Item 3 */}
-            <div className="ticker-logo-item">
-              <svg width="135" height="34" viewBox="0 0 135 34" fill="currentColor">
-                <circle cx="17" cy="17" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
-                <ellipse cx="17" cy="17" rx="5" ry="10" stroke="currentColor" strokeWidth="1.8" fill="none" />
-                <line x1="7" y1="17" x2="27" y2="17" stroke="currentColor" strokeWidth="1.8" />
-                <text x="36" y="22" fontFamily="Plus Jakarta Sans, sans-serif" fontSize="15" fontWeight="600">logo ipsum</text>
-              </svg>
-            </div>
-
-            {/* Logo Item 4 */}
-            <div className="ticker-logo-item">
-              <svg width="115" height="34" viewBox="0 0 115 34" fill="currentColor">
-                <rect x="6" y="10" width="4" height="14" rx="2" fill="currentColor" />
-                <rect x="13" y="7" width="4" height="20" rx="2" fill="currentColor" />
-                <rect x="20" y="12" width="4" height="10" rx="2" fill="currentColor" />
-                <text x="32" y="22" fontFamily="Plus Jakarta Sans, sans-serif" fontSize="17" fontWeight="800" fontStyle="italic" letterSpacing="-0.03em">IPSUM</text>
-              </svg>
-            </div>
-
-            {/* Logo Item 5 */}
-            <div className="ticker-logo-item">
-              <svg width="130" height="34" viewBox="0 0 130 34" fill="currentColor">
-                <path d="M16 6L25 11V18C25 23.5 21.2 28.5 16 30C10.8 28.5 7 23.5 7 18V11L16 6Z" stroke="currentColor" strokeWidth="2.2" fill="none" />
-                <path d="M16 11V23M10 17H22" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-                <text x="36" y="22" fontFamily="Plus Jakarta Sans, sans-serif" fontSize="16" fontWeight="700" letterSpacing="-0.02em">Logoipsum</text>
-              </svg>
-            </div>
-
-            {/* Logo Item 6 */}
-            <div className="ticker-logo-item">
-              <svg width="130" height="34" viewBox="0 0 130 34" fill="currentColor">
-                <circle cx="16" cy="17" r="4" fill="currentColor" />
-                <circle cx="16" cy="7" r="2.5" fill="currentColor" />
-                <circle cx="16" cy="27" r="2.5" fill="currentColor" />
-                <circle cx="6" cy="17" r="2.5" fill="currentColor" />
-                <circle cx="26" cy="17" r="2.5" fill="currentColor" />
-                <text x="36" y="22" fontFamily="Plus Jakarta Sans, sans-serif" fontSize="16" fontWeight="700" letterSpacing="-0.02em">Logoipsum</text>
-              </svg>
-            </div>
-
-            {/* Logo Item 7 */}
-            <div className="ticker-logo-item">
-              <svg width="105" height="34" viewBox="0 0 105 34" fill="currentColor">
-                <text x="6" y="23" fontFamily="Plus Jakarta Sans, sans-serif" fontSize="21" fontWeight="800" letterSpacing="-0.04em">IPSUM</text>
-              </svg>
-            </div>
-          </div>
-        </div>
+        {/* 1. TOP LOGO TICKER / CLIENT TRUST BAR & INFINITE SLIDER */}
+        <ClientLogoTicker showSubtitle={false} />
 
         {/* Dotted border separator */}
         <div className="about-divider-line" />

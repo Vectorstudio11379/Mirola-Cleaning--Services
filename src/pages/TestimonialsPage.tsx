@@ -8,6 +8,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { CONTACT_INFO } from '../constants/contactInfo';
+import { ClientLogoTicker } from '../components/ClientLogoTicker';
 import type { AppRoute } from '../types/navigation';
 
 interface TestimonialsPageProps {
@@ -248,6 +249,13 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({ onNavigate, 
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* 1.5 Client Logos Infinite Slider */}
+      <section className="testimonials-clients-ticker-section" style={{ background: '#ffffff', padding: '32px 0 16px', borderBottom: '1px solid #e2e8f0' }}>
+        <div className="service-page-container">
+          <ClientLogoTicker showSubtitle={true} subtitle="TRUSTED BY INDUSTRY LEADERS & RECOGNIZED NATIONAL BRANDS" />
         </div>
       </section>
 
