@@ -57,7 +57,7 @@ if (empty($email) || (!filter_var($email, FILTER_VALIDATE_EMAIL))) {
 }
 
 // 5. Build Recipient & Subject
-$to = 'mirolacleaning@mirolaenterprises.com';
+$to = 'ezekielelijahkola@gmail.com';
 $facilitySummary = !empty($company) ? $company : (!empty($fullName) ? $fullName : 'New Commercial Lead');
 $subject = "[Mirola Website Lead] {$formType}: {$facilitySummary}";
 

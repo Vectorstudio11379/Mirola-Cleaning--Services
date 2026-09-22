@@ -66,7 +66,31 @@ ${payload.company ? `${payload.company}\n` : ''}${payload.phone || ''}`;
 export async function submitLeadDirect(payload: LeadSubmissionPayload): Promise<SubmissionResult> {
   const { gmailUrl, mailtoUrl } = generateEmailLinks(payload);
 
-  // 1. If Web3Forms access key is configured in contactInfo, use Web3Forms
+  // 1. Try the primary server mailer endpoint (/api/contact.php) directly
+  try {
+    const response = await fetch(CONTACT_INFO.formEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+      const data = await response.json().catch(() => ({ success: true }));
+      if (data.success) {
+        return {
+          success: true,
+          message: data.message || 'Your commercial request was dispatched directly to our facility director. We will contact you within 24 hours.'
+        };
+      }
+    }
+  } catch (err) {
+    console.warn('Direct server endpoint unavailable, attempting fallback:', err);
+  }
+
+  // 2. Fallback to Web3Forms if configured
   if (CONTACT_INFO.web3FormsAccessKey) {
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -93,31 +117,11 @@ export async function submitLeadDirect(payload: LeadSubmissionPayload): Promise<
         };
       }
     } catch (err) {
-      console.warn('Web3Forms dispatch error, falling back to local mailer:', err);
+      console.warn('Web3Forms dispatch error:', err);
     }
   }
 
-  // 2. Try the primary PHP mailer endpoint (/api/contact.php)
-  try {
-    const response = await fetch(CONTACT_INFO.formEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
 
-    if (response.ok) {
-      const data = await response.json().catch(() => ({ success: true }));
-      return {
-        success: true,
-        message: data.message || 'Your commercial request was dispatched directly to our facility director. We will contact you within 24 hours.'
-      };
-    }
-  } catch (err) {
-    console.warn('Direct server endpoint unavailable:', err);
-  }
 
   // 3. In Vite Local Dev environment, simulate success so forms can be tested locally
   if (import.meta.env.DEV) {

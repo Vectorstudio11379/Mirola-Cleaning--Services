@@ -7,8 +7,8 @@ export const CONTACT_INFO = {
   phoneDisplay: '(732) 592-9222',
   phoneTel: '7325929222',
 
-  // Primary Inquiries & Consultation Recipient Email
-  email: 'mirolacleaning@mirolaenterprises.com',
+  // Primary Inquiries & Consultation Recipient Email (Temporary test address)
+  email: 'ezekielelijahkola@gmail.com',
 
   // Corporate Office / Service Location
   streetAddress: '800 Hamilton Street',
