@@ -20,27 +20,34 @@ import { GymCleaningPage } from './pages/GymCleaningPage';
 import { WarehouseCleaningPage } from './pages/WarehouseCleaningPage';
 import { OfficeCleaningPage } from './pages/OfficeCleaningPage';
 import { MedicalCleaningPage } from './pages/MedicalCleaningPage';
+import { AboutPage } from './pages/AboutPage';
+import { TestimonialsPage } from './pages/TestimonialsPage';
+import { ContactPage } from './pages/ContactPage';
 
 import type { AppRoute } from './types/navigation';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import './App.css';
 
+const VALID_ROUTES: AppRoute[] = [
+  '/',
+  '/services/janitorial',
+  '/services/floor-care',
+  '/services/sanitation',
+  '/services/janitorial/daycare',
+  '/services/janitorial/gym',
+  '/services/janitorial/warehouse',
+  '/services/janitorial/office',
+  '/services/janitorial/medical',
+  '/about',
+  '/testimonials',
+  '/contact'
+];
+
 function App() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState<AppRoute>(() => {
     const path = window.location.pathname;
-    const validRoutes: AppRoute[] = [
-      '/',
-      '/services/janitorial',
-      '/services/floor-care',
-      '/services/sanitation',
-      '/services/janitorial/daycare',
-      '/services/janitorial/gym',
-      '/services/janitorial/warehouse',
-      '/services/janitorial/office',
-      '/services/janitorial/medical'
-    ];
-    return validRoutes.includes(path as AppRoute) ? (path as AppRoute) : '/';
+    return VALID_ROUTES.includes(path as AppRoute) ? (path as AppRoute) : '/';
   });
 
   // Re-observe elements on route transitions
@@ -50,18 +57,7 @@ function App() {
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname;
-      const validRoutes: AppRoute[] = [
-        '/',
-        '/services/janitorial',
-        '/services/floor-care',
-        '/services/sanitation',
-        '/services/janitorial/daycare',
-        '/services/janitorial/gym',
-        '/services/janitorial/warehouse',
-        '/services/janitorial/office',
-        '/services/janitorial/medical'
-      ];
-      setCurrentPath(validRoutes.includes(path as AppRoute) ? (path as AppRoute) : '/');
+      setCurrentPath(VALID_ROUTES.includes(path as AppRoute) ? (path as AppRoute) : '/');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -70,18 +66,7 @@ function App() {
   }, []);
 
   const navigate = (path: string) => {
-    const validRoutes: AppRoute[] = [
-      '/',
-      '/services/janitorial',
-      '/services/floor-care',
-      '/services/sanitation',
-      '/services/janitorial/daycare',
-      '/services/janitorial/gym',
-      '/services/janitorial/warehouse',
-      '/services/janitorial/office',
-      '/services/janitorial/medical'
-    ];
-    const targetRoute = validRoutes.includes(path as AppRoute) ? (path as AppRoute) : '/';
+    const targetRoute = VALID_ROUTES.includes(path as AppRoute) ? (path as AppRoute) : '/';
     if (targetRoute !== currentPath) {
       window.history.pushState({}, '', targetRoute);
       setCurrentPath(targetRoute);
@@ -147,6 +132,27 @@ function App() {
             onOpenConsultation={() => setIsConsultationOpen(true)} 
           />
         );
+      case '/about':
+        return (
+          <AboutPage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
+      case '/testimonials':
+        return (
+          <TestimonialsPage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
+      case '/contact':
+        return (
+          <ContactPage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
       case '/':
       default:
         return (
@@ -155,7 +161,10 @@ function App() {
             <Hero onOpenConsultation={() => setIsConsultationOpen(true)} />
 
             {/* 2. About Us Section */}
-            <AboutSection onOpenConsultation={() => setIsConsultationOpen(true)} />
+            <AboutSection 
+              onOpenConsultation={() => setIsConsultationOpen(true)} 
+              onNavigate={navigate}
+            />
 
             {/* 3. Services Section with 3 Core Services & Janitorial Building Selector */}
             <ServicesSection 
@@ -167,7 +176,7 @@ function App() {
             <WhyChooseUsSection onOpenConsultation={() => setIsConsultationOpen(true)} />
 
             {/* 5. Testimonials Section */}
-            <TestimonialsSection />
+            <TestimonialsSection onNavigate={navigate} />
 
             {/* 6. Contact Section */}
             <ContactSection />

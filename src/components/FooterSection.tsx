@@ -135,8 +135,9 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
               <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/janitorial')}>Janitorial Services</button></li>
               <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/floor-care')}>Floor Care & Strip/Wax</button></li>
               <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/sanitation')}>Sanitation Services</button></li>
-              <li><a href="#about" onClick={(e) => { e.preventDefault(); handleLink('/'); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>About Us</a></li>
-              <li><a href="#testimonials" onClick={(e) => { e.preventDefault(); handleLink('/'); setTimeout(() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }), 100); }}>Testimonials</a></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/about')}>About Us</button></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/testimonials')}>Testimonials</button></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/contact')}>Contact Us</button></li>
             </ul>
           </div>
 

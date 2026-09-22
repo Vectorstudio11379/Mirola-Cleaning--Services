@@ -1,7 +1,11 @@
 import React from 'react';
-import { Star, Quote } from 'lucide-react';
+import { Star, Quote, ArrowRight } from 'lucide-react';
 
-export const TestimonialsSection: React.FC = () => {
+interface TestimonialsSectionProps {
+  onNavigate?: (path: string) => void;
+}
+
+export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ onNavigate }) => {
   const reviews = [
     {
       name: 'Carlos Martinez',
@@ -94,6 +98,19 @@ export const TestimonialsSection: React.FC = () => {
             </div>
           ))}
         </div>
+
+        {onNavigate && (
+          <div className="testimonials-footer-cta scroll-reveal" style={{ textAlign: 'center', marginTop: '48px' }}>
+            <button 
+              type="button" 
+              className="testimonials-explore-btn"
+              onClick={() => onNavigate('/testimonials')}
+            >
+              <span>Explore All 500+ Verified Facility Reviews</span>
+              <ArrowRight size={16} />
+            </button>
+          </div>
+        )}
 
       </div>
     </section>

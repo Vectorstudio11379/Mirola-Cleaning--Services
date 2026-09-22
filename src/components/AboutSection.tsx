@@ -3,6 +3,7 @@ import { ArrowRight, Play, X, ShieldCheck, Sparkles } from 'lucide-react';
 
 interface AboutSectionProps {
   onOpenConsultation: () => void;
+  onNavigate?: (path: string) => void;
 }
 
 interface RevealLetter {
@@ -39,7 +40,7 @@ const buildRevealData = (text: string) => {
 const STATEMENT_TEXT = "Discover how our commitment to quality, reliability, and eco-friendly practices transforms spaces into healthier environments. We bring peace of mind to our clients, ensuring every space shines.";
 const { words: REVEAL_WORDS, totalLetters: TOTAL_LETTERS } = buildRevealData(STATEMENT_TEXT);
 
-export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation }) => {
+export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation, onNavigate }) => {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const statementRef = useRef<HTMLHeadingElement | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -238,8 +239,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation }
             <button 
               type="button" 
               className="about-learn-more-btn"
-              onClick={onOpenConsultation}
-              aria-label="Learn more about our cleaning solutions"
+              onClick={() => {
+                if (onNavigate) onNavigate('/about');
+                else onOpenConsultation();
+              }}
+              aria-label="Learn more about our company and standards"
             >
               <span className="learn-more-text">Learn More</span>
               <span className="learn-more-arrow">

@@ -323,24 +323,24 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button 
               type="button" 
-              className="pill-nav-btn"
-              onClick={() => handleSectionScroll('about')}
+              className={`pill-nav-btn ${currentPath === '/about' ? 'active' : ''}`}
+              onClick={() => handleLinkClick('/about')}
             >
               About
             </button>
 
             <button 
               type="button" 
-              className="pill-nav-btn"
-              onClick={() => handleSectionScroll('testimonials')}
+              className={`pill-nav-btn ${currentPath === '/testimonials' ? 'active' : ''}`}
+              onClick={() => handleLinkClick('/testimonials')}
             >
               Testimonials
             </button>
 
             <button 
               type="button" 
-              className="pill-nav-btn"
-              onClick={() => handleSectionScroll('contact')}
+              className={`pill-nav-btn ${currentPath === '/contact' ? 'active' : ''}`}
+              onClick={() => handleLinkClick('/contact')}
             >
               Contact
             </button>
@@ -526,21 +526,30 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </button>
 
-          <div className="drawer-section-label">QUICK NAVIGATION</div>
-          <button type="button" className="drawer-nav-item-simple" onClick={() => handleSectionScroll('about')}>
+          <div className="drawer-section-label">PAGES & COMPANY</div>
+          <button 
+            type="button" 
+            className={`drawer-nav-item-simple ${currentPath === '/about' ? 'active' : ''}`} 
+            onClick={() => handleLinkClick('/about')}
+          >
             About Mirola
           </button>
-          <button type="button" className="drawer-nav-item-simple" onClick={() => handleSectionScroll('why-choose')}>
-            Why Choose Us
+          <button 
+            type="button" 
+            className={`drawer-nav-item-simple ${currentPath === '/testimonials' ? 'active' : ''}`} 
+            onClick={() => handleLinkClick('/testimonials')}
+          >
+            Client Testimonials
           </button>
-          <button type="button" className="drawer-nav-item-simple" onClick={() => handleSectionScroll('testimonials')}>
-            Testimonials
+          <button 
+            type="button" 
+            className={`drawer-nav-item-simple ${currentPath === '/contact' ? 'active' : ''}`} 
+            onClick={() => handleLinkClick('/contact')}
+          >
+            Contact & Walkthrough
           </button>
           <button type="button" className="drawer-nav-item-simple" onClick={() => handleSectionScroll('faq')}>
-            FAQ
-          </button>
-          <button type="button" className="drawer-nav-item-simple" onClick={() => handleSectionScroll('contact')}>
-            Contact & Walkthrough
+            Frequently Asked Questions
           </button>
         </nav>
 

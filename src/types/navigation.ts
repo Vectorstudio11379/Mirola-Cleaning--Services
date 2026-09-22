@@ -7,7 +7,10 @@ export type AppRoute =
   | '/services/janitorial/gym'
   | '/services/janitorial/warehouse'
   | '/services/janitorial/office'
-  | '/services/janitorial/medical';
+  | '/services/janitorial/medical'
+  | '/about'
+  | '/testimonials'
+  | '/contact';
 
 export interface ServiceNavigationItem {
   id: string;
