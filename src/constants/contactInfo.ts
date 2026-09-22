@@ -16,4 +16,10 @@ export const CONTACT_INFO = {
 
   // Service Hours
   operatingHours: '24/7 Rapid Response & Nightly Janitorial Dispatch',
+
+  // Background Form Submission Endpoints
+  // Automatically uses built-in PHP mailer on Hostinger/Apache/Nginx hosting
+  formEndpoint: '/api/contact.php',
+  // Optional: Paste a free Web3Forms Access Key here if deploying to purely static Jamstack hosts (e.g. Netlify/Vercel)
+  web3FormsAccessKey: '',
 } as const;

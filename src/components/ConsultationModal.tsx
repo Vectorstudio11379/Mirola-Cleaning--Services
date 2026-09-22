@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { X, CheckCircle2, MapPin, Check, ExternalLink, Mail, AlertCircle } from 'lucide-react';
+import { X, CheckCircle2, MapPin, Check, ExternalLink, AlertCircle, Loader2, ArrowRight } from 'lucide-react';
 import { CONTACT_INFO } from '../constants/contactInfo';
+import { submitLeadDirect } from '../services/formSubmission';
 
 interface ConsultationModalProps {
   isOpen: boolean;
@@ -20,9 +21,10 @@ const TARGET_EMAIL = CONTACT_INFO.email;
 
 export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, onClose }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [gmailLink, setGmailLink] = useState('');
-  const [mailtoLink, setMailtoLink] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     company: '',
@@ -46,63 +48,30 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
     });
   };
 
-  const generateEmailData = () => {
-    const subject = `Facility Consultation Request - ${formData.company || formData.fullName || 'Commercial Client'}`;
-    const facilityList = formData.facilityTypes.length > 0
-      ? formData.facilityTypes.map(f => `  • ${f}`).join('\n')
-      : '  • Commercial Facility (Standard)';
-
-    const body = 
-`Hello Mirola Commercial Cleaning Team,
-
-I would like to request an on-site commercial facility consultation and estimate. Here are our facility specifications:
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-FACILITY CONSULTATION DETAILS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Full Name: ${formData.fullName}
-• Company / Facility Name: ${formData.company}
-• Corporate Email: ${formData.email}
-• Direct Phone: ${formData.phone}
-• Approximate Area: ${formData.squareFootage}
-
-FACILITY CLASSIFICATION(S):
-${facilityList}
-
-SPECIFIC CLEANING PRIORITIES / NOTES:
-${formData.notes.trim() ? formData.notes.trim() : 'Standard commercial janitorial walkthrough requested.'}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Please contact me to arrange an on-site walkthrough.
-
-Thank you,
-${formData.fullName}
-${formData.company ? `${formData.company}\n` : ''}${formData.phone}`;
-
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(TARGET_EMAIL)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    const mailtoUrl = `mailto:${encodeURIComponent(TARGET_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    return { gmailUrl, mailtoUrl };
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.facilityTypes.length === 0) {
       setErrorMsg('Please select at least one facility classification.');
       return;
     }
 
-    const { gmailUrl, mailtoUrl } = generateEmailData();
-    setGmailLink(gmailUrl);
-    setMailtoLink(mailtoUrl);
+    setIsSubmitting(true);
+    setErrorMsg('');
 
-    // Automatically open Gmail compose in a new tab
-    try {
-      window.open(gmailUrl, '_blank', 'noopener,noreferrer');
-    } catch {
-      // Browser popup fallback handled by confirmation UI
-    }
+    const res = await submitLeadDirect({
+      fullName: formData.fullName,
+      company: formData.company,
+      email: formData.email,
+      phone: formData.phone,
+      facilityTypes: formData.facilityTypes,
+      squareFootage: formData.squareFootage,
+      message: formData.notes,
+      formType: 'Commercial Consultation Request'
+    });
 
+    setIsSubmitting(false);
+    setStatusMessage(res.message);
+    if (res.gmailUrl) setGmailLink(res.gmailUrl);
     setIsSubmitted(true);
   };
 
@@ -125,65 +94,65 @@ ${formData.company ? `${formData.company}\n` : ''}${formData.phone}`;
         </button>
 
         {isSubmitted ? (
-          <div className="modal-success-state">
-            <div className="success-icon-badge">
-              <CheckCircle2 size={46} color="#c90000" />
-            </div>
-            <h3>Consultation Draft Opened in Gmail!</h3>
-            <p>
-              Thank you, <strong>{formData.fullName || 'there'}</strong>. We have opened a new tab with your prefilled facility details in <strong>Gmail</strong> addressed to <strong>{TARGET_EMAIL}</strong>.
-            </p>
-
-            <div className="gmail-summary-box">
-              <div className="gmail-summary-header">Consultation Summary</div>
-              <div className="gmail-summary-row">
-                <span className="summary-label">Company / Facility:</span>
-                <span className="summary-val">{formData.company || 'Not specified'}</span>
+            <div className="modal-success-state">
+              <div className="success-icon-badge">
+                <CheckCircle2 size={46} color="#c90000" />
               </div>
-              <div className="gmail-summary-row">
-                <span className="summary-label">Estimated Area:</span>
-                <span className="summary-val">{formData.squareFootage}</span>
-              </div>
-              <div className="gmail-summary-header" style={{ marginTop: '10px' }}>Facility Classifications:</div>
-              <div className="gmail-summary-chips">
-                {formData.facilityTypes.map((type) => (
-                  <span key={type} className="gmail-chip">
-                    <Check size={11} strokeWidth={3} />
-                    {type}
-                  </span>
-                ))}
-              </div>
-            </div>
+              <h3>Consultation Request Dispatched!</h3>
+              <p>
+                Thank you, <strong>{formData.fullName || 'there'}</strong>. {statusMessage || `Your commercial facility consultation request has been sent directly to our operations directors at ${TARGET_EMAIL}.`}
+              </p>
 
-            <p className="gmail-instruction-note">
-              Please switch to your Gmail tab and click <strong>Send</strong> to dispatch your walkthrough request directly to our commercial operations team.
-            </p>
+              <div className="gmail-summary-box">
+                <div className="gmail-summary-header">Consultation Summary</div>
+                <div className="gmail-summary-row">
+                  <span className="summary-label">Company / Facility:</span>
+                  <span className="summary-val">{formData.company || 'Not specified'}</span>
+                </div>
+                <div className="gmail-summary-row">
+                  <span className="summary-label">Corporate Email:</span>
+                  <span className="summary-val">{formData.email}</span>
+                </div>
+                <div className="gmail-summary-row">
+                  <span className="summary-label">Direct Phone:</span>
+                  <span className="summary-val">{formData.phone || 'Not provided'}</span>
+                </div>
+                <div className="gmail-summary-row">
+                  <span className="summary-label">Estimated Area:</span>
+                  <span className="summary-val">{formData.squareFootage}</span>
+                </div>
+                <div className="gmail-summary-header" style={{ marginTop: '10px' }}>Facility Classifications:</div>
+                <div className="gmail-summary-chips">
+                  {formData.facilityTypes.map((type) => (
+                    <span key={type} className="gmail-chip">
+                      <Check size={11} strokeWidth={3} />
+                      {type}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-            <div className="modal-actions-group">
-              {gmailLink && (
-                <a 
-                  href={gmailLink} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="modal-gmail-btn"
-                >
-                  <ExternalLink size={16} />
-                  <span>Re-open in Gmail</span>
-                </a>
-              )}
-              <div className="modal-secondary-actions">
-                {mailtoLink && (
-                  <a href={mailtoLink} className="modal-secondary-btn">
-                    <Mail size={14} />
-                    <span>Open in Default Mail</span>
-                  </a>
-                )}
+              <p className="gmail-instruction-note">
+                Our regional operations director will review your building specifications and contact you within 24 hours to coordinate the on-site walkthrough.
+              </p>
+
+              <div className="modal-actions-group">
                 <button type="button" className="modal-secondary-btn" onClick={handleReset}>
                   Done / Close
                 </button>
+                {gmailLink && (
+                  <a 
+                    href={gmailLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="modal-secondary-btn"
+                  >
+                    <ExternalLink size={14} />
+                    <span>Also Open in Gmail</span>
+                  </a>
+                )}
               </div>
             </div>
-          </div>
         ) : (
           <form className="modal-form" onSubmit={handleSubmit}>
             <div className="modal-header">
@@ -311,12 +280,21 @@ ${formData.company ? `${formData.company}\n` : ''}${formData.phone}`;
               <span>Serving commercial facilities across the USA • Fully Bonded & Insured</span>
             </div>
 
-            <button type="submit" className="modal-submit-btn">
-              <span>SUBMIT & OPEN IN GMAIL</span>
-              <ExternalLink size={15} />
+            <button type="submit" className="modal-submit-btn" disabled={isSubmitting}>
+              {isSubmitting ? (
+                <>
+                  <Loader2 size={15} className="animate-spin" />
+                  <span>DISPATCHING REQUEST...</span>
+                </>
+              ) : (
+                <>
+                  <span>CONFIRM CONSULTATION REQUEST</span>
+                  <ArrowRight size={15} />
+                </>
+              )}
             </button>
             <div className="dispatch-hint-note">
-              ✓ Prepares your consultation draft in Gmail with prefilled specifications
+              ✓ Direct dispatch to operations • 100% confidential • 24-hr response guarantee
             </div>
           </form>
         )}

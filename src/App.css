@@ -5802,5 +5802,20 @@
   }
 }
 
+/* Background form submission & loading spinner */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
+.animate-spin {
+  animation: spin 0.8s linear infinite;
+}
 
+.form-submit-btn:disabled,
+.modal-submit-btn:disabled,
+.cta-submit-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  pointer-events: none;
+}

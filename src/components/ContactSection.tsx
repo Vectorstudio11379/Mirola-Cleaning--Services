@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, ShieldCheck, CheckCircle2, Check, ExternalLink, AlertCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, ShieldCheck, CheckCircle2, Check, ExternalLink, AlertCircle, Loader2, ArrowRight } from 'lucide-react';
 import { FACILITY_OPTIONS } from './ConsultationModal';
 import { CONTACT_INFO } from '../constants/contactInfo';
+import { submitLeadDirect } from '../services/formSubmission';
 
 const TARGET_EMAIL = CONTACT_INFO.email;
 
 export const ContactSection: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [gmailLink, setGmailLink] = useState('');
-  const [mailtoLink, setMailtoLink] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     company: '',
@@ -30,61 +32,29 @@ export const ContactSection: React.FC = () => {
     });
   };
 
-  const generateEmailData = () => {
-    const subject = `Commercial Facility Walkthrough Request - ${formData.company || formData.fullName || 'New Facility'}`;
-    const facilityList = formData.facilityTypes.length > 0
-      ? formData.facilityTypes.map(f => `  • ${f}`).join('\n')
-      : '  • Commercial Facility (Standard)';
-
-    const body = 
-`Hello Mirola Commercial Cleaning Team,
-
-I would like to request an on-site facility inspection and custom proposal. Here are our facility details:
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-FACILITY WALKTHROUGH DETAILS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Full Name: ${formData.fullName}
-• Company / Building Name: ${formData.company}
-• Corporate Email: ${formData.email}
-• Direct Phone: ${formData.phone}
-
-FACILITY CLASSIFICATION(S):
-${facilityList}
-
-SPECIFIC CLEANING PRIORITIES / SCOPE:
-${formData.message.trim() ? formData.message.trim() : 'Standard commercial janitorial walkthrough requested.'}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Please contact me to coordinate the on-site walkthrough.
-
-Best regards,
-${formData.fullName}
-${formData.company ? `${formData.company}\n` : ''}${formData.phone}`;
-
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(TARGET_EMAIL)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    const mailtoUrl = `mailto:${encodeURIComponent(TARGET_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    return { gmailUrl, mailtoUrl };
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.facilityTypes.length === 0) {
       setErrorMsg('Please select at least one facility classification.');
       return;
     }
 
-    const { gmailUrl, mailtoUrl } = generateEmailData();
-    setGmailLink(gmailUrl);
-    setMailtoLink(mailtoUrl);
+    setIsSubmitting(true);
+    setErrorMsg('');
 
-    try {
-      window.open(gmailUrl, '_blank', 'noopener,noreferrer');
-    } catch {
-      // Browser popup fallback
-    }
+    const res = await submitLeadDirect({
+      fullName: formData.fullName,
+      company: formData.company,
+      email: formData.email,
+      phone: formData.phone,
+      facilityTypes: formData.facilityTypes,
+      message: formData.message,
+      formType: 'Commercial Facility Walkthrough'
+    });
 
+    setIsSubmitting(false);
+    setStatusMessage(res.message);
+    if (res.gmailUrl) setGmailLink(res.gmailUrl);
     setIsSubmitted(true);
   };
 
@@ -149,16 +119,24 @@ ${formData.company ? `${formData.company}\n` : ''}${formData.phone}`;
                 <div className="success-icon-badge">
                   <CheckCircle2 size={48} color="#c90000" />
                 </div>
-                <h3>Draft Opened in Gmail!</h3>
+                <h3>Walkthrough Request Dispatched!</h3>
                 <p>
-                  Thank you, <strong>{formData.fullName || 'there'}</strong>. We have prepared your facility walkthrough request in <strong>Gmail</strong> addressed to <strong>{TARGET_EMAIL}</strong>.
+                  Thank you, <strong>{formData.fullName || 'there'}</strong>. {statusMessage || `Your commercial facility walkthrough request has been sent directly to our operations directors at ${TARGET_EMAIL}.`}
                 </p>
 
                 <div className="gmail-summary-box">
-                  <div className="gmail-summary-header">Submitted Scope</div>
+                  <div className="gmail-summary-header">Submitted Facility Scope</div>
                   <div className="gmail-summary-row">
-                    <span className="summary-label">Facility / Building:</span>
+                    <span className="summary-label">Facility / Company:</span>
                     <span className="summary-val">{formData.company || 'Not specified'}</span>
+                  </div>
+                  <div className="gmail-summary-row">
+                    <span className="summary-label">Corporate Email:</span>
+                    <span className="summary-val">{formData.email}</span>
+                  </div>
+                  <div className="gmail-summary-row">
+                    <span className="summary-label">Direct Phone:</span>
+                    <span className="summary-val">{formData.phone || 'Not provided'}</span>
                   </div>
                   <div className="gmail-summary-header" style={{ marginTop: '10px' }}>Facility Classifications:</div>
                   <div className="gmail-summary-chips">
@@ -172,36 +150,38 @@ ${formData.company ? `${formData.company}\n` : ''}${formData.phone}`;
                 </div>
 
                 <p className="gmail-instruction-note">
-                  Please switch to your Gmail tab and click <strong>Send</strong> to dispatch your proposal request directly to our commercial directors.
+                  Our regional operations manager will review your facility specifications and contact you within 24 hours to coordinate the on-site walkthrough.
                 </p>
 
                 <div className="modal-actions-group">
+                  <button 
+                    type="button" 
+                    className="modal-secondary-btn"
+                    onClick={() => {
+                      setIsSubmitted(false);
+                      setFormData({
+                        fullName: '',
+                        company: '',
+                        email: '',
+                        phone: '',
+                        facilityTypes: ['Office / Corporate Building'],
+                        message: ''
+                      });
+                    }}
+                  >
+                    Submit Another Request
+                  </button>
                   {gmailLink && (
                     <a 
                       href={gmailLink} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="modal-gmail-btn"
+                      className="modal-secondary-btn"
                     >
-                      <ExternalLink size={16} />
-                      <span>Re-open in Gmail</span>
+                      <ExternalLink size={14} />
+                      <span>Also Open in Gmail</span>
                     </a>
                   )}
-                  <div className="modal-secondary-actions">
-                    {mailtoLink && (
-                      <a href={mailtoLink} className="modal-secondary-btn">
-                        <Mail size={14} />
-                        <span>Open in Default Mail</span>
-                      </a>
-                    )}
-                    <button 
-                      type="button" 
-                      className="modal-secondary-btn"
-                      onClick={() => setIsSubmitted(false)}
-                    >
-                      Send Another Request
-                    </button>
-                  </div>
                 </div>
               </div>
             ) : (
@@ -308,12 +288,21 @@ ${formData.company ? `${formData.company}\n` : ''}${formData.phone}`;
                   />
                 </div>
 
-                <button type="submit" className="form-submit-btn">
-                  <span>SUBMIT & OPEN IN GMAIL</span>
-                  <ExternalLink size={16} />
+                <button type="submit" className="form-submit-btn" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      <span>DISPATCHING REQUEST...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>CONFIRM FACILITY WALKTHROUGH</span>
+                      <ArrowRight size={16} />
+                    </>
+                  )}
                 </button>
                 <div className="dispatch-hint-note">
-                  ✓ Prepares your walkthrough request draft in Gmail with prefilled specifications
+                  ✓ Direct dispatch to operations • 100% confidential • 24-hr response guarantee
                 </div>
               </form>
             )}

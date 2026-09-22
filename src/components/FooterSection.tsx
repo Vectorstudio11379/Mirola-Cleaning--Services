@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Phone, Mail, MapPin, ArrowRight, ShieldCheck, CheckCircle2, Loader2 } from 'lucide-react';
 import { CONTACT_INFO } from '../constants/contactInfo';
+import { submitLeadDirect } from '../services/formSubmission';
+
 interface FooterSectionProps {
   onOpenConsultation: () => void;
   onNavigate?: (path: string) => void;
@@ -11,11 +13,20 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
   onNavigate 
 }) => {
   const [emailInput, setEmailInput] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (emailInput.trim()) {
+      setIsSubmitting(true);
+      await submitLeadDirect({
+        fullName: 'Prospective Commercial Client',
+        email: emailInput.trim(),
+        formType: 'Footer Quick Estimate Request',
+        message: 'Quick estimate requested via website footer estimate banner.'
+      });
+      setIsSubmitting(false);
       setSubscribed(true);
     }
   };
@@ -64,9 +75,18 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
                   onChange={(e) => setEmailInput(e.target.value)}
                   className="cta-email-input"
                 />
-                <button type="submit" className="cta-submit-btn">
-                  <span>Get Free Estimate</span>
-                  <ArrowRight size={16} />
+                <button type="submit" className="cta-submit-btn" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Get Free Estimate</span>
+                      <ArrowRight size={16} />
+                    </>
+                  )}
                 </button>
               </form>
             )}
