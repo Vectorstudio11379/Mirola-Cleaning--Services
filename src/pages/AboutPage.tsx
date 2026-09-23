@@ -131,7 +131,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         <div className="subpage-container">
           <ClientLogoTicker 
             showSubtitle={true} 
-            subtitle="TRUSTED BY PREMIER COMMERCIAL FACILITIES & NATIONAL BRANDS" 
+            badgeText="CLIENTS WE'VE WORKED FOR"
+            subtitle="Commercial Clients & Organizations We Proudly Serve"
+            description="These are some of the premier commercial facilities, educational academies, and national brands that rely on Mirola Cleaning Services for pristine everyday operations."
           />
         </div>
       </section>

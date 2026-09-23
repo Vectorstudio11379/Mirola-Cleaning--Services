@@ -130,7 +130,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation, 
       <div className="about-container">
         
         {/* 1. TOP LOGO TICKER / CLIENT TRUST BAR & INFINITE SLIDER */}
-        <ClientLogoTicker showSubtitle={false} />
+        <ClientLogoTicker 
+          showSubtitle={true}
+          badgeText="CLIENTS WE'VE WORKED FOR"
+          subtitle="Commercial Clients & Industry Leaders We Proudly Serve"
+          description="These are some of the premier commercial facilities, academies, and national brands that trust Mirola Cleaning Services for hospital-grade janitorial standards."
+        />
 
         {/* Dotted border separator */}
         <div className="about-divider-line" />

@@ -251,7 +251,9 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
         <div className="subpage-container">
           <ClientLogoTicker 
             showSubtitle={true} 
-            subtitle="OFFICIAL SANITIZATION PARTNER TO NATIONAL BRANDS & COMMERCIAL OPERATORS" 
+            badgeText="CLIENTS WE'VE WORKED FOR"
+            subtitle="Commercial Clients & Industry Partners Across the USA"
+            description="These are the commercial clients and facilities we've worked for, maintaining pristine inspection standards day in and day out."
           />
         </div>
       </section>

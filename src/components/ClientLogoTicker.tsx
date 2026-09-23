@@ -17,8 +17,8 @@ export const CLIENT_LOGOS: ClientLogo[] = [
     src: '/images/clients/goddard-school.png',
     alt: 'The Goddard School for Early Childhood Development',
     category: 'Early Childhood Education',
-    maxHeight: 40,
-    maxWidth: 200,
+    maxHeight: 65,
+    maxWidth: 240,
   },
   {
     id: 'crunch',
@@ -26,8 +26,8 @@ export const CLIENT_LOGOS: ClientLogo[] = [
     src: '/images/clients/crunch-fitness.jpg',
     alt: 'Crunch Fitness Commercial Athletic Centers',
     category: 'Commercial Athletics',
-    maxHeight: 48,
-    maxWidth: 130,
+    maxHeight: 70,
+    maxWidth: 170,
   },
   {
     id: 'kiddie-academy',
@@ -35,8 +35,8 @@ export const CLIENT_LOGOS: ClientLogo[] = [
     src: '/images/clients/kiddie-academy.png',
     alt: 'Kiddie Academy Educational Child Care',
     category: 'Educational Child Care',
-    maxHeight: 42,
-    maxWidth: 160,
+    maxHeight: 64,
+    maxWidth: 220,
   },
   {
     id: 'crossfit',
@@ -44,8 +44,8 @@ export const CLIENT_LOGOS: ClientLogo[] = [
     src: '/images/clients/crossfit.png',
     alt: 'CrossFit Athletic Facilities',
     category: 'Athletic Centers',
-    maxHeight: 34,
-    maxWidth: 150,
+    maxHeight: 52,
+    maxWidth: 190,
   },
   {
     id: 'learning-exp',
@@ -53,8 +53,8 @@ export const CLIENT_LOGOS: ClientLogo[] = [
     src: '/images/clients/the-learning-experience.png',
     alt: 'The Learning Experience Academy of Early Education',
     category: 'Early Education Academy',
-    maxHeight: 50,
-    maxWidth: 150,
+    maxHeight: 72,
+    maxWidth: 190,
   },
 ];
 
@@ -65,13 +65,17 @@ const ALL_ITEMS = [...REPEATED_SET, ...REPEATED_SET];
 interface ClientLogoTickerProps {
   className?: string;
   showSubtitle?: boolean;
+  badgeText?: string;
   subtitle?: string;
+  description?: string;
 }
 
 export const ClientLogoTicker: React.FC<ClientLogoTickerProps> = ({
   className = '',
-  showSubtitle = false,
-  subtitle = 'TRUSTED BY NATIONAL BRANDS & PREMIER COMMERCIAL OPERATORS',
+  showSubtitle = true,
+  badgeText = "CLIENTS WE'VE WORKED FOR",
+  subtitle = "Trusted by Premier Commercial Facilities & National Brands",
+  description = "These are some of the premier commercial facilities, academies, and athletic franchises that rely on Mirola Cleaning Services for pristine sanitation and facility excellence.",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isHoveredRef = useRef(false);
@@ -179,8 +183,19 @@ export const ClientLogoTicker: React.FC<ClientLogoTickerProps> = ({
   return (
     <div className={`client-logo-slider-wrapper ${className}`.trim()}>
       {showSubtitle && (
-        <div className="client-logo-subtitle-row">
-          <span className="client-logo-subtitle">{subtitle}</span>
+        <div className="client-logo-header-box">
+          {badgeText && (
+            <div className="client-logo-badge">
+              <span className="client-logo-badge-dot" />
+              <span>{badgeText}</span>
+            </div>
+          )}
+          {subtitle && <h3 className="client-logo-title">{subtitle}</h3>}
+          {description && (
+            <p className="client-logo-desc">
+              {description}
+            </p>
+          )}
         </div>
       )}
 
@@ -212,8 +227,8 @@ export const ClientLogoTicker: React.FC<ClientLogoTickerProps> = ({
                     alt={item.alt}
                     className={`client-logo-img client-logo-${item.id}`}
                     style={{
-                      maxHeight: item.maxHeight ? `${item.maxHeight}px` : '44px',
-                      maxWidth: item.maxWidth ? `${item.maxWidth}px` : '170px',
+                      maxHeight: item.maxHeight ? `${item.maxHeight}px` : '70px',
+                      maxWidth: item.maxWidth ? `${item.maxWidth}px` : '220px',
                     }}
                     loading="lazy"
                     draggable={false}

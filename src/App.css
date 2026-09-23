@@ -1258,22 +1258,71 @@
 }
 
 /* 1. TOP LOGO TICKER / CLIENT TRUST BAR & INFINITE SLIDER */
+/* 1. TOP LOGO TICKER / CLIENT TRUST BAR & INFINITE SLIDER */
 .client-logo-slider-wrapper {
   width: 100%;
   position: relative;
-  padding: 4px 0 16px;
+  padding: 12px 0 24px;
+}
+
+.client-logo-header-box {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 30px;
+  padding: 0 16px;
+}
+
+.client-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fee2e2;
+  border: 1px solid rgba(201, 0, 0, 0.22);
+  color: #c90000;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.client-logo-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #c90000;
+  box-shadow: 0 0 8px rgba(201, 0, 0, 0.6);
+  flex-shrink: 0;
+}
+
+.client-logo-title {
+  font-size: clamp(1.3rem, 2.6vw, 1.75rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+  line-height: 1.28;
+}
+
+.client-logo-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #64748b;
+  margin: 0;
 }
 
 .client-logo-subtitle-row {
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .client-logo-subtitle {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1293,19 +1342,19 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 80px;
+  width: 90px;
   z-index: 3;
   pointer-events: none;
 }
 
 .client-logo-slider-viewport::before {
   left: 0;
-  background: linear-gradient(to right, #ffffff 20%, rgba(255, 255, 255, 0));
+  background: linear-gradient(to right, #ffffff 25%, rgba(255, 255, 255, 0));
 }
 
 .client-logo-slider-viewport::after {
   right: 0;
-  background: linear-gradient(to left, #ffffff 20%, rgba(255, 255, 255, 0));
+  background: linear-gradient(to left, #ffffff 25%, rgba(255, 255, 255, 0));
 }
 
 .client-logo-slider-container {
@@ -1330,9 +1379,9 @@
 .client-logo-slider-track {
   display: flex;
   align-items: center;
-  gap: 56px;
+  gap: 68px;
   width: max-content;
-  padding: 8px 16px;
+  padding: 12px 20px 20px;
 }
 
 .client-logo-card {
@@ -1341,31 +1390,31 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: 12px;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 14px;
   background: transparent;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;
   position: relative;
 }
 
 .client-logo-card:hover {
-  transform: translateY(-2px);
-  background: rgba(241, 245, 249, 0.6);
+  transform: translateY(-3px);
+  background: rgba(241, 245, 249, 0.7);
 }
 
 .client-logo-img-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
-  min-width: 120px;
+  height: 75px;
+  min-width: 170px;
 }
 
 .client-logo-img {
   width: auto;
   object-fit: contain;
-  filter: grayscale(15%) opacity(0.85);
+  filter: grayscale(10%) opacity(0.9);
   mix-blend-mode: multiply;
   transition: filter 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
   pointer-events: none;
@@ -1373,41 +1422,52 @@
 
 .client-logo-card:hover .client-logo-img {
   filter: grayscale(0%) opacity(1);
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .client-logo-tag {
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #94a3b8;
-  opacity: 0;
-  transform: translateY(3px);
+  opacity: 0.8;
   transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
   pointer-events: none;
 }
 
 .client-logo-card:hover .client-logo-tag {
   opacity: 1;
-  transform: translateY(0);
   color: #C90000;
 }
 
 @media (max-width: 768px) {
+  .client-logo-header-box {
+    margin-bottom: 22px;
+    padding: 0 12px;
+  }
+  .client-logo-title {
+    font-size: 1.25rem;
+  }
+  .client-logo-desc {
+    font-size: 0.88rem;
+  }
   .client-logo-slider-track {
-    gap: 32px;
+    gap: 36px;
   }
   .client-logo-slider-viewport::before,
   .client-logo-slider-viewport::after {
-    width: 40px;
+    width: 35px;
   }
   .client-logo-img-wrapper {
-    height: 44px;
-    min-width: 100px;
+    height: 58px;
+    min-width: 125px;
   }
   .client-logo-img {
-    max-height: 36px !important;
+    max-height: 52px !important;
+  }
+  .client-logo-card {
+    padding: 8px 14px;
   }
 }
 
