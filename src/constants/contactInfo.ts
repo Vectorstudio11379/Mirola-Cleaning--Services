@@ -11,8 +11,8 @@ export const CONTACT_INFO = {
   email: 'mirolacleaning@mirolaenterprises.com',
 
   // Form Submission Master Switch
-  formsActive: false,
-  formsDeactivatedMessage: 'Forms have been temporarily deactivated. Please call our 24/7 team at (732) 592-9222 or email mirolacleaning@mirolaenterprises.com.',
+  formsActive: true,
+  formsDeactivatedMessage: '',
 
   // Corporate Office / Service Location
   streetAddress: '800 Hamilton Street',

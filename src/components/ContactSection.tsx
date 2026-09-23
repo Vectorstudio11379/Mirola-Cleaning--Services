@@ -54,7 +54,7 @@ export const ContactSection: React.FC = () => {
 
     setIsSubmitting(false);
     if (!res.success) {
-      setErrorMsg(res.message || 'Forms have been temporarily deactivated. Please call (732) 592-9222.');
+      setErrorMsg(res.message || 'There was an issue dispatching your request. Please call (732) 592-9222.');
       return;
     }
     setStatusMessage(res.message);

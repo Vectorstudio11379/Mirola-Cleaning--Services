@@ -1,7 +1,7 @@
 <?php
 /**
  * Mirola Cleaning Services - Commercial Lead & Consultation Mailer
- * Handles direct background form submissions and delivers directly to ezekielelijahkola@gmail.com
+ * Handles direct background form submissions and delivers directly to mirolacleaning@mirolaenterprises.com
  */
 
 // 1. Set CORS and JSON Response Headers
@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Temporary Form Deactivation Flag
-$formsActive = false;
+// Form Activation Switch
+$formsActive = true;
 if (!$formsActive) {
     http_response_code(200);
     echo json_encode([
@@ -293,9 +293,12 @@ HTML;
 
 // 7. Configure Mail Headers & MIME Structure
 $boundary  = "mirola_bnd_" . md5(uniqid((string)time(), true));
+$companySenderEmail = 'mirolacleaning@mirolaenterprises.com';
 $headers   = [];
 $headers[] = 'MIME-Version: 1.0';
-$headers[] = "From: Mirola Cleaning Operations <noreply@{$serverHost}>";
+$headers[] = "From: Mirola Cleaning Services <{$companySenderEmail}>";
+$headers[] = "Sender: {$companySenderEmail}";
+$headers[] = "Return-Path: <{$companySenderEmail}>";
 if (!empty($email)) {
     $headers[] = "Reply-To: {$fullName} <{$email}>";
 }
@@ -325,8 +328,8 @@ if ($hasLogoFile) {
     $fullBody  = $bodyHtml;
 }
 
-// 8. Send Email with Envelope Sender
-$envelope = "-f noreply@{$serverHost}";
+// 8. Send Email with Envelope Sender using company email
+$envelope = "-f {$companySenderEmail}";
 $mailSent = @mail($to, $subject, $fullBody, implode("\r\n", $headers), $envelope);
 
 if ($mailSent) {
@@ -336,11 +339,10 @@ if ($mailSent) {
         'message' => 'Thank you. Your request has been dispatched directly to our facility director.'
     ]);
 } else {
-    // If mail() fails on unconfigured local dev environment, return structured response
-    http_response_code(200);
+    // If native mail() encounters an issue, return error so client-side fallback delivers
+    http_response_code(500);
     echo json_encode([
-        'success' => true,
-        'fallback' => true,
-        'message' => 'Your consultation request was recorded.'
+        'success' => false,
+        'error' => 'Server mail transfer agent failed to dispatch email.'
     ]);
 }

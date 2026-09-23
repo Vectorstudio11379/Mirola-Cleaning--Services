@@ -32,7 +32,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
       });
       setIsSubmitting(false);
       if (!res.success) {
-        setDeactivatedMsg(res.message || 'Forms have been temporarily deactivated. Please call (732) 592-9222.');
+        setDeactivatedMsg(res.message || 'There was an issue submitting your request. Please call our team at (732) 592-9222.');
         return;
       }
       setSubscribed(true);

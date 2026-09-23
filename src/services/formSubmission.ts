@@ -112,7 +112,8 @@ export async function submitLeadDirect(payload: LeadSubmissionPayload): Promise<
         body: JSON.stringify({
           access_key: CONTACT_INFO.web3FormsAccessKey,
           subject: `[Mirola Website Lead] ${payload.formType}: ${payload.company || payload.fullName}`,
-          from_name: payload.fullName || 'Mirola Website Visitor',
+          from_name: 'Mirola Cleaning Services',
+          from_email: CONTACT_INFO.email,
           replyto: payload.email,
           ...payload,
           facilityTypes: (payload.facilityTypes || []).join(', ')
