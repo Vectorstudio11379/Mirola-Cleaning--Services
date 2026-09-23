@@ -458,6 +458,27 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                   </div>
 
+                  {errorMessage && (
+                    <div style={{
+                      backgroundColor: '#fef2f2',
+                      border: '1.5px solid #ef4444',
+                      color: '#991b1b',
+                      padding: '12px 14px',
+                      borderRadius: '8px',
+                      fontSize: '13px',
+                      fontWeight: 600,
+                      lineHeight: 1.5,
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '8px',
+                      marginBottom: '16px',
+                      textAlign: 'left'
+                    }}>
+                      <span style={{ fontSize: '16px', lineHeight: 1 }}>⚠️</span>
+                      <span>{errorMessage}</span>
+                    </div>
+                  )}
+
                   <button 
                     type="submit" 
                     className="contact-submit-btn"

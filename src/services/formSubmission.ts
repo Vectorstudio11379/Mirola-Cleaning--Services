@@ -66,7 +66,17 @@ ${payload.company ? `${payload.company}\n` : ''}${payload.phone || ''}`;
 export async function submitLeadDirect(payload: LeadSubmissionPayload): Promise<SubmissionResult> {
   const { gmailUrl, mailtoUrl } = generateEmailLinks(payload);
 
-  // 1. Try the primary server mailer endpoint (/api/contact.php) directly
+  // Form deactivation check
+  if (!CONTACT_INFO.formsActive) {
+    return {
+      success: false,
+      message: CONTACT_INFO.formsDeactivatedMessage || 'Forms have been temporarily deactivated. Please call our 24/7 team at (732) 592-9222 or email mirolacleaning@mirolaenterprises.com.',
+      gmailUrl,
+      mailtoUrl
+    };
+  }
+
+  // 1. Primary custom server mailer endpoint with branded HTML template & company logo
   try {
     const response = await fetch(CONTACT_INFO.formEndpoint, {
       method: 'POST',
@@ -87,10 +97,10 @@ export async function submitLeadDirect(payload: LeadSubmissionPayload): Promise<
       }
     }
   } catch (err) {
-    console.warn('Direct server endpoint unavailable, attempting fallback:', err);
+    console.warn('Primary server endpoint unavailable, attempting fallback:', err);
   }
 
-  // 2. Fallback to Web3Forms if configured
+  // 2. Fallback to Web3Forms if on localhost/preview and primary server is unavailable
   if (CONTACT_INFO.web3FormsAccessKey) {
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -119,16 +129,6 @@ export async function submitLeadDirect(payload: LeadSubmissionPayload): Promise<
     } catch (err) {
       console.warn('Web3Forms dispatch error:', err);
     }
-  }
-
-
-
-  // 3. In Vite Local Dev environment, simulate success so forms can be tested locally
-  if (import.meta.env.DEV) {
-    return {
-      success: true,
-      message: '[Local Development] Lead recorded successfully. (On live server, this emails mirolacleaning@mirolaenterprises.com directly).'
-    };
   }
 
   // 4. Return graceful fallback with pre-filled Gmail & mailto links if offline or unhosted

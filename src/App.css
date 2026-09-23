@@ -7663,43 +7663,29 @@
   }
 
   .subpage-hero-img-wrap,
-  .subpage-hero-image-card {
-    max-height: 280px;
-    width: 100%;
-    border-radius: 16px;
-  }
-
-  .subpage-hero-img {
-    height: 250px;
-  }
-
-  .subpage-hero-img-badge {
-    position: static;
-    margin-top: 10px;
-    border-radius: 12px;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px 14px;
-  }
-
+  .subpage-hero-image-card,
   .hero-image-frame {
-    max-height: 280px;
+    width: 100%;
+    height: 260px;
+    max-height: 260px;
     border-radius: 16px;
-    width: 100%;
+    overflow: hidden;
   }
 
+  .subpage-hero-img,
   .service-hero-main-img {
-    height: 250px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
-  .hero-image-glass-card {
-    position: static;
-    margin-top: 10px;
-    border-radius: 12px;
-    padding: 10px 14px;
-    width: 100%;
-    box-sizing: border-box;
+  /* Hide write-up cards on mobile to keep hero photography clean, prominent, and eliminate cut-offs */
+  .hero-image-glass-card,
+  .subpage-hero-img-badge {
+    display: none !important;
   }
+
 
   /* 1. About Page Mobile Optimizations */
   .about-story-split-grid {

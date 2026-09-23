@@ -17,18 +17,24 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
   const [emailInput, setEmailInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
+  const [deactivatedMsg, setDeactivatedMsg] = useState('');
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (emailInput.trim()) {
       setIsSubmitting(true);
-      await submitLeadDirect({
+      setDeactivatedMsg('');
+      const res = await submitLeadDirect({
         fullName: 'Prospective Commercial Client',
         email: emailInput.trim(),
         formType: 'Footer Quick Estimate Request',
         message: 'Quick estimate requested via website footer estimate banner.'
       });
       setIsSubmitting(false);
+      if (!res.success) {
+        setDeactivatedMsg(res.message || 'Forms have been temporarily deactivated. Please call (732) 592-9222.');
+        return;
+      }
       setSubscribed(true);
     }
   };
@@ -91,6 +97,25 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
                   )}
                 </button>
               </form>
+            )}
+
+            {deactivatedMsg && (
+              <div style={{
+                backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                border: '1px solid #ef4444',
+                color: '#fee2e2',
+                padding: '10px 14px',
+                borderRadius: '8px',
+                fontSize: '12.5px',
+                fontWeight: 600,
+                marginTop: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px'
+              }}>
+                <span>⚠️ {deactivatedMsg}</span>
+              </div>
             )}
           </div>
         </div>

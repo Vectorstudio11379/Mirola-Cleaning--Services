@@ -53,6 +53,10 @@ export const ContactSection: React.FC = () => {
     });
 
     setIsSubmitting(false);
+    if (!res.success) {
+      setErrorMsg(res.message || 'Forms have been temporarily deactivated. Please call (732) 592-9222.');
+      return;
+    }
     setStatusMessage(res.message);
     if (res.gmailUrl) setGmailLink(res.gmailUrl);
     setIsSubmitted(true);
@@ -287,6 +291,27 @@ export const ContactSection: React.FC = () => {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   />
                 </div>
+
+                {errorMsg && (
+                  <div style={{
+                    backgroundColor: '#fef2f2',
+                    border: '1.5px solid #ef4444',
+                    color: '#991b1b',
+                    padding: '12px 14px',
+                    borderRadius: '8px',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    lineHeight: 1.5,
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '8px',
+                    marginBottom: '16px',
+                    textAlign: 'left'
+                  }}>
+                    <span style={{ fontSize: '16px', lineHeight: 1 }}>⚠️</span>
+                    <span>{errorMsg}</span>
+                  </div>
+                )}
 
                 <button type="submit" className="form-submit-btn" disabled={isSubmitting}>
                   {isSubmitting ? (
