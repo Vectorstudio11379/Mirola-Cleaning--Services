@@ -57,7 +57,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
           <div className="cta-banner-content">
             <div className="cta-badge">
               <ShieldCheck size={16} />
-              <span>USA'S COMMERCIAL SPECIALISTS</span>
+              <span>PREMIER COMMERCIAL SPECIALISTS</span>
             </div>
 
             <h2 className="cta-title">
@@ -65,7 +65,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
             </h2>
 
             <p className="cta-subtitle">
-              Join over 500+ satisfied corporate facilities across the USA. Schedule your complimentary site audit today.
+              Join over 500+ satisfied corporate facilities nationwide. Schedule your complimentary site audit today.
             </p>
 
             {subscribed ? (
@@ -135,7 +135,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
             </div>
 
             <p className="footer-brand-desc">
-              Mirola Cleaning Services delivers hospital-grade sanitization, automated floor care, and precision janitorial facility management across the USA.
+              Mirola Cleaning Services delivers hospital-grade sanitization, automated floor care, and precision janitorial facility management nationwide.
             </p>
 
             <div className="footer-contact-items">

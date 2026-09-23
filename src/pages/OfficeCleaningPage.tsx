@@ -33,7 +33,7 @@ export const OfficeCleaningPage: React.FC<OfficeCleaningPageProps> = ({
       badgeText="CORPORATE & COMMERCIAL SUITE SPECIALISTS"
       title="Corporate Office"
       titleHighlight="Cleaning Services"
-      subtitle="Fostering productive, pristine workplaces for USA enterprises with tailored nightly janitorial, day porter services, and executive touchpoint hygiene."
+      subtitle="Fostering productive, pristine workplaces for modern enterprises with tailored nightly janitorial, day porter services, and executive touchpoint hygiene."
       heroImage="/images/drive_folder_2/DSC00318.jpg"
       heroImageCaption="Commercial Vacuuming & Detail Care in Executive Workstations"
       stats={[
@@ -44,7 +44,7 @@ export const OfficeCleaningPage: React.FC<OfficeCleaningPageProps> = ({
       overviewHeading="Elevating Professional Impressions and Employee Health"
       overviewParagraphs={[
         "Your office environment directly impacts client trust, staff morale, and employee absenteeism. With shared conference rooms, computer peripherals, coffee stations, and high-density desk layouts, commercial offices quickly accumulate dust, allergens, and seasonal bacteria.",
-        "Mirola Cleaning Services partners with leading corporate campuses, law firms, financial institutions, tech startups, and multi-tenant office buildings across the USA.",
+        "Mirola Cleaning Services partners with leading corporate campuses, law firms, financial institutions, tech startups, and multi-tenant office buildings nationwide.",
         "We implement color-coded microfiber systems to guarantee zero cross-contamination between restrooms and workstations, utilizing HEPA-filtered commercial vacuums to purify indoor air quality."
       ]}
       features={[

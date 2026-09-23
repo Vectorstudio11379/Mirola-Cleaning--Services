@@ -147,7 +147,7 @@ export const MedicalCleaningPage: React.FC<MedicalCleaningPageProps> = ({
           a: 'Yes. Every cleaner is briefed on HIPAA compliance, ensuring that charts, computer displays, and patient files are never observed, photographed, or disturbed.'
         },
         {
-          q: 'Do your chemicals meet CDC and USA Department of Health standards?',
+          q: 'Do your chemicals meet CDC and state Department of Health standards?',
           a: 'Yes, we exclusively utilize hospital-grade EPA-registered disinfectants proven effective against bloodborne pathogens, SARS-CoV-2, MRSA, and hospital-acquired infections (HAIs).'
         },
         {

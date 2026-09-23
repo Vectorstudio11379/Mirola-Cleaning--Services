@@ -376,7 +376,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Quick USA Direct Hotline / CTA button */}
+        {/* Quick Direct Hotline / CTA button */}
         <div className="nav-quick-contact">
           <button 
             type="button" 
@@ -406,7 +406,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
             <div>
               <div className="drawer-title">Mirola Cleaning Services</div>
-              <div className="drawer-subtitle">USA's Commercial Specialists</div>
+              <div className="drawer-subtitle">Premier Commercial Specialists</div>
             </div>
           </div>
           <button 
@@ -612,7 +612,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onOpenConsultation();
             }}
           >
-            Book Free USA Consultation
+            Book Free Consultation
           </button>
         </div>
       </aside>

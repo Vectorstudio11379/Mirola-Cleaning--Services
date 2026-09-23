@@ -19,8 +19,8 @@ export const CONTACT_INFO = {
   city: 'Somerset',
   state: 'NJ',
   zipCode: '08873',
-  country: 'USA',
-  address: '800 Hamilton Street, Somerset, NJ 08873, USA',
+  country: 'United States',
+  address: '800 Hamilton Street, Somerset, NJ 08873',
   cityStateZip: 'Somerset, NJ 08873',
 
   // Service Hours

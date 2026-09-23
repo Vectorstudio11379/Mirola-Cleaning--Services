@@ -43,7 +43,7 @@ export const FloorCarePage: React.FC<FloorCarePageProps> = ({
       overviewHeading="Transforming Worn Commercial Corridors into Mirror-Finish Showpieces"
       overviewParagraphs={[
         "Commercial floors take relentless punishment from pedestrian foot traffic, rolling carts, salt residue in winter, and grit. Over time, standard mop-and-bucket cleaning fails as old wax discolors, yellowing and trapping grime deep within the substrate.",
-        "Mirola Cleaning Services is the USA’s recognized leader in commercial floor stripping, waxing, and restoration. We deploy heavy-duty commercial rotary machines, chemical emulsifiers, and premium high-solid polymer finishes that deliver an extraordinary wet-look reflection while meeting strict ASTM non-slip safety ratings.",
+        "Mirola Cleaning Services is a recognized industry leader in commercial floor stripping, waxing, and restoration. We deploy heavy-duty commercial rotary machines, chemical emulsifiers, and premium high-solid polymer finishes that deliver an extraordinary wet-look reflection while meeting strict ASTM non-slip safety ratings.",
         "Whether your facility features Vinyl Composition Tile (VCT), terrazzo, polished concrete, linoleum, ceramic tile and grout, or natural marble, our specialized technicians restore its original luster and protect it against heavy foot traffic."
       ]}
       features={[
@@ -158,7 +158,7 @@ export const FloorCarePage: React.FC<FloorCarePageProps> = ({
           title: 'Janitorial Services Overview',
           path: '/services/janitorial',
           icon: <Building2 size={20} />,
-          desc: 'Comprehensive recurring facility cleaning programs across the USA.'
+          desc: 'Comprehensive recurring facility cleaning programs nationwide.'
         },
         {
           title: 'Sanitation Services',

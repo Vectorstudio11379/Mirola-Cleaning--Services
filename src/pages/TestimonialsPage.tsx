@@ -176,7 +176,7 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
               </div>
 
               <h1 className="subpage-hero-title">
-                Trusted by USA’s{' '}
+                Trusted by{' '}
                 <span className="subpage-highlight-red">Leading Commercial</span>{' '}
                 Properties
               </h1>
@@ -191,7 +191,7 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
                   className="subpage-btn-primary"
                   onClick={onOpenConsultation}
                 >
-                  <span>Book Free USA Facility Walkthrough</span>
+                  <span>Book Free Facility Walkthrough</span>
                   <ArrowRight size={16} />
                 </button>
 
@@ -236,7 +236,7 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
                   <div className="badge-pulse-indicator" />
                   <div>
                     <div className="img-badge-title">500+ Commercial Facilities Safeguarded</div>
-                    <div className="img-badge-subtitle">4.9 / 5.0 Star Verified Client Satisfaction Across USA</div>
+                    <div className="img-badge-subtitle">4.9 / 5.0 Star Verified Client Satisfaction Nationwide</div>
                   </div>
                 </div>
               </div>
@@ -252,7 +252,7 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
           <ClientLogoTicker 
             showSubtitle={true} 
             badgeText="CLIENTS WE'VE WORKED FOR"
-            subtitle="Commercial Clients & Industry Partners Across the USA"
+            subtitle="Commercial Clients & Trusted Industry Partners"
             description="These are the commercial clients and facilities we've worked for, maintaining pristine inspection standards day in and day out."
           />
         </div>

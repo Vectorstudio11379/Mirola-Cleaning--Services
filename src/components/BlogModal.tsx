@@ -194,7 +194,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({
             <div className="bio-text">
               <h4>About Mirola Cleaning Services Operations</h4>
               <p>
-                Mirola Cleaning Services delivers hospital-grade sanitization, high-gloss floor restoration, and turn-key commercial janitorial care across the USA. Our teams operate with 100% W-2 vetted personnel, EPA List N chemistries, and guaranteed 24-hour corrective SLAs.
+                Mirola Cleaning Services delivers hospital-grade sanitization, high-gloss floor restoration, and turn-key commercial janitorial care nationwide. Our teams operate with 100% W-2 vetted personnel, EPA List N chemistries, and guaranteed 24-hour corrective SLAs.
               </p>
             </div>
           </div>

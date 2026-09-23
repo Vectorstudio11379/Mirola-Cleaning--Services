@@ -60,7 +60,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               <h1 className="subpage-hero-title">
                 Setting the Gold Standard for{' '}
                 <span className="subpage-highlight-red">Commercial Hygiene</span>{' '}
-                Across the USA
+                Nationwide
               </h1>
 
               <p className="subpage-hero-subtitle">
@@ -73,7 +73,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                   className="subpage-btn-primary"
                   onClick={onOpenConsultation}
                 >
-                  <span>Book Free USA Facility Walkthrough</span>
+                  <span>Book Free Facility Walkthrough</span>
                   <ArrowRight size={16} />
                 </button>
 
@@ -157,7 +157,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
               <div className="about-story-paragraphs">
                 <p>
-                  At Mirola Cleaning Services, we believe that clean environments are foundational to commercial productivity, employee well-being, and brand reputation. What began as a dedicated janitorial operation has expanded into a full-scale commercial cleaning network trusted by Fortune 500 corporate offices, surgical medical suites, massive distribution centers, and prestigious child care academies across New Jersey and the USA.
+                  At Mirola Cleaning Services, we believe that clean environments are foundational to commercial productivity, employee well-being, and brand reputation. What began as a dedicated janitorial operation has expanded into a full-scale commercial cleaning network trusted by Fortune 500 corporate offices, surgical medical suites, massive distribution centers, and prestigious child care academies across New Jersey and regional commercial hubs.
                 </p>
                 <p>
                   Unlike fragmented service brokers who outsource work to temporary laborers, every Mirola specialist is directly hired, rigorously background-checked, and continually trained in EPA dwell-time regulations, OSHA bloodborne pathogen compliance, and color-coded microfiber protocols to eliminate cross-contamination.
@@ -303,7 +303,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               <span>OPERATIONAL EXCELLENCE IN ACTION</span>
             </div>
             <h2 className="subpage-hero-title" style={{ fontSize: 'clamp(1.8rem, 2.8vw, 2.3rem)' }}>
-              See How Mirola Safeguards American Facilities
+              See How Mirola Safeguards Commercial Facilities
             </h2>
             <p className="subpage-hero-subtitle" style={{ margin: '0 auto 40px', textAlign: 'center' }}>
               Watch our specialized teams execute standard operating procedures across corporate boardrooms, fitness centers, and high-traffic commercial spaces.
@@ -456,7 +456,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 style={{ width: '100%', maxHeight: '480px', objectFit: 'contain', borderRadius: '12px', background: '#000000', display: 'block' }}
               />
               <p style={{ color: '#cbd5e1', fontSize: '13.5px', marginTop: '16px', lineHeight: 1.6 }}>
-                Mirola’s uniformed janitorial specialists execute continuous high-efficiency facility sanitization, precision automated floor scrubbing, and certified pathogen barrier protocols across USA corporate, medical, and industrial environments.
+                Mirola’s uniformed janitorial specialists execute continuous high-efficiency facility sanitization, precision automated floor scrubbing, and certified pathogen barrier protocols across corporate, medical, and industrial environments.
               </p>
             </div>
           </div>

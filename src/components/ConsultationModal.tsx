@@ -165,7 +165,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
                 <span>MIROLA COMMERCIAL SERVICES</span>
               </div>
               <h2>Book Your Free Consultation</h2>
-              <p>Specialized commercial janitorial & sanitation analysis for USA businesses.</p>
+              <p>Specialized commercial janitorial & sanitation analysis for commercial businesses.</p>
             </div>
 
             <div className="form-grid">
@@ -187,7 +187,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
                   id="company"
                   type="text" 
                   required 
-                  placeholder="e.g. Apex Financial USA"
+                  placeholder="e.g. Apex Financial"
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                 />
@@ -281,7 +281,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
 
             <div className="modal-trust-bar">
               <MapPin size={14} color="#94a3b8" />
-              <span>Serving commercial facilities across the USA • Fully Bonded & Insured</span>
+              <span>Serving commercial facilities nationwide • Fully Bonded & Insured</span>
             </div>
 
             {errorMsg && (

@@ -28,7 +28,7 @@ export const BLOG_POSTS: BlogPost[] = [
     author: 'Marcus Bennett',
     authorRole: 'Director of Commercial Sanitation & Compliance, Mirola Cleaning Services',
     title: '10 Expert-Approved Sanitization Protocols That Actually Keep Offices Healthy',
-    excerpt: 'Learn how top USA commercial enterprises mitigate airborne pathogens and seasonal absenteeism through zoned hygiene execution, verified dwell times, and ATP swab audits.',
+    excerpt: 'Learn how top commercial enterprises mitigate airborne pathogens and seasonal absenteeism through zoned hygiene execution, verified dwell times, and ATP swab audits.',
     keyTakeaways: [
       'Wiping disinfectant immediately after spraying eliminates zero germs; EPA List N sanitizers require 5 to 10 minutes of active wet contact time.',
       'A strict 4-color microfiber system prevents restroom bacterial colonies from ever crossing into corporate workstations and boardrooms.',

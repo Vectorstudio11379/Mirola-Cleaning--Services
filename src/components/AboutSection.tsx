@@ -272,7 +272,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation, 
                 <span>Commercial Excellence in Motion</span>
               </div>
               <h3>Hospital-Grade Janitorial & Sanitization Standards</h3>
-              <p>See how Mirola Cleaning Services transforms corporate facilities across the USA with precision, eco-conscious chemistry, and meticulous detail.</p>
+              <p>See how Mirola Cleaning Services transforms corporate facilities nationwide with precision, eco-conscious chemistry, and meticulous detail.</p>
             </div>
 
             <div className="video-player-frame" style={{ background: '#000000', borderRadius: '12px', overflow: 'hidden' }}>

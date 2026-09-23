@@ -148,7 +148,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 <div className="subpage-hero-img-badge">
                   <div className="badge-pulse-indicator" />
                   <div>
-                    <div className="img-badge-title">Direct USA Facility Operations</div>
+                    <div className="img-badge-title">Direct Commercial Facility Operations</div>
                     <div className="img-badge-subtitle">100% Bonded, Insured & Background-Vetted Crews</div>
                   </div>
                 </div>

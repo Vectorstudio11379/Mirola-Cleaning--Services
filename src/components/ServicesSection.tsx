@@ -95,7 +95,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               <span className="services-badge-text">OUR EXPERT COMMERCIAL SERVICES</span>
             </div>
             <h2 className="services-headline">
-              Specialized commercial cleaning engineered for <span className="accent-lime">USA enterprises</span>.
+              Specialized commercial cleaning engineered for <span className="accent-lime">modern enterprises</span>.
             </h2>
           </div>
 
@@ -197,7 +197,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                       />
                       <div className="expanded-img-badge">
                         <CheckCircle2 size={14} color="#c90000" />
-                        <span>Certified USA Specialists</span>
+                        <span>Certified Commercial Specialists</span>
                       </div>
                     </div>
                   </div>

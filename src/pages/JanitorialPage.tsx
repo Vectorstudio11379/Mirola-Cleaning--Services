@@ -103,7 +103,7 @@ export const JanitorialPage: React.FC<JanitorialPageProps> = ({ onNavigate, onOp
               </h1>
 
               <p className="service-hero-subtitle">
-                Tailored recurring cleaning schedules, day porter management, and turnkey facility maintenance across the USA. Select your specific building type below to explore dedicated protocols and scope of work.
+                Tailored recurring cleaning schedules, day porter management, and turnkey facility maintenance nationwide. Select your specific building type below to explore dedicated protocols and scope of work.
               </p>
 
               <div className="service-hero-actions">
@@ -112,7 +112,7 @@ export const JanitorialPage: React.FC<JanitorialPageProps> = ({ onNavigate, onOp
                   className="service-primary-cta"
                   onClick={onOpenConsultation}
                 >
-                  <span>Book Free USA Facility Walkthrough</span>
+                  <span>Book Free Facility Walkthrough</span>
                   <ArrowRight size={16} />
                 </button>
               </div>
@@ -146,7 +146,7 @@ export const JanitorialPage: React.FC<JanitorialPageProps> = ({ onNavigate, onOp
                   </div>
                   <div>
                     <div className="glass-card-title">Trained, Bonded & Insured Crew</div>
-                    <div className="glass-card-sub">Serving Commercial Facilities Nationwide in the USA</div>
+                    <div className="glass-card-sub">Serving Commercial Facilities Nationwide</div>
                   </div>
                 </div>
               </div>
@@ -264,7 +264,7 @@ export const JanitorialPage: React.FC<JanitorialPageProps> = ({ onNavigate, onOp
               <span>CUSTOM COMMERCIAL CONTRACTS • 24/7 SUPPORT</span>
             </div>
             <h2 className="cta-headline">
-              Ready for a Tailored Janitorial Program for Your USA Facility?
+              Ready for a Tailored Janitorial Program for Your Facility?
             </h2>
             <p className="cta-subheadline">
               Speak with our operations director to build a customized daily or nightly cleaning scope designed around your exact square footage and operational schedule.

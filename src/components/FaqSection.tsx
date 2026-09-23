@@ -6,8 +6,8 @@ export const FaqSection: React.FC = () => {
 
   const faqs = [
     {
-      question: 'What types of commercial facilities does Mirola service across the USA?',
-      answer: 'We provide specialized janitorial, terminal sanitation, and floor care solutions for corporate office buildings, medical and outpatient clinics, industrial warehouses, private schools, and commercial showrooms throughout the USA.'
+      question: 'What types of commercial facilities does Mirola service?',
+      answer: 'We provide specialized janitorial, terminal sanitation, and floor care solutions for corporate office buildings, medical and outpatient clinics, industrial warehouses, private schools, and commercial showrooms.'
     },
     {
       question: 'Are all Mirola cleaners fully bonded, insured, and background-screened?',
@@ -23,7 +23,7 @@ export const FaqSection: React.FC = () => {
     },
     {
       question: 'Can you provide emergency cleaning or same-day spill response?',
-      answer: 'Yes. Our USA service dispatch operates 24/7. When unexpected plumbing issues, spills, or urgent sanitization needs arise, we deploy rapid-response teams within 60 to 90 minutes.'
+      answer: 'Yes. Our emergency service dispatch operates 24/7. When unexpected plumbing issues, spills, or urgent sanitization needs arise, we deploy rapid-response teams within 60 to 90 minutes.'
     },
     {
       question: 'Do you lock clients into rigid contracts, or can we adjust our cleaning schedule?',

@@ -28,15 +28,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
 
             {/* Minimalist, Clean Editorial Headline with Reduced Boldness */}
             <h1 className="hero-headline">
-              Serving All<br />
-              50 States
+              Serving Facilities<br />
+              Nationwide
             </h1>
           </div>
 
           {/* RIGHT COLUMN: Concise Description & Red CTA Button */}
           <div className="hero-right-column">
             <p className="hero-description">
-              Mirola Cleaning Services delivers hospital-grade sanitization, precision floor care, and comprehensive commercial facility management across the USA that convert first impressions into lasting trust.
+              Mirola Cleaning Services delivers hospital-grade sanitization, precision floor care, and comprehensive commercial facility management nationwide that convert first impressions into lasting trust.
             </p>
 
             {/* Red CTA button with circular arrow icon */}

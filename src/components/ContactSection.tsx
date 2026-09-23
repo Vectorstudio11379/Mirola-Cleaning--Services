@@ -78,7 +78,7 @@ export const ContactSection: React.FC = () => {
           </h2>
 
           <p className="contact-description">
-            Experience the gold standard of USA facility maintenance. Our commercial directors conduct comprehensive walkthroughs and provide transparent, itemized proposals within 24 hours.
+            Experience the gold standard of commercial facility maintenance. Our commercial directors conduct comprehensive walkthroughs and provide transparent, itemized proposals within 24 hours.
           </p>
 
           <div className="contact-perks-list">
@@ -97,8 +97,8 @@ export const ContactSection: React.FC = () => {
                 <MapPin size={18} />
               </div>
               <div className="perk-text-group">
-                <div className="perk-title">Nationwide USA Coverage</div>
-                <div className="perk-desc">Rapid dispatch teams operating across all commercial sectors throughout the USA.</div>
+                <div className="perk-title">Comprehensive Facility Coverage</div>
+                <div className="perk-desc">Rapid dispatch teams operating across all commercial sectors nationwide.</div>
               </div>
             </div>
           </div>

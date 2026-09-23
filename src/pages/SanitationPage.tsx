@@ -42,7 +42,7 @@ export const SanitationPage: React.FC<SanitationPageProps> = ({
       overviewHeading="Defending Occupants with Medical-Grade Microbial Eradication"
       overviewParagraphs={[
         "Modern commercial facilities face invisible threats: airborne viral aerosol settling, high-touch cross-contamination, fungal spores in locker facilities, and gastrointestinal bacteria like Norovirus and Salmonella.",
-        "Mirola Cleaning Services delivers surgical-grade sanitation protocols engineered for commercial offices, fitness centers, childcare centers, schools, and medical clinics throughout the USA.",
+        "Mirola Cleaning Services delivers surgical-grade sanitation protocols engineered for commercial offices, fitness centers, childcare centers, schools, and medical clinics nationwide.",
         "We utilize electrostatic spray technology that charges disinfectant droplets to wrap 360 degrees around all exposed surfaces, furniture undersides, and hard-to-reach recesses, ensuring complete contact dwell times without leaving wet residues."
       ]}
       features={[
@@ -149,7 +149,7 @@ export const SanitationPage: React.FC<SanitationPageProps> = ({
         },
         {
           q: 'Do your sanitation services satisfy state health inspection standards?',
-          a: 'Yes, 100%. We provide formal digital Certificates of Sanitization and SDS compliance documentation that verify compliance with USA Department of Health and CDC protocols.'
+          a: 'Yes, 100%. We provide formal digital Certificates of Sanitization and SDS compliance documentation that verify compliance with Department of Health and CDC protocols.'
         }
       ]}
       relatedBuildingLinks={[

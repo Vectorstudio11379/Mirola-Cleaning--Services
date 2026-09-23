@@ -149,7 +149,7 @@ $bodyHtml = <<<HTML
                       MIROLA CLEANING SERVICES
                     </div>
                     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; color: #94a3b8; font-weight: 500; margin-top: 3px; letter-spacing: 0.3px;">
-                      Premier Commercial & Janitorial Care USA • New Facility Inquiry
+                      Premier Commercial & Janitorial Care • New Facility Inquiry
                     </div>
                   </td>
                 </tr>
@@ -270,7 +270,7 @@ $bodyHtml .= <<<HTML
                 <tr>
                   <td align="center" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.6; color: #64748b;">
                     <strong style="color: #0f172a;">Mirola Cleaning Services LLC</strong><br>
-                    800 Hamilton Street, Somerset, NJ 08873, USA • 24/7 Operations Hotline: <a href="tel:7325929222" style="color: #c90000; font-weight: 600; text-decoration: none;">(732) 592-9222</a><br>
+                    800 Hamilton Street, Somerset, NJ 08873 • 24/7 Operations Hotline: <a href="tel:7325929222" style="color: #c90000; font-weight: 600; text-decoration: none;">(732) 592-9222</a><br>
                     <span style="font-size: 11px; color: #94a3b8; display: inline-block; margin-top: 6px;">
                       Dispatched on {$submittedAt} • Client IP: {$visitorIp}
                     </span>

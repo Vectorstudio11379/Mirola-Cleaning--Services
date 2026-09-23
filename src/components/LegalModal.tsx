@@ -125,7 +125,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                   These Terms of Commercial Service govern all commercial cleaning, janitorial facility care, and specialized floor maintenance agreements provided by <strong>Mirola Cleaning Services LLC</strong> to commercial property operators, healthcare administrators, logistics managers, and institutional clients.
                 </p>
                 <div className="legal-effective-date">
-                  Effective Date: September 2026 • Governing Law: State of New Jersey, USA
+                  Effective Date: September 2026 • Governing Law: State of New Jersey
                 </div>
               </div>
 

@@ -200,7 +200,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({
               </div>
 
               <div className="overview-highlights-box scroll-reveal-scale">
-                <h4 className="highlights-box-title">Why USA Facilities Trust Mirola</h4>
+                <h4 className="highlights-box-title">Why Commercial Facilities Trust Mirola</h4>
                 <ul className="highlights-list">
                   <li>
                     <CheckCircle2 size={18} className="hl-check" />
@@ -274,7 +274,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({
                 <span className="section-pill-label">ON-SITE DOCUMENTATION</span>
                 <h2 className="gallery-section-title">Authentic Facility Clean Showcase</h2>
                 <p className="gallery-section-desc">
-                  Real photos of Mirola specialists actively executing commercial service contracts across the USA.
+                  Real photos of Mirola specialists actively executing commercial service contracts nationwide.
                 </p>
               </div>
               <button 

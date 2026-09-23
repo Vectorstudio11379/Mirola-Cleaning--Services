@@ -33,13 +33,13 @@ export const DaycareCleaningPage: React.FC<DaycareCleaningPageProps> = ({
       badgeText="CHILD-SAFE & PEDIATRIC CERTIFIED"
       title="Daycare & Preschool"
       titleHighlight="Cleaning Services"
-      subtitle="Protecting infants, toddlers, and educators across the USA with non-toxic, hospital-grade sanitization that eliminates pathogens while leaving zero harsh chemical residues."
+      subtitle="Protecting infants, toddlers, and educators with non-toxic, hospital-grade sanitization that eliminates pathogens while leaving zero harsh chemical residues."
       heroImage="/images/thumb_DSC03742.jpg"
       heroImageCaption="Active On-Site Sanitization of Preschool Classroom Furniture"
       stats={[
         { value: '100%', label: 'Non-Toxic Green Certified' },
         { value: '99.99%', label: 'Germ & Virus Kill Rate' },
-        { value: 'USA DCF', label: 'Child Care Licensing Compliant' }
+        { value: '100% DCF', label: 'Child Care Licensing Compliant' }
       ]}
       overviewHeading="Creating Safe, Spotless Havens Where Children Learn and Thrive"
       overviewParagraphs={[

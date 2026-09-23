@@ -44,7 +44,7 @@ export const GymCleaningPage: React.FC<GymCleaningPageProps> = ({
       overviewHeading="Elevating Member Retention Through Immaculate Hygiene and Freshness"
       overviewParagraphs={[
         "Gym members judge fitness facilities primarily on cleanliness and odor. Heavy daily foot traffic, sweat transfer, and shared equipment create prime breeding environments for Staphylococcus, MRSA, athlete’s foot fungus, and unpleasant bio-odors.",
-        "Mirola Cleaning Services is trusted by leading commercial gym operators across the USA—including regional Crunch Fitness franchises. We deploy hospital-grade germicidal cleaners and high-reach microfibers that cut through sweat grease without corroding expensive digital consoles or vinyl upholstery.",
+        "Mirola Cleaning Services is trusted by leading commercial gym operators—including regional Crunch Fitness franchises. We deploy hospital-grade germicidal cleaners and high-reach microfibers that cut through sweat grease without corroding expensive digital consoles or vinyl upholstery.",
         "From free-weight dumbbell racks and rubber flooring to tiled locker showers and high-humidity cedar saunas, our specialized teams keep your facility pristine, fresh, and inspection-ready 365 days a year."
       ]}
       features={[
