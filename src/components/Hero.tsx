@@ -28,8 +28,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
 
             {/* Minimalist, Clean Editorial Headline with Reduced Boldness */}
             <h1 className="hero-headline">
-              Serving Facilities<br />
-              Nationwide
+              Serving All<br />
+              50 States
             </h1>
           </div>
 
