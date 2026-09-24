@@ -1,5 +1,5 @@
 # Mirola Cleaning Services - Robots.txt
-# Official Web: https://mirolacleaning.com
+# Official Web: https://mirolacleaningservices.com
 
 User-agent: *
 Allow: /
@@ -7,4 +7,4 @@ Disallow: /api/
 Disallow: /frames_backup/
 
 # XML Sitemap Index
-Sitemap: https://mirolacleaning.com/sitemap.xml
+Sitemap: https://mirolacleaningservices.com/sitemap.xml

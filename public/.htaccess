@@ -4,6 +4,10 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # 301 Redirect obsolete legacy pages to homepage so Google updates its index immediately
+  RewriteRule ^featured/?$ https://mirolacleaningservices.com/ [R=301,L]
+
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
