@@ -51,6 +51,19 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation, 
   const isRunningRef = useRef(false);
 
   useEffect(() => {
+    if (!isVideoModalOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsVideoModalOpen(false);
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [isVideoModalOpen]);
+
+  useEffect(() => {
     const calculateTarget = () => {
       if (!statementRef.current) return 0;
       const rect = statementRef.current.getBoundingClientRect();
@@ -200,22 +213,20 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation, 
             onClick={() => setIsVideoModalOpen(true)}
             role="button"
             tabIndex={0}
-            aria-label="Watch video demonstration"
+            aria-label="Watch The Mirola Experience video"
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 setIsVideoModalOpen(true);
               }
             }}
           >
-            <video 
-              src="/Seamless_continuous_cinematic.mp4" 
-              poster="/images/drive_folder_2/DSC00216.jpg" 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
+            <img 
+              src="https://img.youtube.com/vi/utMfTjTxZws/maxresdefault.jpg" 
+              alt="The Mirola Experience - Commercial Facility Solutions" 
               className="about-media-img"
-              style={{ objectFit: 'cover' }}
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://img.youtube.com/vi/utMfTjTxZws/hqdefault.jpg';
+              }}
             />
             <div className="media-overlay-gradient" />
             
@@ -223,17 +234,52 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation, 
             <div className="media-play-button" aria-hidden="true">
               <Play size={22} fill="#d81e35" color="#d81e35" className="play-icon-offset" />
             </div>
+
+            {/* Video Title Pill Badge */}
+            <div 
+              style={{
+                position: 'absolute',
+                bottom: '16px',
+                left: '18px',
+                right: '18px',
+                display: 'flex',
+                alignItems: 'center',
+                zIndex: 4,
+                pointerEvents: 'none'
+              }}
+            >
+              <span 
+                style={{
+                  background: 'rgba(5, 7, 12, 0.85)',
+                  backdropFilter: 'blur(8px)',
+                  color: '#ffffff',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  padding: '6px 14px',
+                  borderRadius: '100px',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+              >
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ef233c' }} />
+                The Mirola Experience
+              </span>
+            </div>
           </div>
 
-          {/* Middle Card: Residences / Facilities Serviced */}
+          {/* Middle Card: Facilities Serviced */}
           <div className="about-stat-card">
             <div className="stat-card-header">
-              <span className="stat-card-category">RESIDENCES SERVICED</span>
+              <span className="stat-card-category">FACILITIES SERVICED</span>
             </div>
             
             <div className="stat-card-body">
               <div className="stat-card-number">$5M+</div>
-              <div className="stat-card-subtext">Residences and offices</div>
+              <div className="stat-card-subtext">Schools, offices & commercial facilities</div>
             </div>
           </div>
 
@@ -245,7 +291,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation, 
             
             <div className="stat-card-body">
               <div className="stat-card-number">500+</div>
-              <div className="stat-card-subtext">Highly trained Satisfied clients</div>
+              <div className="stat-card-subtext">Satisfied commercial & educational clients</div>
             </div>
           </div>
 
@@ -269,21 +315,29 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenConsultation, 
             <div className="video-modal-header">
               <div className="modal-badge-row">
                 <Sparkles size={16} color="#c90000" />
-                <span>Commercial Excellence in Motion</span>
+                <span>The Mirola Experience</span>
               </div>
               <h3>Hospital-Grade Janitorial & Sanitization Standards</h3>
-              <p>See how Mirola Cleaning Services transforms corporate facilities nationwide with precision, eco-conscious chemistry, and meticulous detail.</p>
+              <p>See how Mirola Cleaning Services transforms schools, corporate offices, and commercial facilities nationwide with precision, eco-conscious chemistry, and meticulous detail.</p>
             </div>
 
             <div className="video-player-frame" style={{ background: '#000000', borderRadius: '12px', overflow: 'hidden' }}>
-              <video 
-                src="/Seamless_continuous_cinematic.mp4" 
-                poster="/images/drive_folder_2/DSC00216.jpg" 
-                controls 
-                autoPlay 
-                playsInline 
-                style={{ width: '100%', maxHeight: '480px', objectFit: 'contain', display: 'block' }}
-              />
+              <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0 }}>
+                <iframe 
+                  src="https://www.youtube-nocookie.com/embed/utMfTjTxZws?autoplay=1&rel=0&modestbranding=1" 
+                  title="The Mirola Experience"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    border: 'none'
+                  }}
+                />
+              </div>
               <div className="video-simulated-controls" style={{ padding: '12px' }}>
                 <div className="simulated-pill">
                   <ShieldCheck size={16} color="#c90000" />

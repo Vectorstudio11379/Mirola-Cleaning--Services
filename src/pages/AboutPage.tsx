@@ -306,28 +306,25 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               See How Mirola Safeguards Commercial Facilities
             </h2>
             <p className="subpage-hero-subtitle" style={{ margin: '0 auto 40px', textAlign: 'center' }}>
-              Watch our specialized teams execute standard operating procedures across corporate boardrooms, fitness centers, and high-traffic commercial spaces.
+              Watch our specialized teams execute standard operating procedures across corporate offices, schools, and high-traffic commercial spaces.
             </p>
           </div>
 
           <div className="about-video-stats-grid">
             
             {/* Embedded Cinematic Video Showcase */}
-            <div className="about-video-showcase-box">
-              <video 
-                src="/Seamless_continuous_cinematic.mp4" 
-                poster="/images/drive_folder_2/DSC00216.jpg" 
-                autoPlay 
-                loop 
-                muted 
-                playsInline 
-                controls
-                className="about-cinematic-video"
+            <div className="about-video-showcase-box" style={{ position: 'relative', overflow: 'hidden', borderRadius: '18px', background: '#000000', aspectRatio: '16/9' }}>
+              <iframe 
+                src="https://www.youtube-nocookie.com/embed/utMfTjTxZws?rel=0&modestbranding=1" 
+                title="The Mirola Experience - Commercial Facility Solutions"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
               />
-              <div className="about-cinematic-pill-badge">
+              <div className="about-cinematic-pill-badge" style={{ pointerEvents: 'none' }}>
                 <div className="pulse-red-dot" />
                 <span className="cinematic-pill-text">
-                  CONTINUOUS CINEMATIC FACILITY WALKTHROUGH
+                  THE MIROLA EXPERIENCE
                 </span>
               </div>
             </div>
@@ -342,7 +339,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                   Commercial Property Under Active Care
                 </div>
                 <div className="perf-stat-desc">
-                  Consistently delivering spotless turnaround for corporate office towers, fulfillment centers, and medical suites.
+                  Consistently delivering spotless turnaround for corporate office towers, schools, fulfillment centers, and commercial facilities.
                 </div>
               </div>
 
@@ -447,16 +444,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             </div>
 
             <div style={{ padding: '24px' }}>
-              <video 
-                src="/Seamless_continuous_cinematic.mp4" 
-                poster="/images/drive_folder_2/DSC00216.jpg" 
-                controls 
-                autoPlay 
-                playsInline 
-                style={{ width: '100%', maxHeight: '480px', objectFit: 'contain', borderRadius: '12px', background: '#000000', display: 'block' }}
-              />
+              <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, borderRadius: '12px', overflow: 'hidden' }}>
+                <iframe 
+                  src="https://www.youtube-nocookie.com/embed/utMfTjTxZws?autoplay=1&rel=0&modestbranding=1" 
+                  title="The Mirola Experience"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                />
+              </div>
               <p style={{ color: '#cbd5e1', fontSize: '13.5px', marginTop: '16px', lineHeight: 1.6 }}>
-                Mirola’s uniformed janitorial specialists execute continuous high-efficiency facility sanitization, precision automated floor scrubbing, and certified pathogen barrier protocols across corporate, medical, and industrial environments.
+                Mirola’s uniformed janitorial specialists execute continuous high-efficiency facility sanitization, precision automated floor scrubbing, and certified pathogen barrier protocols across schools, corporate offices, and commercial environments.
               </p>
             </div>
           </div>
