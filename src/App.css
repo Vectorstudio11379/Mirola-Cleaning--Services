@@ -8881,6 +8881,8 @@
 
 .partners-stats-row {
   margin-top: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 720px;
 }
 
 .partners-hero-media {
@@ -9431,54 +9433,104 @@
   color: #c90000;
 }
 
-/* Category Toggle Buttons */
-.partner-type-toggle-group {
-  margin-bottom: 22px;
+/* Form Tabs & Headings */
+.partner-form-tabs-header {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1.5px solid #f1f5f9;
 }
 
-.partner-toggle-pills {
+.partner-tabs-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.partner-form-tab-nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
 
-.partner-toggle-btn {
+.partner-tab-btn {
   display: flex;
   align-items: center;
   gap: 12px;
   background: #f8fafc;
-  border: 1.5px solid #cbd5e1;
-  border-radius: 12px;
-  padding: 12px 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 13px 16px;
   cursor: pointer;
   text-align: left;
   transition: all 0.2s ease;
 }
 
-.partner-toggle-btn.active {
-  background: #fef2f2;
-  border-color: #c90000;
-  box-shadow: 0 0 0 1px #c90000;
+.partner-tab-btn:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
 }
 
-.partner-toggle-btn.active svg {
+.partner-tab-btn.active {
+  background: #fef2f2;
+  border-color: #c90000;
+  box-shadow: 0 4px 14px rgba(201, 0, 0, 0.12);
+}
+
+.partner-tab-btn.active svg {
   color: #c90000;
 }
 
-.toggle-btn-text {
+.tab-btn-content {
   display: flex;
   flex-direction: column;
 }
 
-.toggle-main {
+.tab-title {
+  font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 13.5px;
+  font-size: 14px;
   color: #0f172a;
+  line-height: 1.25;
 }
 
-.toggle-sub {
+.tab-sub {
   font-size: 11.5px;
   color: #64748b;
+  margin-top: 2px;
+}
+
+.form-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.form-card-tag {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.individual-tag {
+  background: rgba(22, 163, 74, 0.1);
+  color: #15803d;
+  border: 1px solid rgba(22, 163, 74, 0.25);
+}
+
+.company-tag {
+  background: rgba(201, 0, 0, 0.1);
+  color: #c90000;
+  border: 1px solid rgba(201, 0, 0, 0.25);
 }
 
 /* Services Checklist Pills */

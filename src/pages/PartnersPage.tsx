@@ -8,7 +8,6 @@ import {
   CheckCircle2, 
   Building2, 
   UserCheck, 
-  Clock, 
   Sparkles, 
   DollarSign, 
   TrendingUp, 
@@ -19,7 +18,8 @@ import {
   HelpCircle, 
   CalendarCheck,
   MapPin,
-  Maximize2
+  Maximize2,
+  Clock
 } from 'lucide-react';
 import { CONTACT_INFO } from '../constants/contactInfo';
 import { submitLeadDirect, generateEmailLinks } from '../services/formSubmission';
@@ -30,38 +30,103 @@ interface PartnersPageProps {
   onOpenConsultation: () => void;
 }
 
-const PARTNER_CAPABILITIES = [
-  'General Commercial Janitorial',
-  'Floor Care, Stripping & Waxing',
-  'Medical & Terminal Disinfection',
-  'Commercial Carpet Extraction',
-  'Post-Construction Cleanup',
-  'Commercial Window & Glass Care',
-  'Day Porter & Restroom Attendant'
+// Capabilities for Individual Solo Cleaners
+const INDIVIDUAL_SERVICES = [
+  'Commercial Office Janitorial',
+  'Restroom Sanitation & Restock',
+  'Trash Removal & Recycling',
+  'Floor Mopping & Vacuuming',
+  'Breakroom & Kitchen Cleaning',
+  'Commercial Glass & Touchpoint Care'
+];
+
+// Shifts for Solo Cleaners
+const SHIFT_OPTIONS = [
+  'Evening / Nightly Janitorial (After 5 PM)',
+  'Weekend Cleaning (Sat / Sun)',
+  'Early Morning Janitorial (Before 8 AM)',
+  'Day Porter / Daytime Coverage'
+];
+
+// Capabilities for Cleaning Companies / Subcontractors
+const COMPANY_CAPABILITIES = [
+  'Corporate Office Janitorial',
+  'Medical & Healthcare Terminal Disinfection',
+  'Industrial & Warehouse Floor Scrubbing',
+  'VCT Strip and Wax & High-Gloss Buffing',
+  'Childcare & Daycare Sanitization',
+  'High-Traffic Fitness Center Cleaning',
+  'Commercial Carpet Hot-Water Extraction',
+  'Post-Construction Final Turnover Clean'
+];
+
+// Heavy Equipment for Companies
+const COMPANY_EQUIPMENT_OPTIONS = [
+  'Walk-Behind / Ride-On Auto Scrubbers',
+  'High-Speed Floor Burnishers & Buffers',
+  'Commercial Carpet Extractors',
+  'Electrostatic Disinfection Sprayers',
+  'Commercial Backpack HEPA Vacuums',
+  'Commercial Pressure Washers',
+  'Company Branded Fleet Vehicles'
 ];
 
 export const PartnersPage: React.FC<PartnersPageProps> = ({ onNavigate }) => {
   // Video Modal State
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   
-  // Partner Application Form State
-  const [partnerType, setPartnerType] = useState<'independent' | 'company'>('independent');
-  const [fullName, setFullName] = useState('');
-  const [company, setCompany] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [location, setLocation] = useState('');
-  const [experience, setExperience] = useState('1 - 3 years');
-  const [teamSize, setTeamSize] = useState('Solo Professional (1 Person)');
-  const [selectedServices, setSelectedServices] = useState<string[]>([
-    'General Commercial Janitorial'
-  ]);
-  const [insuranceStatus, setInsuranceStatus] = useState('General Liability Insured');
-  const [notes, setNotes] = useState('');
+  // Active Form Tab: 'individual' | 'company'
+  const [activeTab, setActiveTab] = useState<'individual' | 'company'>('individual');
 
-  // Submission State
+  // -------------------------------------------------------------
+  // FORM 1: INDIVIDUAL / SOLO CLEANER STATE
+  // -------------------------------------------------------------
+  const [indFullName, setIndFullName] = useState('');
+  const [indEmail, setIndEmail] = useState('');
+  const [indPhone, setIndPhone] = useState('');
+  const [indLocation, setIndLocation] = useState('');
+  const [indExperience, setIndExperience] = useState('1 - 3 years');
+  const [indTransportation, setIndTransportation] = useState('Yes — Own Reliable Vehicle');
+  const [indInsurance, setIndInsurance] = useState('General Liability Insured');
+  const [indEquipmentOwned, setIndEquipmentOwned] = useState('Commercial HEPA Vacuum & Basic Janitorial Kit');
+  const [indShifts, setIndShifts] = useState<string[]>([
+    'Evening / Nightly Janitorial (After 5 PM)'
+  ]);
+  const [indServices, setIndServices] = useState<string[]>([
+    'Commercial Office Janitorial',
+    'Restroom Sanitation & Restock'
+  ]);
+  const [indNotes, setIndNotes] = useState('');
+
+  // -------------------------------------------------------------
+  // FORM 2: CLEANING COMPANY / SUBCONTRACTOR STATE
+  // -------------------------------------------------------------
+  const [corpCompanyName, setCorpCompanyName] = useState('');
+  const [corpContactName, setCorpContactName] = useState('');
+  const [corpContactTitle, setCorpContactTitle] = useState('Owner / Managing Director');
+  const [corpEmail, setCorpEmail] = useState('');
+  const [corpPhone, setCorpPhone] = useState('');
+  const [corpCounties, setCorpCounties] = useState('');
+  const [corpYearsInBusiness, setCorpYearsInBusiness] = useState('3 - 5 years established');
+  const [corpCrewSize, setCorpCrewSize] = useState('2 - 5 Active Crew Members');
+  const [corpInsuranceLimit, setCorpInsuranceLimit] = useState('$1,000,000 General Liability');
+  const [corpWorkersComp, setCorpWorkersComp] = useState('Active Workers\' Comp in Place');
+  const [corpMonthlyCapacity, setCorpMonthlyCapacity] = useState('25,000 - 75,000 sq ft');
+  const [corpCapabilities, setCorpCapabilities] = useState<string[]>([
+    'Corporate Office Janitorial',
+    'VCT Strip and Wax & High-Gloss Buffing'
+  ]);
+  const [corpEquipment, setCorpEquipment] = useState<string[]>([
+    'High-Speed Floor Burnishers & Buffers',
+    'Commercial Backpack HEPA Vacuums'
+  ]);
+  const [corpNotes, setCorpNotes] = useState('');
+
+  // -------------------------------------------------------------
+  // SUBMISSION & FEEDBACK STATE
+  // -------------------------------------------------------------
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedType, setSubmittedType] = useState<'individual' | 'company' | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [fallbackLinks, setFallbackLinks] = useState<{ gmailUrl: string; mailtoUrl: string } | null>(null);
 
@@ -77,68 +142,77 @@ export const PartnersPage: React.FC<PartnersPageProps> = ({ onNavigate }) => {
     };
   }, []);
 
-  const handleServiceToggle = (service: string) => {
-    setSelectedServices(prev => 
-      prev.includes(service) 
-        ? prev.filter(s => s !== service)
-        : [...prev, service]
-    );
-  };
-
-  const scrollToApplication = (type?: 'independent' | 'company') => {
-    if (type) {
-      setPartnerType(type);
-      if (type === 'company' && teamSize === 'Solo Professional (1 Person)') {
-        setTeamSize('2 - 5 Crew Members');
-      } else if (type === 'independent') {
-        setTeamSize('Solo Professional (1 Person)');
-      }
-    }
+  const scrollToApplication = (tab: 'individual' | 'company') => {
+    setActiveTab(tab);
     const formElement = document.getElementById('partner-application');
     if (formElement) {
       formElement.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleIndServiceToggle = (service: string) => {
+    setIndServices(prev => 
+      prev.includes(service) ? prev.filter(s => s !== service) : [...prev, service]
+    );
+  };
+
+  const handleIndShiftToggle = (shift: string) => {
+    setIndShifts(prev => 
+      prev.includes(shift) ? prev.filter(s => s !== shift) : [...prev, shift]
+    );
+  };
+
+  const handleCorpCapabilityToggle = (cap: string) => {
+    setCorpCapabilities(prev => 
+      prev.includes(cap) ? prev.filter(c => c !== cap) : [...prev, cap]
+    );
+  };
+
+  const handleCorpEquipmentToggle = (equip: string) => {
+    setCorpEquipment(prev => 
+      prev.includes(equip) ? prev.filter(e => e !== equip) : [...prev, equip]
+    );
+  };
+
+  // Submit Individual Solo Cleaner Application
+  const handleIndividualSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrorMessage(null);
 
-    const partnerTypeLabel = partnerType === 'independent' 
-      ? 'Independent Cleaner (Solo Professional)' 
-      : 'Cleaning Company (Subcontracting Partner)';
-
     const payload = {
-      fullName: fullName.trim(),
-      company: partnerType === 'company' 
-        ? (company.trim() || 'Established Cleaning Company') 
-        : (company.trim() || 'Independent Cleaner (Solo)'),
-      email: email.trim(),
-      phone: phone.trim(),
-      facilityTypes: selectedServices.length > 0 ? selectedServices : ['General Commercial Janitorial'],
-      squareFootage: `Capacity: ${teamSize} | Exp: ${experience}`,
+      fullName: indFullName.trim(),
+      company: 'Independent Solo Cleaner',
+      email: indEmail.trim(),
+      phone: indPhone.trim(),
+      facilityTypes: indServices.length > 0 ? indServices : ['Commercial Office Janitorial'],
+      squareFootage: `Solo Cleaner | ${indExperience} exp | Transport: ${indTransportation}`,
       message: `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-PARTNER APPLICATION DETAILS
+SOLO CLEANER PARTNER APPLICATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Partnership Category: ${partnerTypeLabel}
-• Primary Location / Service Area: ${location.trim() || 'New Jersey Regional Area'}
-• Years of Commercial Experience: ${experience}
-• Team Size / Crew Capacity: ${teamSize}
-• Insurance & Bonding Status: ${insuranceStatus}
-• Core Capabilities: ${selectedServices.join(', ')}
+• Applicant Full Name: ${indFullName.trim()}
+• Category: Independent Solo Cleaner
+• Email Address: ${indEmail.trim()}
+• Direct Mobile Phone: ${indPhone.trim()}
+• Coverage Area / Location: ${indLocation.trim() || 'Not specified'}
+• Commercial Experience: ${indExperience}
+• Reliable Transportation: ${indTransportation}
+• General Liability Insurance: ${indInsurance}
+• Equipment Owned: ${indEquipmentOwned}
+• Shift Availability: ${indShifts.join(', ') || 'Flexible'}
+• Services Offered: ${indServices.join(', ')}
 
-EQUIPMENT, AVAILABILITY & ADDITIONAL NOTES:
-${notes.trim() || 'None provided.'}
+ADDITIONAL BACKGROUND & NOTES:
+${indNotes.trim() || 'None provided.'}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
-      formType: 'Partner Application (/partners)'
+      formType: 'Individual Cleaner Application (/partners)'
     };
 
     const result = await submitLeadDirect(payload);
     setIsSubmitting(false);
 
     if (result.success) {
-      setIsSubmitted(true);
+      setSubmittedType('individual');
     } else {
       setErrorMessage(result.message || 'There was a problem submitting your application. Please email or call us directly.');
       if (result.gmailUrl && result.mailtoUrl) {
@@ -150,16 +224,62 @@ ${notes.trim() || 'None provided.'}
     }
   };
 
+  // Submit Cleaning Company Subcontractor Application
+  const handleCompanySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    const payload = {
+      fullName: `${corpContactName.trim()} (${corpContactTitle.trim()})`,
+      company: corpCompanyName.trim(),
+      email: corpEmail.trim(),
+      phone: corpPhone.trim(),
+      facilityTypes: corpCapabilities.length > 0 ? corpCapabilities : ['Corporate Office Janitorial'],
+      squareFootage: `Capacity: ${corpMonthlyCapacity} | Crew: ${corpCrewSize} | Ins: ${corpInsuranceLimit}`,
+      message: `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CLEANING COMPANY SUBCONTRACTOR APPLICATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Company Legal Name: ${corpCompanyName.trim()}
+• Primary Contact Person: ${corpContactName.trim()}
+• Contact Title: ${corpContactTitle.trim()}
+• Corporate Email: ${corpEmail.trim()}
+• Business Phone: ${corpPhone.trim()}
+• HQ & Operating Counties: ${corpCounties.trim() || 'Not specified'}
+• Years in Business: ${corpYearsInBusiness}
+• Active Cleaning Crew Size: ${corpCrewSize}
+• General Liability Limit: ${corpInsuranceLimit}
+• Workers' Comp Status: ${corpWorkersComp}
+• Est. Monthly Capacity: ${corpMonthlyCapacity}
+• Commercial Capabilities: ${corpCapabilities.join(', ')}
+• Heavy Equipment Owned: ${corpEquipment.join(', ') || 'Standard equipment'}
+
+COMPANY PORTFOLIO & SUMMARY:
+${corpNotes.trim() || 'None provided.'}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+      formType: 'Cleaning Company Subcontractor Application (/partners)'
+    };
+
+    const result = await submitLeadDirect(payload);
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setSubmittedType('company');
+    } else {
+      setErrorMessage(result.message || 'There was a problem submitting your subcontractor application. Please email or call us directly.');
+      if (result.gmailUrl && result.mailtoUrl) {
+        setFallbackLinks({ gmailUrl: result.gmailUrl, mailtoUrl: result.mailtoUrl });
+      } else {
+        const fallbacks = generateEmailLinks(payload);
+        setFallbackLinks({ gmailUrl: fallbacks.gmailUrl, mailtoUrl: fallbacks.mailtoUrl });
+      }
+    }
+  };
+
   const handleResetForm = () => {
-    setIsSubmitted(false);
+    setSubmittedType(null);
     setErrorMessage(null);
     setFallbackLinks(null);
-    setFullName('');
-    setCompany('');
-    setEmail('');
-    setPhone('');
-    setLocation('');
-    setNotes('');
   };
 
   const partnerFaqs = [
@@ -227,7 +347,7 @@ ${notes.trim() || 'None provided.'}
                 <button 
                   type="button" 
                   className="subpage-btn-primary"
-                  onClick={() => scrollToApplication()}
+                  onClick={() => scrollToApplication(activeTab)}
                   id="hero-become-partner-btn"
                 >
                   <span>Become a Partner</span>
@@ -242,15 +362,11 @@ ${notes.trim() || 'None provided.'}
                 </a>
               </div>
 
-              {/* 4 Partner Value Highlights */}
+              {/* 3 Partner Value Highlights (Clean, without Weekly$ card) */}
               <div className="subpage-hero-stats-row partners-stats-row">
                 <div className="subpage-stat-card">
                   <div className="subpage-stat-num">100<span>%</span></div>
                   <div className="subpage-stat-label">Independent Autonomy</div>
-                </div>
-                <div className="subpage-stat-card">
-                  <div className="subpage-stat-num">Weekly<span>$</span></div>
-                  <div className="subpage-stat-label">Direct Payouts</div>
                 </div>
                 <div className="subpage-stat-card">
                   <div className="subpage-stat-num">Vetted</div>
@@ -284,7 +400,7 @@ ${notes.trim() || 'None provided.'}
                   </button>
                 </div>
 
-                {/* 16:9 YouTube Embed */}
+                {/* 16:9 YouTube Embed (Using the user's requested video link: https://youtu.be/V3phteGqDds) */}
                 <div className="partners-video-frame">
                   <iframe 
                     src="https://www.youtube-nocookie.com/embed/V3phteGqDds?rel=0&modestbranding=1" 
@@ -362,7 +478,7 @@ ${notes.trim() || 'None provided.'}
                   </div>
                   <div className="perk-item">
                     <CheckCircle2 size={17} className="perk-check-icon" />
-                    <span><strong>Guaranteed Direct Payouts:</strong> Weekly direct deposit so you never wait for client checks.</span>
+                    <span><strong>Reliable Direct Payouts:</strong> Predictable direct deposit disbursements.</span>
                   </div>
                   <div className="perk-item">
                     <CheckCircle2 size={17} className="perk-check-icon" />
@@ -375,7 +491,7 @@ ${notes.trim() || 'None provided.'}
                 <button 
                   type="button" 
                   className="partner-apply-btn"
-                  onClick={() => scrollToApplication('independent')}
+                  onClick={() => scrollToApplication('individual')}
                 >
                   <span>Apply as Independent Cleaner</span>
                   <ArrowRight size={16} />
@@ -563,7 +679,7 @@ ${notes.trim() || 'None provided.'}
               <div className="step-num-pill">01</div>
               <h4 className="step-title">Submit Application</h4>
               <p className="step-desc">
-                Fill out our quick partner form below detailing your experience, services, coverage area, and capacity.
+                Select your track below (Individual Cleaner or Cleaning Company) and complete your dedicated partner form.
               </p>
             </div>
 
@@ -596,12 +712,13 @@ ${notes.trim() || 'None provided.'}
         </div>
       </section>
 
-      {/* 5. INTERACTIVE PARTNER APPLICATION FORM ("BECOME A MIROLA PARTNER") */}
+      {/* 5. DEDICATED PARTNER APPLICATION FORMS SECTION ("BECOME A MIROLA PARTNER") */}
       <section className="partners-form-section" id="partner-application">
         <div className="subpage-container">
           
           <div className="partners-form-wrapper">
             
+            {/* Left Column: Form Intro & Trust Points */}
             <div className="partners-form-intro">
               <div className="subpage-badge">
                 <span className="subpage-pulse-dot" />
@@ -611,17 +728,21 @@ ${notes.trim() || 'None provided.'}
                 Ready to Expand Your Cleaning Opportunities?
               </h2>
               <p className="partners-form-desc">
-                Are you an independent cleaner or do you own a cleaning company? Partner with Mirola and explore new cleaning opportunities. Fill out the application below to get connected with our partner operations team.
+                Are you an independent cleaner or do you own a cleaning company? Partner with Mirola and explore new cleaning opportunities. Select your partner category and submit your application below.
               </p>
 
               <div className="partner-form-trust-points">
                 <div className="trust-point">
                   <CheckCircle2 size={16} color="#c90000" />
-                  <span>No upfront fees or subscription costs</span>
+                  <span>Two distinct application paths for individuals & companies</span>
                 </div>
                 <div className="trust-point">
                   <CheckCircle2 size={16} color="#c90000" />
-                  <span>Rapid response within 24–48 business hours</span>
+                  <span>No upfront fees, commissions, or bidding charges</span>
+                </div>
+                <div className="trust-point">
+                  <CheckCircle2 size={16} color="#c90000" />
+                  <span>Direct response from partner dispatch within 24–48 hours</span>
                 </div>
                 <div className="trust-point">
                   <CheckCircle2 size={16} color="#c90000" />
@@ -641,33 +762,38 @@ ${notes.trim() || 'None provided.'}
               </div>
             </div>
 
-            {/* Application Form Card */}
+            {/* Right Column: Distinct Forms with Tab Navigation */}
             <div className="contact-form-card partner-form-card">
               
-              {isSubmitted ? (
+              {/* SUCCESS CONFIRMATION STATE */}
+              {submittedType ? (
                 <div className="contact-success-box partner-success-box">
                   <div className="success-icon-ring">
                     <Check size={36} />
                   </div>
-                  <h3 className="success-title">Partner Application Received!</h3>
+                  <h3 className="success-title">
+                    {submittedType === 'individual' ? 'Solo Cleaner Application Received!' : 'Subcontractor Application Received!'}
+                  </h3>
                   <p className="success-desc">
-                    Thank you, <strong>{fullName}</strong>. Your partner application has been dispatched directly to our facility director and partner onboarding team.
+                    Thank you, <strong>{submittedType === 'individual' ? indFullName : corpContactName}</strong>. Your partner application has been dispatched directly to our facility director and partner onboarding team.
                   </p>
                   
                   <div className="success-meta-card">
                     <div className="meta-row">
-                      <span className="meta-label">Applicant:</span>
-                      <span className="meta-value">{fullName}</span>
+                      <span className="meta-label">Application Type:</span>
+                      <span className="meta-value">
+                        {submittedType === 'individual' ? 'Independent Cleaner (Solo Professional)' : `Cleaning Company (${corpCompanyName})`}
+                      </span>
                     </div>
                     <div className="meta-row">
-                      <span className="meta-label">Category:</span>
+                      <span className="meta-label">Primary Contact:</span>
                       <span className="meta-value">
-                        {partnerType === 'independent' ? 'Independent Solo Cleaner' : `Cleaning Company (${company || 'Subcontractor'})`}
+                        {submittedType === 'individual' ? indFullName : `${corpContactName} (${corpContactTitle})`}
                       </span>
                     </div>
                     <div className="meta-row">
                       <span className="meta-label">Confirmation Email:</span>
-                      <span className="meta-value">{email}</span>
+                      <span className="meta-value">{submittedType === 'individual' ? indEmail : corpEmail}</span>
                     </div>
                   </div>
 
@@ -686,282 +812,629 @@ ${notes.trim() || 'None provided.'}
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="partner-application-form">
+                <div className="partner-forms-container">
                   
-                  <div className="form-card-heading">
-                    Partner Application
-                  </div>
-                  <p className="form-card-sub">
-                    Select your partner track and provide your business credentials below.
-                  </p>
-
-                  {/* 1. Partner Category Selector Toggle */}
-                  <div className="partner-type-toggle-group">
-                    <label className="partner-field-label">I am applying as:</label>
-                    <div className="partner-toggle-pills">
+                  {/* TAB SWITCHER: INDIVIDUAL vs COMPANY */}
+                  <div className="partner-form-tabs-header">
+                    <div className="partner-tabs-label">Choose your partner application:</div>
+                    <div className="partner-form-tab-nav">
                       <button
                         type="button"
-                        className={`partner-toggle-btn ${partnerType === 'independent' ? 'active' : ''}`}
-                        onClick={() => {
-                          setPartnerType('independent');
-                          if (teamSize.includes('Crew')) setTeamSize('Solo Professional (1 Person)');
-                        }}
+                        className={`partner-tab-btn ${activeTab === 'individual' ? 'active' : ''}`}
+                        onClick={() => { setActiveTab('individual'); setErrorMessage(null); }}
                       >
                         <UserCheck size={18} />
-                        <div className="toggle-btn-text">
-                          <span className="toggle-main">Independent Cleaner</span>
-                          <span className="toggle-sub">Solo professional</span>
+                        <div className="tab-btn-content">
+                          <span className="tab-title">Individual Cleaner</span>
+                          <span className="tab-sub">Solo professional application</span>
                         </div>
                       </button>
 
                       <button
                         type="button"
-                        className={`partner-toggle-btn ${partnerType === 'company' ? 'active' : ''}`}
-                        onClick={() => {
-                          setPartnerType('company');
-                          if (teamSize.includes('Solo')) setTeamSize('2 - 5 Crew Members');
-                        }}
+                        className={`partner-tab-btn ${activeTab === 'company' ? 'active' : ''}`}
+                        onClick={() => { setActiveTab('company'); setErrorMessage(null); }}
                       >
                         <Building2 size={18} />
-                        <div className="toggle-btn-text">
-                          <span className="toggle-main">Cleaning Company</span>
-                          <span className="toggle-sub">Subcontracting team</span>
+                        <div className="tab-btn-content">
+                          <span className="tab-title">Cleaning Company</span>
+                          <span className="tab-sub">Subcontractor application</span>
                         </div>
                       </button>
                     </div>
                   </div>
 
-                  <div className="contact-form-grid">
-                    
-                    {/* Full Name */}
-                    <div className="contact-form-field">
-                      <label htmlFor="partner-fullname">
-                        Full Name / Primary Contact <span className="field-required">*</span>
-                      </label>
-                      <input 
-                        type="text" 
-                        id="partner-fullname"
-                        required
-                        placeholder="e.g. Marcus Miller"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                        className="contact-form-input"
-                      />
-                    </div>
-
-                    {/* Company Name */}
-                    <div className="contact-form-field">
-                      <label htmlFor="partner-company">
-                        {partnerType === 'company' ? (
-                          <>Company Name <span className="field-required">*</span></>
-                        ) : (
-                          'Business / Trade Name (Optional)'
-                        )}
-                      </label>
-                      <input 
-                        type="text" 
-                        id="partner-company"
-                        required={partnerType === 'company'}
-                        placeholder={partnerType === 'company' ? 'e.g. Apex Janitorial LLC' : 'e.g. Marcus Cleaning Services'}
-                        value={company}
-                        onChange={(e) => setCompany(e.target.value)}
-                        className="contact-form-input"
-                      />
-                    </div>
-
-                    {/* Email */}
-                    <div className="contact-form-field">
-                      <label htmlFor="partner-email">
-                        Business Email Address <span className="field-required">*</span>
-                      </label>
-                      <input 
-                        type="email" 
-                        id="partner-email"
-                        required
-                        placeholder="e.g. marcus@apexclean.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="contact-form-input"
-                      />
-                    </div>
-
-                    {/* Phone */}
-                    <div className="contact-form-field">
-                      <label htmlFor="partner-phone">
-                        Direct Phone Number <span className="field-required">*</span>
-                      </label>
-                      <input 
-                        type="tel" 
-                        id="partner-phone"
-                        required
-                        placeholder="e.g. (732) 555-0199"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="contact-form-input"
-                      />
-                    </div>
-
-                    {/* Service Area / Location */}
-                    <div className="contact-form-field">
-                      <label htmlFor="partner-location">
-                        City & State / Service Area <span className="field-required">*</span>
-                      </label>
-                      <input 
-                        type="text" 
-                        id="partner-location"
-                        required
-                        placeholder="e.g. Somerset, NJ (Middlesex/Somerset Counties)"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
-                        className="contact-form-input"
-                      />
-                    </div>
-
-                    {/* Experience Level */}
-                    <div className="contact-form-field">
-                      <label htmlFor="partner-experience">
-                        Commercial Cleaning Experience
-                      </label>
-                      <select 
-                        id="partner-experience"
-                        value={experience}
-                        onChange={(e) => setExperience(e.target.value)}
-                        className="contact-form-select"
-                      >
-                        <option value="Less than 1 year">Less than 1 year</option>
-                        <option value="1 - 3 years">1 - 3 years</option>
-                        <option value="3 - 5 years">3 - 5 years</option>
-                        <option value="5 - 10 years">5 - 10 years</option>
-                        <option value="10+ years">10+ years established</option>
-                      </select>
-                    </div>
-
-                    {/* Team Size / Crew Capacity */}
-                    <div className="contact-form-field">
-                      <label htmlFor="partner-teamsize">
-                        Team Size / Crew Capacity
-                      </label>
-                      <select 
-                        id="partner-teamsize"
-                        value={teamSize}
-                        onChange={(e) => setTeamSize(e.target.value)}
-                        className="contact-form-select"
-                      >
-                        <option value="Solo Professional (1 Person)">Solo Professional (1 Person)</option>
-                        <option value="2 - 5 Crew Members">2 - 5 Crew Members</option>
-                        <option value="6 - 15 Crew Members">6 - 15 Crew Members</option>
-                        <option value="16+ Professional Cleaners">16+ Professional Staff</option>
-                      </select>
-                    </div>
-
-                    {/* Insurance Status */}
-                    <div className="contact-form-field">
-                      <label htmlFor="partner-insurance">
-                        Insurance & Bonding Status
-                      </label>
-                      <select 
-                        id="partner-insurance"
-                        value={insuranceStatus}
-                        onChange={(e) => setInsuranceStatus(e.target.value)}
-                        className="contact-form-select"
-                      >
-                        <option value="General Liability Insured">General Liability Insured</option>
-                        <option value="Fully Insured & Bonded">Fully Insured & Bonded</option>
-                        <option value="In Process of Getting Insured">In Process of Getting Insured</option>
-                        <option value="Need Guidance on Insurance">Need Guidance / Help Getting Insured</option>
-                      </select>
-                    </div>
-
-                    {/* Core Services Capabilities (Multi-select check pills) */}
-                    <div className="contact-form-field full-span">
-                      <label className="partner-field-label">
-                        Services You Provide (Select all that apply):
-                      </label>
-                      <div className="partner-services-checklist">
-                        {PARTNER_CAPABILITIES.map(service => {
-                          const isChecked = selectedServices.includes(service);
-                          return (
-                            <button
-                              type="button"
-                              key={service}
-                              className={`partner-service-pill ${isChecked ? 'selected' : ''}`}
-                              onClick={() => handleServiceToggle(service)}
-                            >
-                              <div className="service-pill-checkbox">
-                                {isChecked && <Check size={13} strokeWidth={3} />}
-                              </div>
-                              <span className="service-pill-label">{service}</span>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* Additional Notes, Equipment & Availability */}
-                    <div className="contact-form-field full-span">
-                      <label htmlFor="partner-notes">
-                        Equipment, Shift Availability & Background Notes (Optional)
-                      </label>
-                      <textarea 
-                        id="partner-notes"
-                        rows={3}
-                        placeholder="Tell us about the equipment you own (e.g. floor buffers, HEPA extractors), your preferred shifts (nightly/daytime), or any questions you have."
-                        value={notes}
-                        onChange={(e) => setNotes(e.target.value)}
-                        className="contact-form-textarea"
-                      />
-                    </div>
-
-                    {/* Error & Fallback Link Message */}
-                    {errorMessage && (
-                      <div className="contact-error-box full-span">
-                        <AlertCircle size={18} />
-                        <div className="error-text-content">
-                          <p>{errorMessage}</p>
-                          {fallbackLinks && (
-                            <div className="error-fallbacks">
-                              <a href={fallbackLinks.gmailUrl} target="_blank" rel="noopener noreferrer" className="fallback-btn">
-                                Open in Gmail Draft
-                              </a>
-                              <a href={fallbackLinks.mailtoUrl} className="fallback-btn">
-                                Send via Default Email
-                              </a>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Submit Button */}
-                    <div className="contact-form-field full-span">
-                      <button 
-                        type="submit" 
-                        disabled={isSubmitting}
-                        className="subpage-btn-primary form-submit-btn"
-                        id="submit-partner-app-btn"
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 size={18} className="animate-spin" />
-                            <span>Submitting Partner Application...</span>
-                          </>
-                        ) : (
-                          <>
-                            <span>Become a Partner</span>
-                            <ArrowRight size={18} />
-                          </>
-                        )}
-                      </button>
+                  {/* ======================================================== */}
+                  {/* FORM A: INDIVIDUAL CLEANER (SOLO PROFESSIONAL)           */}
+                  {/* ======================================================== */}
+                  {activeTab === 'individual' && (
+                    <form onSubmit={handleIndividualSubmit} className="partner-application-form individual-form">
                       
-                      <div className="form-privacy-note">
-                        <ShieldCheck size={14} color="#16a34a" />
-                        <span>We respect your business autonomy. No obligations or contracts until you approve a scope.</span>
+                      <div className="form-heading-row">
+                        <div className="form-card-heading">
+                          Individual Cleaner Application
+                        </div>
+                        <span className="form-card-tag individual-tag">Solo Professional</span>
                       </div>
-                    </div>
+                      <p className="form-card-sub">
+                        For independent cleaning technicians and solo janitorial specialists seeking commercial assignments.
+                      </p>
 
-                  </div>
+                      <div className="contact-form-grid">
+                        
+                        {/* Full Name */}
+                        <div className="contact-form-field">
+                          <label htmlFor="ind-fullname">
+                            Full Name <span className="field-required">*</span>
+                          </label>
+                          <input 
+                            type="text" 
+                            id="ind-fullname"
+                            required
+                            placeholder="e.g. Marcus Miller"
+                            value={indFullName}
+                            onChange={(e) => setIndFullName(e.target.value)}
+                            className="contact-form-input"
+                          />
+                        </div>
 
-                </form>
+                        {/* Email Address */}
+                        <div className="contact-form-field">
+                          <label htmlFor="ind-email">
+                            Email Address <span className="field-required">*</span>
+                          </label>
+                          <input 
+                            type="email" 
+                            id="ind-email"
+                            required
+                            placeholder="e.g. marcus@gmail.com"
+                            value={indEmail}
+                            onChange={(e) => setIndEmail(e.target.value)}
+                            className="contact-form-input"
+                          />
+                        </div>
+
+                        {/* Direct Mobile Phone */}
+                        <div className="contact-form-field">
+                          <label htmlFor="ind-phone">
+                            Mobile Phone Number <span className="field-required">*</span>
+                          </label>
+                          <input 
+                            type="tel" 
+                            id="ind-phone"
+                            required
+                            placeholder="e.g. (732) 555-0199"
+                            value={indPhone}
+                            onChange={(e) => setIndPhone(e.target.value)}
+                            className="contact-form-input"
+                          />
+                        </div>
+
+                        {/* Service City / Coverage Area */}
+                        <div className="contact-form-field">
+                          <label htmlFor="ind-location">
+                            City & State / Service Area <span className="field-required">*</span>
+                          </label>
+                          <input 
+                            type="text" 
+                            id="ind-location"
+                            required
+                            placeholder="e.g. Somerset, New Brunswick, Edison, NJ"
+                            value={indLocation}
+                            onChange={(e) => setIndLocation(e.target.value)}
+                            className="contact-form-input"
+                          />
+                        </div>
+
+                        {/* Commercial Experience */}
+                        <div className="contact-form-field">
+                          <label htmlFor="ind-experience">
+                            Commercial Cleaning Experience
+                          </label>
+                          <select 
+                            id="ind-experience"
+                            value={indExperience}
+                            onChange={(e) => setIndExperience(e.target.value)}
+                            className="contact-form-select"
+                          >
+                            <option value="Less than 1 year">Less than 1 year</option>
+                            <option value="1 - 3 years">1 - 3 years</option>
+                            <option value="3 - 5 years">3 - 5 years</option>
+                            <option value="5+ years">5+ years experienced</option>
+                          </select>
+                        </div>
+
+                        {/* Reliable Transportation */}
+                        <div className="contact-form-field">
+                          <label htmlFor="ind-transportation">
+                            Reliable Transportation
+                          </label>
+                          <select 
+                            id="ind-transportation"
+                            value={indTransportation}
+                            onChange={(e) => setIndTransportation(e.target.value)}
+                            className="contact-form-select"
+                          >
+                            <option value="Yes — Own Reliable Vehicle">Yes — Own Reliable Vehicle</option>
+                            <option value="Public Transit / Rideshare">Public Transit / Rideshare</option>
+                            <option value="In Process of Securing Vehicle">In Process of Securing Vehicle</option>
+                          </select>
+                        </div>
+
+                        {/* Equipment Owned */}
+                        <div className="contact-form-field full-span">
+                          <label htmlFor="ind-equipment">
+                            Cleaning Equipment You Currently Own
+                          </label>
+                          <select 
+                            id="ind-equipment"
+                            value={indEquipmentOwned}
+                            onChange={(e) => setIndEquipmentOwned(e.target.value)}
+                            className="contact-form-select"
+                          >
+                            <option value="Commercial HEPA Vacuum & Basic Janitorial Kit">Commercial HEPA Vacuum & Basic Janitorial Kit</option>
+                            <option value="Full Equipment Setup (Vacuum, Dual Bucket, Buffer)">Full Equipment Setup (Vacuum, Dual Bucket, Buffer)</option>
+                            <option value="Standard Supplies Only (Mop, Microfiber, Caddy)">Standard Supplies Only (Mop, Microfiber, Caddy)</option>
+                            <option value="None / Would Need Facility Provided Equipment">None / Would Need Facility Provided Equipment</option>
+                          </select>
+                        </div>
+
+                        {/* General Liability Insurance */}
+                        <div className="contact-form-field full-span">
+                          <label htmlFor="ind-insurance">
+                            General Liability Insurance Status
+                          </label>
+                          <select 
+                            id="ind-insurance"
+                            value={indInsurance}
+                            onChange={(e) => setIndInsurance(e.target.value)}
+                            className="contact-form-select"
+                          >
+                            <option value="General Liability Insured">Yes — Currently Insured (General Liability)</option>
+                            <option value="Fully Insured & Bonded">Fully Insured & Bonded</option>
+                            <option value="In Process of Getting Insured">In Process of Getting Policy</option>
+                            <option value="Need Guidance on Insurance">Not Insured Yet / Need Guidance</option>
+                          </select>
+                        </div>
+
+                        {/* Shift Availability */}
+                        <div className="contact-form-field full-span">
+                          <label className="partner-field-label">
+                            Preferred Shift Availability (Select all that apply):
+                          </label>
+                          <div className="partner-services-checklist">
+                            {SHIFT_OPTIONS.map(shift => {
+                              const isChecked = indShifts.includes(shift);
+                              return (
+                                <button
+                                  type="button"
+                                  key={shift}
+                                  className={`partner-service-pill ${isChecked ? 'selected' : ''}`}
+                                  onClick={() => handleIndShiftToggle(shift)}
+                                >
+                                  <div className="service-pill-checkbox">
+                                    {isChecked && <Check size={13} strokeWidth={3} />}
+                                  </div>
+                                  <span className="service-pill-label">{shift}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        {/* Individual Services Checklist */}
+                        <div className="contact-form-field full-span">
+                          <label className="partner-field-label">
+                            Cleaning Services You Can Deliver:
+                          </label>
+                          <div className="partner-services-checklist">
+                            {INDIVIDUAL_SERVICES.map(service => {
+                              const isChecked = indServices.includes(service);
+                              return (
+                                <button
+                                  type="button"
+                                  key={service}
+                                  className={`partner-service-pill ${isChecked ? 'selected' : ''}`}
+                                  onClick={() => handleIndServiceToggle(service)}
+                                >
+                                  <div className="service-pill-checkbox">
+                                    {isChecked && <Check size={13} strokeWidth={3} />}
+                                  </div>
+                                  <span className="service-pill-label">{service}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        {/* Background & Notes */}
+                        <div className="contact-form-field full-span">
+                          <label htmlFor="ind-notes">
+                            Brief Background & Availability Notes (Optional)
+                          </label>
+                          <textarea 
+                            id="ind-notes"
+                            rows={3}
+                            placeholder="Tell us about the types of buildings you have cleaned, your preferred hours per week, or any questions you have."
+                            value={indNotes}
+                            onChange={(e) => setIndNotes(e.target.value)}
+                            className="contact-form-textarea"
+                          />
+                        </div>
+
+                        {/* Error & Fallback */}
+                        {errorMessage && (
+                          <div className="contact-error-box full-span">
+                            <AlertCircle size={18} />
+                            <div className="error-text-content">
+                              <p>{errorMessage}</p>
+                              {fallbackLinks && (
+                                <div className="error-fallbacks">
+                                  <a href={fallbackLinks.gmailUrl} target="_blank" rel="noopener noreferrer" className="fallback-btn">
+                                    Open in Gmail Draft
+                                  </a>
+                                  <a href={fallbackLinks.mailtoUrl} className="fallback-btn">
+                                    Send via Default Email
+                                  </a>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Submit Button */}
+                        <div className="contact-form-field full-span">
+                          <button 
+                            type="submit" 
+                            disabled={isSubmitting}
+                            className="subpage-btn-primary form-submit-btn"
+                            id="submit-individual-app-btn"
+                          >
+                            {isSubmitting ? (
+                              <>
+                                <Loader2 size={18} className="animate-spin" />
+                                <span>Submitting Solo Application...</span>
+                              </>
+                            ) : (
+                              <>
+                                <span>Submit Solo Cleaner Application</span>
+                                <ArrowRight size={18} />
+                              </>
+                            )}
+                          </button>
+                          
+                          <div className="form-privacy-note">
+                            <ShieldCheck size={14} color="#16a34a" />
+                            <span>You remain 100% independent. No contracts until you accept a facility scope.</span>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </form>
+                  )}
+
+                  {/* ======================================================== */}
+                  {/* FORM B: CLEANING COMPANY (SUBCONTRACTING PARTNER)        */}
+                  {/* ======================================================== */}
+                  {activeTab === 'company' && (
+                    <form onSubmit={handleCompanySubmit} className="partner-application-form company-form">
+                      
+                      <div className="form-heading-row">
+                        <div className="form-card-heading">
+                          Cleaning Company Subcontractor Application
+                        </div>
+                        <span className="form-card-tag company-tag">Subcontractor Track</span>
+                      </div>
+                      <p className="form-card-sub">
+                        For established commercial cleaning businesses seeking high-square-footage subcontracting contracts.
+                      </p>
+
+                      <div className="contact-form-grid">
+                        
+                        {/* Company Legal Business Name */}
+                        <div className="contact-form-field">
+                          <label htmlFor="corp-name">
+                            Company Legal Name <span className="field-required">*</span>
+                          </label>
+                          <input 
+                            type="text" 
+                            id="corp-name"
+                            required
+                            placeholder="e.g. Apex Commercial Janitorial LLC"
+                            value={corpCompanyName}
+                            onChange={(e) => setCorpCompanyName(e.target.value)}
+                            className="contact-form-input"
+                          />
+                        </div>
+
+                        {/* Primary Contact Name */}
+                        <div className="contact-form-field">
+                          <label htmlFor="corp-contact">
+                            Primary Contact Person <span className="field-required">*</span>
+                          </label>
+                          <input 
+                            type="text" 
+                            id="corp-contact"
+                            required
+                            placeholder="e.g. Robert Vance"
+                            value={corpContactName}
+                            onChange={(e) => setCorpContactName(e.target.value)}
+                            className="contact-form-input"
+                          />
+                        </div>
+
+                        {/* Contact Title */}
+                        <div className="contact-form-field">
+                          <label htmlFor="corp-title">
+                            Contact Title / Role <span className="field-required">*</span>
+                          </label>
+                          <input 
+                            type="text" 
+                            id="corp-title"
+                            required
+                            placeholder="e.g. Managing Partner, Director of Ops"
+                            value={corpContactTitle}
+                            onChange={(e) => setCorpContactTitle(e.target.value)}
+                            className="contact-form-input"
+                          />
+                        </div>
+
+                        {/* Corporate Email */}
+                        <div className="contact-form-field">
+                          <label htmlFor="corp-email">
+                            Corporate Email Address <span className="field-required">*</span>
+                          </label>
+                          <input 
+                            type="email" 
+                            id="corp-email"
+                            required
+                            placeholder="e.g. operations@apexjanitorial.com"
+                            value={corpEmail}
+                            onChange={(e) => setCorpEmail(e.target.value)}
+                            className="contact-form-input"
+                          />
+                        </div>
+
+                        {/* Direct Business Phone */}
+                        <div className="contact-form-field">
+                          <label htmlFor="corp-phone">
+                            Direct Business Phone <span className="field-required">*</span>
+                          </label>
+                          <input 
+                            type="tel" 
+                            id="corp-phone"
+                            required
+                            placeholder="e.g. (732) 555-0188"
+                            value={corpPhone}
+                            onChange={(e) => setCorpPhone(e.target.value)}
+                            className="contact-form-input"
+                          />
+                        </div>
+
+                        {/* Headquarters & Counties Serviced */}
+                        <div className="contact-form-field">
+                          <label htmlFor="corp-counties">
+                            Headquarters & Coverage Counties <span className="field-required">*</span>
+                          </label>
+                          <input 
+                            type="text" 
+                            id="corp-counties"
+                            required
+                            placeholder="e.g. Somerset, Middlesex, Union, Essex, NJ"
+                            value={corpCounties}
+                            onChange={(e) => setCorpCounties(e.target.value)}
+                            className="contact-form-input"
+                          />
+                        </div>
+
+                        {/* Years in Business */}
+                        <div className="contact-form-field">
+                          <label htmlFor="corp-years">
+                            Years in Commercial Operation
+                          </label>
+                          <select 
+                            id="corp-years"
+                            value={corpYearsInBusiness}
+                            onChange={(e) => setCorpYearsInBusiness(e.target.value)}
+                            className="contact-form-select"
+                          >
+                            <option value="1 - 2 years established">1 - 2 years established</option>
+                            <option value="3 - 5 years established">3 - 5 years established</option>
+                            <option value="5 - 10 years established">5 - 10 years established</option>
+                            <option value="10+ years established">10+ years established</option>
+                          </select>
+                        </div>
+
+                        {/* Active Cleaning Staff / Crew Size */}
+                        <div className="contact-form-field">
+                          <label htmlFor="corp-crew">
+                            Active Cleaning Crew Size
+                          </label>
+                          <select 
+                            id="corp-crew"
+                            value={corpCrewSize}
+                            onChange={(e) => setCorpCrewSize(e.target.value)}
+                            className="contact-form-select"
+                          >
+                            <option value="2 - 5 Active Crew Members">2 - 5 Crew Members</option>
+                            <option value="6 - 15 Active Crew Members">6 - 15 Crew Members</option>
+                            <option value="16 - 30 Active Cleaners">16 - 30 Cleaners</option>
+                            <option value="30+ Industrial Crew">30+ Industrial / Commercial Staff</option>
+                          </select>
+                        </div>
+
+                        {/* General Liability Insurance Limit */}
+                        <div className="contact-form-field">
+                          <label htmlFor="corp-insurance-limit">
+                            General Liability Limit
+                          </label>
+                          <select 
+                            id="corp-insurance-limit"
+                            value={corpInsuranceLimit}
+                            onChange={(e) => setCorpInsuranceLimit(e.target.value)}
+                            className="contact-form-select"
+                          >
+                            <option value="$1,000,000 General Liability">$1,000,000 General Liability</option>
+                            <option value="$2,000,000+ General Liability">$2,000,000+ General Liability</option>
+                            <option value="Commercial Umbrella & Bonded">Commercial Umbrella & Bonded</option>
+                            <option value="In Process / Renewing Policy">In Process / Renewing Policy</option>
+                          </select>
+                        </div>
+
+                        {/* Workers' Comp Coverage */}
+                        <div className="contact-form-field">
+                          <label htmlFor="corp-workers-comp">
+                            Workers' Compensation Status
+                          </label>
+                          <select 
+                            id="corp-workers-comp"
+                            value={corpWorkersComp}
+                            onChange={(e) => setCorpWorkersComp(e.target.value)}
+                            className="contact-form-select"
+                          >
+                            <option value="Active Workers' Comp in Place">Active Workers' Comp Policy in Place</option>
+                            <option value="Exempt / Owner-Operated Entity">Exempt / Owner-Operated Entity</option>
+                            <option value="In Process of Adding Policy">In Process of Adding Policy</option>
+                          </select>
+                        </div>
+
+                        {/* Estimated Monthly Capacity (Sq Ft) */}
+                        <div className="contact-form-field full-span">
+                          <label htmlFor="corp-capacity">
+                            Estimated Monthly Subcontracting Capacity (Square Footage)
+                          </label>
+                          <select 
+                            id="corp-capacity"
+                            value={corpMonthlyCapacity}
+                            onChange={(e) => setCorpMonthlyCapacity(e.target.value)}
+                            className="contact-form-select"
+                          >
+                            <option value="Up to 25,000 sq ft">Up to 25,000 sq ft</option>
+                            <option value="25,000 - 75,000 sq ft">25,000 - 75,000 sq ft</option>
+                            <option value="75,000 - 150,000 sq ft">75,000 - 150,000 sq ft</option>
+                            <option value="150,000+ sq ft Multi-Site">150,000+ sq ft Multi-Site Regional</option>
+                          </select>
+                        </div>
+
+                        {/* Commercial Capabilities Checklist */}
+                        <div className="contact-form-field full-span">
+                          <label className="partner-field-label">
+                            Commercial Subcontracting Capabilities:
+                          </label>
+                          <div className="partner-services-checklist">
+                            {COMPANY_CAPABILITIES.map(cap => {
+                              const isChecked = corpCapabilities.includes(cap);
+                              return (
+                                <button
+                                  type="button"
+                                  key={cap}
+                                  className={`partner-service-pill ${isChecked ? 'selected' : ''}`}
+                                  onClick={() => handleCorpCapabilityToggle(cap)}
+                                >
+                                  <div className="service-pill-checkbox">
+                                    {isChecked && <Check size={13} strokeWidth={3} />}
+                                  </div>
+                                  <span className="service-pill-label">{cap}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        {/* Heavy Equipment Checklist */}
+                        <div className="contact-form-field full-span">
+                          <label className="partner-field-label">
+                            Heavy Commercial Equipment Owned:
+                          </label>
+                          <div className="partner-services-checklist">
+                            {COMPANY_EQUIPMENT_OPTIONS.map(equip => {
+                              const isChecked = corpEquipment.includes(equip);
+                              return (
+                                <button
+                                  type="button"
+                                  key={equip}
+                                  className={`partner-service-pill ${isChecked ? 'selected' : ''}`}
+                                  onClick={() => handleCorpEquipmentToggle(equip)}
+                                >
+                                  <div className="service-pill-checkbox">
+                                    {isChecked && <Check size={13} strokeWidth={3} />}
+                                  </div>
+                                  <span className="service-pill-label">{equip}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        {/* Portfolio & Summary */}
+                        <div className="contact-form-field full-span">
+                          <label htmlFor="corp-notes">
+                            Company Portfolio & Operating Summary (Optional)
+                          </label>
+                          <textarea 
+                            id="corp-notes"
+                            rows={3}
+                            placeholder="Provide a brief summary of notable facility accounts, OSHA/safety credentials, or specific building sectors your company excels at."
+                            value={corpNotes}
+                            onChange={(e) => setCorpNotes(e.target.value)}
+                            className="contact-form-textarea"
+                          />
+                        </div>
+
+                        {/* Error & Fallback */}
+                        {errorMessage && (
+                          <div className="contact-error-box full-span">
+                            <AlertCircle size={18} />
+                            <div className="error-text-content">
+                              <p>{errorMessage}</p>
+                              {fallbackLinks && (
+                                <div className="error-fallbacks">
+                                  <a href={fallbackLinks.gmailUrl} target="_blank" rel="noopener noreferrer" className="fallback-btn">
+                                    Open in Gmail Draft
+                                  </a>
+                                  <a href={fallbackLinks.mailtoUrl} className="fallback-btn">
+                                    Send via Default Email
+                                  </a>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Submit Button */}
+                        <div className="contact-form-field full-span">
+                          <button 
+                            type="submit" 
+                            disabled={isSubmitting}
+                            className="subpage-btn-primary form-submit-btn"
+                            id="submit-company-app-btn"
+                          >
+                            {isSubmitting ? (
+                              <>
+                                <Loader2 size={18} className="animate-spin" />
+                                <span>Submitting Subcontractor Application...</span>
+                              </>
+                            ) : (
+                              <>
+                                <span>Submit Subcontractor Application</span>
+                                <ArrowRight size={18} />
+                              </>
+                            )}
+                          </button>
+                          
+                          <div className="form-privacy-note">
+                            <ShieldCheck size={14} color="#16a34a" />
+                            <span>Confidential commercial application. Standard Master Subcontract Agreement issued upon mutual walkthrough review.</span>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </form>
+                  )}
+
+                </div>
               )}
 
             </div>
@@ -1062,7 +1535,7 @@ ${notes.trim() || 'None provided.'}
                   style={{ marginTop: '14px', padding: '10px 22px', fontSize: '13.5px' }}
                   onClick={() => {
                     setVideoModalOpen(false);
-                    scrollToApplication();
+                    scrollToApplication(activeTab);
                   }}
                 >
                   <span>Become a Partner</span>
