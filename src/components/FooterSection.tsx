@@ -164,6 +164,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
               <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/services/sanitation')}>Sanitation Services</button></li>
               <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/about')}>About Us</button></li>
               <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/testimonials')}>Testimonials</button></li>
+              <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/partners')}>Partner With Us</button></li>
               <li><button type="button" className="footer-text-btn" onClick={() => handleLink('/contact')}>Contact Us</button></li>
             </ul>
           </div>

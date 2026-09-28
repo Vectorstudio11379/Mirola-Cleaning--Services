@@ -23,12 +23,41 @@ export interface SubmissionResult {
  * Generate fallback mailto & Gmail draft links in case of offline/network issues
  */
 export function generateEmailLinks(payload: LeadSubmissionPayload) {
-  const subject = `[Mirola Website Request] ${payload.formType} - ${payload.company || payload.fullName || 'Commercial Client'}`;
+  const isPartner = payload.formType.toLowerCase().includes('partner');
+  const subject = isPartner
+    ? `[Mirola Partner Application] ${payload.company || payload.fullName} - Partnership Request`
+    : `[Mirola Website Request] ${payload.formType} - ${payload.company || payload.fullName || 'Commercial Client'}`;
+  
   const facilities = payload.facilityTypes && payload.facilityTypes.length > 0 
     ? payload.facilityTypes.map(f => `  • ${f}`).join('\n')
-    : '  • Commercial Facility (Standard)';
+    : (isPartner ? '  • General Commercial Janitorial' : '  • Commercial Facility (Standard)');
 
-  const body = 
+  const body = isPartner ?
+`Hello Mirola Partner Network Operations,
+
+I am applying to partner with Mirola Cleaning Services.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PARTNER APPLICATION DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Applicant / Contact Name: ${payload.fullName}
+• Business / Entity Name: ${payload.company || 'Independent Cleaner (Solo)'}
+• Contact Email: ${payload.email}
+• Direct Phone: ${payload.phone || 'N/A'}
+${payload.squareFootage ? `• Experience / Capacity: ${payload.squareFootage}\n` : ''}
+CORE SERVICES / CAPABILITIES:
+${facilities}
+
+APPLICATION DETAILS & BACKGROUND:
+${payload.message?.trim() ? payload.message.trim() : 'Ready to explore commercial cleaning partnership opportunities.'}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Please contact me to discuss partner onboarding and upcoming facility opportunities.
+
+Best regards,
+${payload.fullName}
+${payload.company ? `${payload.company}\n` : ''}${payload.phone || ''}`
+  :
 `Hello Mirola Commercial Cleaning Team,
 
 I would like to request an on-site facility inspection and proposal.

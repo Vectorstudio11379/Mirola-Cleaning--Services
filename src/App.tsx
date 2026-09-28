@@ -23,6 +23,7 @@ import { MedicalCleaningPage } from './pages/MedicalCleaningPage';
 import { AboutPage } from './pages/AboutPage';
 import { TestimonialsPage } from './pages/TestimonialsPage';
 import { ContactPage } from './pages/ContactPage';
+import { PartnersPage } from './pages/PartnersPage';
 import { LegalModal, type LegalModalType } from './components/LegalModal';
 
 import type { AppRoute } from './types/navigation';
@@ -41,6 +42,7 @@ const VALID_ROUTES: AppRoute[] = [
   '/services/janitorial/medical',
   '/about',
   '/testimonials',
+  '/partners',
   '/contact'
 ];
 
@@ -144,6 +146,13 @@ function App() {
       case '/testimonials':
         return (
           <TestimonialsPage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
+      case '/partners':
+        return (
+          <PartnersPage 
             onNavigate={navigate} 
             onOpenConsultation={() => setIsConsultationOpen(true)} 
           />

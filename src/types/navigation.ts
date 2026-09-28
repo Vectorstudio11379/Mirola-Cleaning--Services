@@ -10,6 +10,7 @@ export type AppRoute =
   | '/services/janitorial/medical'
   | '/about'
   | '/testimonials'
+  | '/partners'
   | '/contact';
 
 export interface ServiceNavigationItem {

@@ -18,7 +18,8 @@ import {
   Users,
   Star,
   Calendar,
-  HelpCircle
+  HelpCircle,
+  Handshake
 } from 'lucide-react';
 import { CONTACT_INFO } from '../constants/contactInfo';
 interface NavbarProps {
@@ -355,6 +356,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button 
               type="button" 
+              className={`pill-nav-btn ${currentPath === '/partners' ? 'active' : ''}`}
+              onClick={() => handleLinkClick('/partners')}
+            >
+              Partners
+            </button>
+
+            <button 
+              type="button" 
               className={`pill-nav-btn ${currentPath === '/contact' ? 'active' : ''}`}
               onClick={() => handleLinkClick('/contact')}
             >
@@ -564,6 +573,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div>
               <div className="item-title">Client Testimonials</div>
               <div className="item-desc">Verified commercial & facility reviews</div>
+            </div>
+          </button>
+
+          <button 
+            type="button" 
+            className={`drawer-nav-item ${currentPath === '/partners' ? 'active' : ''}`} 
+            onClick={() => handleLinkClick('/partners')}
+          >
+            <Handshake size={18} />
+            <div>
+              <div className="item-title">Partner With Mirola</div>
+              <div className="item-desc">Independent cleaners & subcontracting companies</div>
             </div>
           </button>
 
