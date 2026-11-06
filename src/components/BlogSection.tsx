@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
-import { ArrowRight, Calendar, Clock, BookOpen } from 'lucide-react';
+import { ArrowRight, Calendar, Clock, BookOpen, Building2 } from 'lucide-react';
 import { BLOG_POSTS, type BlogPost } from '../data/blogPosts';
 import { BlogModal } from './BlogModal';
 
 interface BlogSectionProps {
   onOpenConsultation: () => void;
+  onNavigate?: (path: string) => void;
 }
 
-export const BlogSection: React.FC<BlogSectionProps> = ({ onOpenConsultation }) => {
+export const BlogSection: React.FC<BlogSectionProps> = ({ 
+  onOpenConsultation,
+  onNavigate 
+}) => {
   const [selectedArticle, setSelectedArticle] = useState<BlogPost | null>(null);
+
+  const handleExploreAll = () => {
+    if (onNavigate) {
+      onNavigate('/blog');
+    } else {
+      setSelectedArticle(BLOG_POSTS[0]);
+    }
+  };
 
   return (
     <>
@@ -20,7 +32,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ onOpenConsultation }) 
             <div className="blog-header-left">
               <div className="blog-pill-badge">
                 <span className="blog-dot" />
-                <span className="blog-badge-text">EXPERT INSIGHTS</span>
+                <span className="blog-badge-text">EXPERT FIELD INSIGHTS</span>
               </div>
               <h2 className="blog-headline">
                 Cleaning Tips, Sanitation Standards & Industry Insights
@@ -31,10 +43,11 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ onOpenConsultation }) 
               <button 
                 type="button" 
                 className="blog-view-all-btn"
-                onClick={() => setSelectedArticle(BLOG_POSTS[0])}
+                onClick={handleExploreAll}
+                title="View all commercial cleaning articles on our blog"
               >
                 <BookOpen size={16} />
-                <span>Read Featured Article</span>
+                <span>Visit Blog & Case Studies</span>
                 <ArrowRight size={16} />
               </button>
             </div>
@@ -42,7 +55,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ onOpenConsultation }) 
 
           {/* Blog Cards Grid */}
           <div className="blog-cards-grid scroll-reveal-stagger">
-            {BLOG_POSTS.map((post) => (
+            {BLOG_POSTS.slice(0, 3).map((post) => (
               <article 
                 key={post.id} 
                 className="blog-card"
@@ -70,6 +83,11 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ onOpenConsultation }) 
                   <h3 className="blog-card-title">{post.title}</h3>
                   <p className="blog-card-excerpt">{post.excerpt}</p>
 
+                  <div className="blog-card-client-badge">
+                    <Building2 size={13} color="#c90000" />
+                    <span>Real Client: {post.exampleFromField.facility.split('(')[0]}</span>
+                  </div>
+
                   <button 
                     type="button" 
                     className="blog-read-link"
@@ -78,13 +96,27 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ onOpenConsultation }) 
                       setSelectedArticle(post);
                     }}
                   >
-                    <span>Read Full Article</span>
+                    <span>Read Full Case Study</span>
                     <ArrowRight size={15} />
                   </button>
                 </div>
               </article>
             ))}
           </div>
+
+          {/* Bottom Link to Full Blog Page */}
+          {onNavigate && (
+            <div className="blog-footer-row scroll-reveal" style={{ textAlign: 'center', marginTop: '40px' }}>
+              <button 
+                type="button" 
+                className="blog-explore-all-cta-btn"
+                onClick={() => onNavigate('/blog')}
+              >
+                <span>Explore All Articles & Client Studies on the Blog</span>
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          )}
 
         </div>
       </section>

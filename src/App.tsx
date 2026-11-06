@@ -24,6 +24,7 @@ import { AboutPage } from './pages/AboutPage';
 import { TestimonialsPage } from './pages/TestimonialsPage';
 import { ContactPage } from './pages/ContactPage';
 import { PartnersPage } from './pages/PartnersPage';
+import { BlogPage } from './pages/BlogPage';
 import { LegalModal, type LegalModalType } from './components/LegalModal';
 
 import type { AppRoute } from './types/navigation';
@@ -43,6 +44,7 @@ const VALID_ROUTES: AppRoute[] = [
   '/about',
   '/testimonials',
   '/partners',
+  '/blog',
   '/contact'
 ];
 
@@ -157,6 +159,13 @@ function App() {
             onOpenConsultation={() => setIsConsultationOpen(true)} 
           />
         );
+      case '/blog':
+        return (
+          <BlogPage 
+            onNavigate={navigate} 
+            onOpenConsultation={() => setIsConsultationOpen(true)} 
+          />
+        );
       case '/contact':
         return (
           <ContactPage 
@@ -196,7 +205,10 @@ function App() {
             <FaqSection />
 
             {/* 8. Blog Section */}
-            <BlogSection onOpenConsultation={() => setIsConsultationOpen(true)} />
+            <BlogSection 
+              onOpenConsultation={() => setIsConsultationOpen(true)} 
+              onNavigate={navigate}
+            />
           </main>
         );
     }

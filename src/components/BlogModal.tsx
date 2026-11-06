@@ -7,7 +7,13 @@ import {
   ArrowRight, 
   Share2, 
   ShieldCheck,
-  Check
+  Check,
+  Building2,
+  AlertTriangle,
+  Lightbulb,
+  Phone,
+  Mail,
+  MapPin
 } from 'lucide-react';
 import type { BlogPost } from '../data/blogPosts';
 
@@ -95,8 +101,9 @@ export const BlogModal: React.FC<BlogModalProps> = ({
         {/* Scrollable Article Body */}
         <div className="blog-modal-scrollable-body">
           
-          {/* Article Header */}
+          {/* Article Header (1. Blog Title) */}
           <header className="blog-article-header">
+            <div className="blog-template-step-badge">1. BLOG TITLE</div>
             <h1 id="blog-article-modal-title" className="blog-article-title">
               {post.title}
             </h1>
@@ -137,92 +144,184 @@ export const BlogModal: React.FC<BlogModalProps> = ({
           </div>
 
           {/* Key Takeaways Callout Card */}
-          <div className="blog-takeaways-card">
-            <div className="takeaways-header">
-              <ShieldCheck size={20} color="#c90000" />
-              <h3>Executive Facility Takeaways</h3>
-            </div>
-            <ul className="takeaways-list">
-              {post.keyTakeaways.map((item, idx) => (
-                <li key={idx} className="takeaways-item">
-                  <span className="takeaway-check">
-                    <Check size={12} strokeWidth={3} />
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Full Article Content Sections */}
-          <div className="blog-article-content-body">
-            {post.sections.map((section, sIdx) => (
-              <section key={sIdx} className="blog-content-section">
-                <h2 className="section-heading">{section.heading}</h2>
-                
-                {section.paragraphs.map((p, pIdx) => (
-                  <p key={pIdx} className="section-paragraph">
-                    {p}
-                  </p>
+          {post.keyTakeaways && post.keyTakeaways.length > 0 && (
+            <div className="blog-takeaways-card">
+              <div className="takeaways-header">
+                <ShieldCheck size={20} color="#c90000" />
+                <h3>Key Facility Takeaways</h3>
+              </div>
+              <ul className="takeaways-list">
+                {post.keyTakeaways.map((item, idx) => (
+                  <li key={idx} className="takeaways-item">
+                    <span className="takeaway-check">
+                      <Check size={12} strokeWidth={3} />
+                    </span>
+                    <span>{item}</span>
+                  </li>
                 ))}
+              </ul>
+            </div>
+          )}
 
-                {section.checklist && section.checklist.length > 0 && (
-                  <div className="section-checklist-box">
-                    <div className="checklist-box-title">
-                      <CheckCircle2 size={16} color="#c90000" />
-                      <span>Facility Implementation Protocol</span>
-                    </div>
-                    <ul className="checklist-box-items">
-                      {section.checklist.map((cItem, cIdx) => (
-                        <li key={cIdx}>
-                          <Check size={13} strokeWidth={2.5} color="#c90000" />
-                          <span>{cItem}</span>
-                        </li>
-                      ))}
-                    </ul>
+          {/* 7-PART TEMPLATE CONTENT BODY */}
+          <div className="blog-article-content-body">
+            
+            {/* 2. Introduction */}
+            <section className="blog-content-section template-section">
+              <div className="blog-section-step-label">2. INTRODUCTION</div>
+              <h2 className="section-heading">Overview & Commercial Impact</h2>
+              <p className="section-paragraph highlight-intro">
+                {post.introduction}
+              </p>
+            </section>
+
+            {/* 3. The Cleaning Challenge */}
+            <section className="blog-content-section template-section">
+              <div className="blog-section-step-label">3. THE CLEANING CHALLENGE</div>
+              <h2 className="section-heading">The Root Problem & Why It Matters</h2>
+              <div className="challenge-content-box">
+                <div className="challenge-icon-tag">
+                  <AlertTriangle size={18} color="#c90000" />
+                  <span>Commercial Hygiene Barrier</span>
+                </div>
+                <p className="section-paragraph">
+                  {post.challenge}
+                </p>
+              </div>
+            </section>
+
+            {/* 4. Example from the Field */}
+            <section className="blog-content-section template-section field-example-section">
+              <div className="blog-section-step-label">4. EXAMPLE FROM THE FIELD</div>
+              <h2 className="section-heading">Real Client Project & Case Study</h2>
+              
+              <div className="field-example-card">
+                <div className="field-facility-header">
+                  <Building2 size={20} color="#c90000" />
+                  <div>
+                    <span className="field-facility-label">Featured Facility:</span>
+                    <strong className="field-facility-name">{post.exampleFromField.facility}</strong>
+                  </div>
+                </div>
+
+                <div className="field-challenge-block">
+                  <h4>The Cleaning Problem:</h4>
+                  <p>{post.exampleFromField.challenge}</p>
+                </div>
+
+                <div className="field-solution-block">
+                  <h4>How It Was Addressed:</h4>
+                  <ul className="field-solution-list">
+                    {post.exampleFromField.solution.map((sol, sIdx) => (
+                      <li key={sIdx}>
+                        <CheckCircle2 size={16} color="#c90000" className="bullet-icon" />
+                        <span>{sol}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="field-results-block">
+                  <h4>Results Achieved:</h4>
+                  <ul className="field-results-list">
+                    {post.exampleFromField.results.map((res, rIdx) => (
+                      <li key={rIdx}>
+                        <Check size={16} strokeWidth={2.5} color="#16a34a" className="bullet-icon" />
+                        <span>{res}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {post.exampleFromField.image && (
+                  <div className="field-example-media">
+                    <img 
+                      src={post.exampleFromField.image} 
+                      alt={post.exampleFromField.facility} 
+                      className="field-media-img" 
+                    />
+                    {post.exampleFromField.imageCaption && (
+                      <div className="field-media-caption">
+                        {post.exampleFromField.imageCaption}
+                      </div>
+                    )}
                   </div>
                 )}
-              </section>
-            ))}
-          </div>
+              </div>
+            </section>
 
-          {/* Author Bio Box */}
-          <div className="blog-author-bio-card">
-            <div className="bio-avatar">
-              <ShieldCheck size={26} color="#c90000" />
-            </div>
-            <div className="bio-text">
-              <h4>About Mirola Cleaning Services Operations</h4>
-              <p>
-                Mirola Cleaning Services delivers hospital-grade sanitization, high-gloss floor restoration, and turn-key commercial janitorial care nationwide. Our teams operate with 100% W-2 vetted personnel, EPA List N chemistries, and guaranteed 24-hour corrective SLAs.
-              </p>
-            </div>
-          </div>
+            {/* 5. Professional Tips */}
+            <section className="blog-content-section template-section">
+              <div className="blog-section-step-label">5. PROFESSIONAL TIPS</div>
+              <h2 className="section-heading">Actionable Advice for Facility Directors</h2>
+              
+              <div className="professional-tips-grid">
+                {post.professionalTips.map((tip, tIdx) => (
+                  <div key={tIdx} className="pro-tip-item">
+                    <div className="tip-badge">
+                      <Lightbulb size={16} color="#c90000" />
+                      <span>Tip #{tIdx + 1}</span>
+                    </div>
+                    <p className="tip-text">{tip}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
 
-          {/* Bottom Consultation CTA Banner */}
-          <div className="blog-article-cta-banner">
-            <div className="cta-banner-text">
-              <h3>Implement These Cleaning Protocols in Your Facility</h3>
-              <p>
-                Schedule an on-site facility walkthrough with our commercial operations director. Receive a customized scope of work and transparent fixed-rate proposal within 24 hours.
+            {/* 6. Conclusion */}
+            <section className="blog-content-section template-section">
+              <div className="blog-section-step-label">6. CONCLUSION</div>
+              <h2 className="section-heading">The Bottom Line</h2>
+              <p className="section-paragraph conclusion-p">
+                {post.conclusion}
               </p>
-            </div>
-            <button 
-              type="button" 
-              className="blog-banner-cta-btn"
-              onClick={() => {
-                onClose();
-                onOpenConsultation();
-              }}
-            >
-              <span>Book Free Facility Walkthrough</span>
-              <ArrowRight size={16} />
-            </button>
+            </section>
+
+            {/* 7. Call to Action */}
+            <section className="blog-content-section template-section cta-section-box">
+              <div className="blog-section-step-label light">7. CALL TO ACTION</div>
+              <div className="cta-box-inner">
+                <h3 className="cta-box-title">Elevate Your Commercial Facility Standards</h3>
+                <p className="cta-box-desc">
+                  {post.callToAction.text}
+                </p>
+
+                <div className="cta-contact-details">
+                  <a href={`tel:${post.callToAction.phone.replace(/[^0-9]/g, '')}`} className="cta-contact-chip">
+                    <Phone size={15} />
+                    <span>{post.callToAction.phone}</span>
+                  </a>
+                  <a href={`mailto:${post.callToAction.email}`} className="cta-contact-chip">
+                    <Mail size={15} />
+                    <span>{post.callToAction.email}</span>
+                  </a>
+                  <div className="cta-contact-chip static">
+                    <MapPin size={15} />
+                    <span>{post.callToAction.address}</span>
+                  </div>
+                </div>
+
+                <div className="cta-action-btn-row">
+                  <button 
+                    type="button" 
+                    className="cta-book-btn"
+                    onClick={() => {
+                      onClose();
+                      onOpenConsultation();
+                    }}
+                  >
+                    <span>Request Free Facility Walkthrough & Quote</span>
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              </div>
+            </section>
+
           </div>
 
           {/* Related Articles Section */}
           <div className="blog-related-articles-section">
-            <h3 className="related-title">More Commercial Cleaning Insights</h3>
+            <h3 className="related-title">More Field Insights & Case Studies</h3>
             <div className="related-grid">
               {relatedPosts.map((rPost) => (
                 <div 
@@ -235,7 +334,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({
                     <span className="related-tag">{rPost.tag}</span>
                     <h4 className="related-post-heading">{rPost.title}</h4>
                     <div className="related-read-link">
-                      <span>Read Article</span>
+                      <span>Read Case Study</span>
                       <ArrowRight size={13} />
                     </div>
                   </div>
