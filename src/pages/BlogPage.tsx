@@ -31,10 +31,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
 
   const categories = [
     { id: 'all', label: 'All Articles' },
-    { id: 'gym', label: 'Gyms & Athletics' },
-    { id: 'daycare', label: 'Childcare & Daycares' },
-    { id: 'office', label: 'Corporate Offices' },
-    { id: 'floors', label: 'Floor Care & Strip/Wax' }
+    { id: 'gym', label: 'Gyms & Athletics' }
   ];
 
   const filteredPosts = BLOG_POSTS.filter((post) => {

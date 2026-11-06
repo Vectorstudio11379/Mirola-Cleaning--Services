@@ -1635,7 +1635,7 @@
 /* Card 1: Media / Video Card */
 .about-media-card {
   position: relative;
-  height: 380px;
+  height: 500px;
   border-radius: 24px;
   overflow: hidden;
   cursor: pointer;
@@ -1698,7 +1698,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 380px;
+  height: 500px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
@@ -8533,7 +8533,7 @@
 
 .featured-media-img {
   width: 100%;
-  height: 380px;
+  height: 500px;
   object-fit: cover;
   display: block;
 }
@@ -10425,7 +10425,7 @@
 
 .field-media-img {
   width: 100%;
-  height: 280px;
+  height: 400px;
   object-fit: cover;
   display: block;
 }
@@ -10442,8 +10442,8 @@
 /* 5. Professional Tips Grid */
 .professional-tips-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
   margin-top: 16px;
 }
 
@@ -10616,7 +10616,8 @@
 }
 
 .blog-fullpage-hero-header {
-  max-width: 880px;
+  max-width: 100%;
+  width: 100%;
   margin-top: 18px;
 }
 
@@ -10653,20 +10654,21 @@
 
 .blog-fullpage-title {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 4.2vw, 3.2rem);
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
   font-weight: 800;
   color: #ffffff;
-  line-height: 1.2;
+  line-height: 1.15;
   margin: 12px 0 20px;
   letter-spacing: -0.02em;
 }
 
 .blog-fullpage-lead {
-  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
   color: #cbd5e1;
   line-height: 1.65;
   margin: 0 0 28px;
-  max-width: 820px;
+  max-width: 100%;
+  width: 100%;
 }
 
 .blog-fullpage-author-bar {
@@ -10738,21 +10740,25 @@
 }
 
 .blog-content-wrapper {
-  max-width: 920px;
+  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
 }
 
 .blog-template-sections-flow {
   margin-top: 40px;
+  width: 100%;
 }
 
 .blog-fullpage-section {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 18px;
-  padding: 34px 38px;
-  margin-bottom: 28px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  border: 1.5px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 38px 44px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .fullpage-section-heading {

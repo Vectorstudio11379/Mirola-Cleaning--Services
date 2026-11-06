@@ -331,55 +331,57 @@ export const BlogPostPage: React.FC<BlogPostPageProps> = ({
             </button>
           </div>
 
-          {/* Related Articles Cards */}
-          <div className="blog-fullpage-related-wrap">
-            <h3 className="fullpage-related-title">Explore More Commercial Cleaning Case Studies</h3>
-            <div className="blog-cards-grid">
-              {relatedPosts.map((rPost) => (
-                <article 
-                  key={rPost.id} 
-                  className="blog-card"
-                  onClick={() => onNavigate(`/blog/${rPost.slug}` as AppRoute)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <div className="blog-img-box">
-                    <img src={rPost.image} alt={rPost.title} className="blog-card-img" />
-                    <span className="blog-tag-badge">{rPost.tag}</span>
-                  </div>
-
-                  <div className="blog-card-content">
-                    <div className="blog-meta-row">
-                      <div className="meta-item">
-                        <Calendar size={13} />
-                        <span>{rPost.date}</span>
-                      </div>
-                      <span className="meta-separator">•</span>
-                      <div className="meta-item">
-                        <Clock size={13} />
-                        <span>{rPost.readTime}</span>
-                      </div>
+          {/* Related Articles Cards (Only rendered if multiple articles exist) */}
+          {relatedPosts.length > 0 && (
+            <div className="blog-fullpage-related-wrap">
+              <h3 className="fullpage-related-title">Explore More Commercial Cleaning Case Studies</h3>
+              <div className="blog-cards-grid">
+                {relatedPosts.map((rPost) => (
+                  <article 
+                    key={rPost.id} 
+                    className="blog-card"
+                    onClick={() => onNavigate(`/blog/${rPost.slug}` as AppRoute)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <div className="blog-img-box">
+                      <img src={rPost.image} alt={rPost.title} className="blog-card-img" />
+                      <span className="blog-tag-badge">{rPost.tag}</span>
                     </div>
 
-                    <h4 className="blog-card-title">{rPost.title}</h4>
-                    <p className="blog-card-excerpt">{rPost.excerpt}</p>
+                    <div className="blog-card-content">
+                      <div className="blog-meta-row">
+                        <div className="meta-item">
+                          <Calendar size={13} />
+                          <span>{rPost.date}</span>
+                        </div>
+                        <span className="meta-separator">•</span>
+                        <div className="meta-item">
+                          <Clock size={13} />
+                          <span>{rPost.readTime}</span>
+                        </div>
+                      </div>
 
-                    <div className="blog-card-client-badge">
-                      <Building2 size={13} color="#c90000" />
-                      <span>Real Client: {rPost.exampleFromField.facility.split('(')[0]}</span>
+                      <h4 className="blog-card-title">{rPost.title}</h4>
+                      <p className="blog-card-excerpt">{rPost.excerpt}</p>
+
+                      <div className="blog-card-client-badge">
+                        <Building2 size={13} color="#c90000" />
+                        <span>Real Client: {rPost.exampleFromField.facility.split('(')[0]}</span>
+                      </div>
+
+                      <button 
+                        type="button" 
+                        className="blog-read-link"
+                      >
+                        <span>Read Full Article</span>
+                        <ArrowRight size={15} />
+                      </button>
                     </div>
-
-                    <button 
-                      type="button" 
-                      className="blog-read-link"
-                    >
-                      <span>Read Full Article</span>
-                      <ArrowRight size={15} />
-                    </button>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
         </div>
       </article>
