@@ -12,6 +12,7 @@ export type AppRoute =
   | '/testimonials'
   | '/partners'
   | '/blog'
+  | `/blog/${string}`
   | '/contact';
 
 export interface ServiceNavigationItem {

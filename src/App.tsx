@@ -25,13 +25,15 @@ import { TestimonialsPage } from './pages/TestimonialsPage';
 import { ContactPage } from './pages/ContactPage';
 import { PartnersPage } from './pages/PartnersPage';
 import { BlogPage } from './pages/BlogPage';
+import { BlogPostPage } from './pages/BlogPostPage';
+import { BLOG_POSTS } from './data/blogPosts';
 import { LegalModal, type LegalModalType } from './components/LegalModal';
 
 import type { AppRoute } from './types/navigation';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import './App.css';
 
-const VALID_ROUTES: AppRoute[] = [
+const VALID_STATIC_ROUTES: AppRoute[] = [
   '/',
   '/services/janitorial',
   '/services/floor-care',
@@ -48,12 +50,21 @@ const VALID_ROUTES: AppRoute[] = [
   '/contact'
 ];
 
+const resolveValidRoute = (path: string): AppRoute => {
+  if (VALID_STATIC_ROUTES.includes(path as AppRoute)) {
+    return path as AppRoute;
+  }
+  if (path.startsWith('/blog/') && path.length > 6) {
+    return path as AppRoute;
+  }
+  return '/';
+};
+
 function App() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [legalModalType, setLegalModalType] = useState<LegalModalType>(null);
   const [currentPath, setCurrentPath] = useState<AppRoute>(() => {
-    const path = window.location.pathname;
-    return VALID_ROUTES.includes(path as AppRoute) ? (path as AppRoute) : '/';
+    return resolveValidRoute(window.location.pathname);
   });
 
   // Re-observe elements on route transitions
@@ -62,8 +73,7 @@ function App() {
   // Listen to browser Back/Forward navigation
   useEffect(() => {
     const handlePopState = () => {
-      const path = window.location.pathname;
-      setCurrentPath(VALID_ROUTES.includes(path as AppRoute) ? (path as AppRoute) : '/');
+      setCurrentPath(resolveValidRoute(window.location.pathname));
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -72,7 +82,7 @@ function App() {
   }, []);
 
   const navigate = (path: string) => {
-    const targetRoute = VALID_ROUTES.includes(path as AppRoute) ? (path as AppRoute) : '/';
+    const targetRoute = resolveValidRoute(path);
     if (targetRoute !== currentPath) {
       window.history.pushState({}, '', targetRoute);
       setCurrentPath(targetRoute);
@@ -175,6 +185,19 @@ function App() {
         );
       case '/':
       default:
+        // Handle full-page dedicated blog articles: /blog/:slug
+        if (currentPath.startsWith('/blog/') && currentPath.length > 6) {
+          const slug = currentPath.replace('/blog/', '');
+          const matchingPost = BLOG_POSTS.find((p) => p.slug === slug) || BLOG_POSTS[0];
+          return (
+            <BlogPostPage 
+              post={matchingPost} 
+              onNavigate={navigate} 
+              onOpenConsultation={() => setIsConsultationOpen(true)} 
+            />
+          );
+        }
+
         return (
           <main>
             {/* 1. Main Hero Section (400vh Canvas Video Sequence) */}

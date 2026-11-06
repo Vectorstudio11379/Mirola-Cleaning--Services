@@ -12,8 +12,7 @@ import {
   Sparkles,
   Phone
 } from 'lucide-react';
-import { BLOG_POSTS, type BlogPost } from '../data/blogPosts';
-import { BlogModal } from '../components/BlogModal';
+import { BLOG_POSTS } from '../data/blogPosts';
 import { ClientLogoTicker } from '../components/ClientLogoTicker';
 import { CONTACT_INFO } from '../constants/contactInfo';
 import type { AppRoute } from '../types/navigation';
@@ -27,7 +26,6 @@ export const BlogPage: React.FC<BlogPageProps> = ({
   onNavigate, 
   onOpenConsultation 
 }) => {
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -90,7 +88,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                 <button 
                   type="button" 
                   className="subpage-primary-btn"
-                  onClick={() => setSelectedPost(BLOG_POSTS[0])}
+                  onClick={() => onNavigate(`/blog/${BLOG_POSTS[0].slug}` as AppRoute)}
                 >
                   <BookOpen size={16} />
                   <span>Read Latest Field Study</span>
@@ -111,7 +109,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
             <div className="subpage-hero-visual">
               <div 
                 className="blog-hero-featured-card"
-                onClick={() => setSelectedPost(BLOG_POSTS[0])}
+                onClick={() => onNavigate(`/blog/${BLOG_POSTS[0].slug}` as AppRoute)}
                 style={{ cursor: 'pointer' }}
               >
                 <div className="hero-featured-badge">FEATURED CASE STUDY</div>
@@ -128,7 +126,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                     <span>Real Client: {BLOG_POSTS[0].exampleFromField.facility}</span>
                   </div>
                   <div className="featured-card-read-row">
-                    <span>Read Full 7-Part Template &rarr;</span>
+                    <span>Read Full Case Study Page &rarr;</span>
                   </div>
                 </div>
               </div>
@@ -190,7 +188,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
               <article 
                 key={post.id} 
                 className="blog-card"
-                onClick={() => setSelectedPost(post)}
+                onClick={() => onNavigate(`/blog/${post.slug}` as AppRoute)}
                 style={{ cursor: 'pointer' }}
               >
                 <div className="blog-img-box">
@@ -225,10 +223,10 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                     className="blog-read-link"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setSelectedPost(post);
+                      onNavigate(`/blog/${post.slug}` as AppRoute);
                     }}
                   >
-                    <span>Read Article & Case Study</span>
+                    <span>Read Full Article</span>
                     <ArrowRight size={15} />
                   </button>
                 </div>
@@ -298,15 +296,6 @@ export const BlogPage: React.FC<BlogPageProps> = ({
 
         </div>
       </section>
-
-      {/* Reader Modal Rendering the Exact 7-Part Template */}
-      <BlogModal 
-        post={selectedPost}
-        onClose={() => setSelectedPost(null)}
-        onOpenConsultation={onOpenConsultation}
-        onSelectPost={(post) => setSelectedPost(post)}
-        allPosts={BLOG_POSTS}
-      />
 
     </div>
   );

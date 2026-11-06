@@ -22,23 +22,15 @@ export const ScrollCanvasBackground: React.FC<ScrollCanvasBackgroundProps> = ({ 
   const currentFrameRef = useRef<number>(1);
   const targetFrameRef = useRef<number>(1);
   const animFrameIdRef = useRef<number>(0);
-  const isReducedMotionRef = useRef<boolean>(false);
+  const lastDrawnFrameRef = useRef<number>(-1);
 
   useEffect(() => {
-    // 1. Accessibility: check prefers-reduced-motion
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    isReducedMotionRef.current = mediaQuery.matches;
-    const handleMotionChange = (e: MediaQueryListEvent) => {
-      isReducedMotionRef.current = e.matches;
-    };
-    mediaQuery.addEventListener('change', handleMotionChange);
-
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
 
-    // 2. High-DPI Canvas Resizing & Draw Logic
+    // High-DPI Canvas Resizing & Draw Logic
     const drawCurrentFrame = (frameNum: number) => {
       if (!canvas || !ctx) return;
 
@@ -77,7 +69,6 @@ export const ScrollCanvasBackground: React.FC<ScrollCanvasBackgroundProps> = ({ 
       ctx.fillRect(0, 0, width, height);
 
       if (img && img.complete && img.naturalWidth > 0) {
-        // Object-fit: cover with centered alignment
         const imgRatio = img.naturalWidth / img.naturalHeight;
         const canvasRatio = width / height;
 
@@ -99,51 +90,62 @@ export const ScrollCanvasBackground: React.FC<ScrollCanvasBackgroundProps> = ({ 
         }
 
         ctx.drawImage(img, offX, offY, drawW, drawH);
+        lastDrawnFrameRef.current = frameNum;
       }
     };
 
-    // 3. Progressive Preloading of Frames
+    // Priority & Progressive Frame Preloader
     const preloadFrame = (index: number) => {
       if (index < 1 || index > TOTAL_FRAMES) return;
       if (imagesRef.current[index]) return;
 
       const img = new Image();
       img.src = getFrameUrl(index);
-      img.decoding = 'async';
       imagesRef.current[index] = img;
 
       img.onload = () => {
         loadedSetRef.current.add(index);
         const currentRounded = Math.round(currentFrameRef.current);
-        if (index === currentRounded || loadedSetRef.current.size === 1) {
+        // If this image is the active frame, or if we haven't rendered yet, redraw immediately
+        if (index === currentRounded || lastDrawnFrameRef.current !== currentRounded) {
           drawCurrentFrame(currentRounded);
         }
       };
+
+      img.onerror = () => {
+        // Fallback retry
+        console.warn(`[ScrollCanvas] Failed to load frame ${index}`);
+      };
     };
 
-    // Initial frame 1 loaded immediately
-    preloadFrame(1);
+    // Preload surrounding frames dynamically as user scrolls
+    const preloadSurroundingFrames = (centerIndex: number) => {
+      const start = Math.max(1, centerIndex - 4);
+      const end = Math.min(TOTAL_FRAMES, centerIndex + 12);
+      for (let i = start; i <= end; i++) {
+        preloadFrame(i);
+      }
+    };
 
-    // Wave 1: First 15 frames for immediate response
+    // Preload initial critical waves
+    preloadFrame(1);
     for (let i = 2; i <= 15; i++) {
       preloadFrame(i);
     }
 
-    // Wave 2: Keyframes across the sequence
     const t1 = setTimeout(() => {
       for (let i = 16; i <= TOTAL_FRAMES; i += 2) {
         preloadFrame(i);
       }
     }, 40);
 
-    // Wave 3: Fill in all frames
     const t2 = setTimeout(() => {
       for (let i = 1; i <= TOTAL_FRAMES; i++) {
         preloadFrame(i);
       }
-    }, 200);
+    }, 180);
 
-    // 4. Scroll Target Tracking
+    // Scroll Target Tracking with 82% completion runway
     const updateScrollTarget = () => {
       const container = containerRef?.current || document.getElementById('hero');
       if (!container) return;
@@ -157,35 +159,38 @@ export const ScrollCanvasBackground: React.FC<ScrollCanvasBackgroundProps> = ({ 
       }
 
       const scrolled = -rect.top;
-      // Linear mapping across the exact scrollable runway: 0 = Frame 1, 100% = Frame 50
-      const progress = Math.max(0, Math.min(1, scrolled / scrollableDist));
+      // Complete all 50 frames across 84% of runway so user enjoys holding the finished state
+      const ANIMATION_END_PERCENT = 0.84;
+      const rawProgress = scrolled / (scrollableDist * ANIMATION_END_PERCENT);
+      const progress = Math.max(0, Math.min(1, rawProgress));
 
-      if (isReducedMotionRef.current) {
-        targetFrameRef.current = 1;
-      } else {
-        targetFrameRef.current = 1 + progress * (TOTAL_FRAMES - 1);
-      }
+      const calculatedTarget = 1 + progress * (TOTAL_FRAMES - 1);
+      targetFrameRef.current = calculatedTarget;
+      preloadSurroundingFrames(Math.round(calculatedTarget));
     };
 
-    // 5. Lerp Animation Loop
-    let lastRenderedFrame = -1;
+    // Responsive Lerp Loop
+    const BASE_LERP = 0.22;
     const tick = () => {
+      // Re-evaluate scroll target on each frame to guarantee 100% responsiveness
+      updateScrollTarget();
+
       const target = targetFrameRef.current;
       const current = currentFrameRef.current;
       const delta = target - current;
 
       if (Math.abs(delta) > 0.001) {
-        const lerpSpeed = Math.min(0.35, 0.18 + Math.abs(delta) * 0.004);
-        currentFrameRef.current += delta * lerpSpeed;
+        const dynamicLerp = Math.min(0.4, BASE_LERP + Math.abs(delta) * 0.005);
+        currentFrameRef.current += delta * dynamicLerp;
       } else {
         currentFrameRef.current = target;
       }
 
       const frameToRender = Math.max(1, Math.min(TOTAL_FRAMES, Math.round(currentFrameRef.current)));
 
-      if (frameToRender !== lastRenderedFrame || loadedSetRef.current.size === 1) {
+      // Render if frame changed or if we need to paint the loaded frame
+      if (frameToRender !== lastDrawnFrameRef.current || loadedSetRef.current.size === 1) {
         drawCurrentFrame(frameToRender);
-        lastRenderedFrame = frameToRender;
       }
 
       animFrameIdRef.current = requestAnimationFrame(tick);
@@ -204,7 +209,6 @@ export const ScrollCanvasBackground: React.FC<ScrollCanvasBackgroundProps> = ({ 
     return () => {
       cancelAnimationFrame(animFrameIdRef.current);
       window.removeEventListener('scroll', updateScrollTarget);
-      mediaQuery.removeEventListener('change', handleMotionChange);
       clearTimeout(t1);
       clearTimeout(t2);
     };
@@ -212,10 +216,7 @@ export const ScrollCanvasBackground: React.FC<ScrollCanvasBackgroundProps> = ({ 
 
   return (
     <div className="scroll-canvas-container" aria-hidden="true">
-      {/* Scroll-Driven HTML5 Canvas */}
       <canvas ref={canvasRef} className="scroll-canvas" />
-
-      {/* Cinematic Dark Luxury Vignette and Edge Blending Overlay */}
       <div className="canvas-cinematic-overlay" />
     </div>
   );
